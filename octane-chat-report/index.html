@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Octane Racing 2.0 — #general-chat stage report</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400;62..125,500;62..125,700;62..125,900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --asphalt:#17191B;
+  --paper:#E9EAE5;
+  --paper-2:#DEDFD8;
+  --cobalt:#1F3FBF;
+  --hazard:#F0B429;
+  --rust:#A93D1B;
+  --slate:#6A6F74;
+  --hair:rgba(23,25,27,.18);
+  --mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+  --sans:"Archivo","Helvetica Neue",Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--paper);color:var(--asphalt);
+  font-family:var(--sans);font-size:16px;line-height:1.6;
+  font-variant-numeric:tabular-nums lining-nums;
+}
+.wrap{max-width:940px;margin:0 auto;padding:0 24px 96px}
+.rule{height:1px;background:var(--hair);border:0;margin:0}
+
+/* ---------- masthead ---------- */
+.mast{padding:56px 0 28px}
+.eyebrow{
+  font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--slate);display:flex;flex-wrap:wrap;gap:8px 18px;margin:0 0 28px
+}
+.eyebrow b{color:var(--asphalt);font-weight:700}
+h1{
+  font-size:clamp(52px,12vw,124px);line-height:.86;margin:0;
+  font-weight:900;font-stretch:125%;letter-spacing:-.03em;text-transform:uppercase;
+}
+h1 .thin{display:block;font-weight:400;font-stretch:75%;letter-spacing:.01em;
+  font-size:clamp(20px,4.4vw,40px);line-height:1.1;margin-top:14px;color:var(--slate)}
+.deck{max-width:52ch;margin:26px 0 0;font-size:17px}
+
+/* ---------- metric strip ---------- */
+.strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+  border-top:2px solid var(--asphalt);border-bottom:1px solid var(--hair);margin-top:36px}
+.metric{padding:16px 18px 18px;border-right:1px solid var(--hair)}
+.metric:last-child{border-right:0}
+.metric .n{font-family:var(--mono);font-size:34px;font-weight:700;line-height:1;display:block}
+.metric .k{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--slate);margin-top:9px;display:block}
+.metric.flag .n{color:var(--rust)}
+
+/* ---------- section headers ---------- */
+section{padding-top:60px}
+.shead{display:flex;align-items:baseline;gap:14px;margin:0 0 8px}
+.shead .ss{font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.14em;
+  color:var(--cobalt);white-space:nowrap}
+h2{font-size:clamp(24px,4vw,34px);font-weight:700;font-stretch:112%;letter-spacing:-.015em;
+  text-transform:uppercase;margin:0}
+.sub{color:var(--slate);margin:0 0 30px;max-width:60ch}
+
+/* ---------- clock ---------- */
+.clock{border-top:2px solid var(--asphalt);padding-top:22px}
+.bars{display:grid;grid-template-columns:repeat(24,1fr);gap:3px;align-items:end;height:210px}
+.bar{background:var(--paper-2);border-top:2px solid var(--slate);min-height:2px;position:relative}
+.bar.hot{background:var(--hazard);border-top-color:var(--asphalt)}
+.bar.dead{background:repeating-linear-gradient(45deg,transparent,transparent 3px,rgba(23,25,27,.13) 3px,rgba(23,25,27,.13) 4px);border-top:1px dashed var(--hair)}
+.bar .v{position:absolute;top:-19px;left:50%;transform:translateX(-50%);
+  font-family:var(--mono);font-size:11px;font-weight:700}
+.hours{display:grid;grid-template-columns:repeat(24,1fr);gap:3px;margin-top:8px;
+  border-top:1px solid var(--hair);padding-top:7px}
+.hours span{font-family:var(--mono);font-size:9.5px;color:var(--slate);text-align:center}
+.hours span.mark{color:var(--asphalt);font-weight:700}
+.clocknote{display:flex;flex-wrap:wrap;gap:10px 26px;margin-top:20px;
+  font-family:var(--mono);font-size:11px;letter-spacing:.05em;color:var(--slate)}
+.key{display:inline-flex;align-items:center;gap:7px}
+.sw{width:13px;height:13px;background:var(--hazard);border:1px solid var(--asphalt)}
+.sw.q{background:var(--paper-2);border-color:var(--slate)}
+.sw.z{background:repeating-linear-gradient(45deg,transparent,transparent 3px,rgba(23,25,27,.13) 3px,rgba(23,25,27,.13) 4px);border:1px dashed var(--hair)}
+
+/* ---------- stages ---------- */
+.stage{display:grid;grid-template-columns:76px 1fr;gap:22px;
+  padding:22px 0;border-top:1px solid var(--hair)}
+.stage:last-of-type{border-bottom:1px solid var(--hair)}
+.stage .num{font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.12em;
+  color:var(--cobalt);padding-top:5px}
+.stage h3{margin:0 0 6px;font-size:19px;font-weight:700;font-stretch:108%}
+.stage p{margin:0;color:#33383C}
+
+/* ---------- table ---------- */
+.tablewrap{border-top:2px solid var(--asphalt)}
+table{width:100%;border-collapse:collapse}
+th{font-family:var(--mono);font-size:10px;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--slate);text-align:right;padding:12px 8px;font-weight:700;
+  border-bottom:1px solid var(--hair);white-space:nowrap}
+th.l{text-align:left}
+td{padding:15px 8px;border-bottom:1px solid var(--hair);vertical-align:top;text-align:right;
+  font-family:var(--mono);font-size:13px}
+td.l{text-align:left;font-family:var(--sans);font-size:15px}
+tr:nth-child(-n+1) td{border-top:0}
+.pos{color:var(--slate);font-size:11px;width:26px}
+.who{font-weight:700}
+.window{color:var(--slate);white-space:nowrap;font-size:12px}
+.verdict{text-align:left;font-family:var(--sans);font-size:14px;line-height:1.5;color:#33383C;
+  max-width:38ch}
+tr.lead .who{box-shadow:inset 0 -8px 0 var(--hazard)}
+
+/* ---------- findings ---------- */
+.finds{display:grid;grid-template-columns:repeat(auto-fit,minmax(258px,1fr));gap:1px;
+  background:var(--hair);border:1px solid var(--hair)}
+.find{background:var(--paper);padding:24px 22px 26px}
+.find .tag{font-family:var(--mono);font-size:10px;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--cobalt);font-weight:700}
+.find h3{margin:11px 0 8px;font-size:18px;font-weight:700;font-stretch:108%}
+.find p{margin:0;font-size:15px;color:#33383C}
+.find .big{font-family:var(--mono);font-size:27px;font-weight:700;display:block;margin:2px 0 6px}
+
+blockquote{margin:34px 0 0;padding:22px 26px;background:var(--asphalt);color:var(--paper)}
+blockquote p{margin:0;font-size:17px}
+blockquote cite{display:block;margin-top:12px;font-family:var(--mono);font-size:11px;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--hazard);font-style:normal}
+
+footer{margin-top:64px;padding-top:20px;border-top:2px solid var(--asphalt);
+  font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--slate);
+  display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between}
+
+@media (max-width:720px){
+  .wrap{padding:0 18px 72px}
+  .bars{height:150px}
+  .bar .v{display:none}
+  .bar.hot .v{display:block;font-size:10px}
+  .hours span{font-size:8px}
+  .stage{grid-template-columns:1fr;gap:8px}
+  .stage .num{padding-top:0}
+  table,thead,tbody,tr,td{display:block;width:100%}
+  thead{display:none}
+  tr{border-bottom:1px solid var(--hair);padding:18px 0}
+  td{border:0;padding:2px 0;text-align:left}
+  td.l{font-size:17px}
+  td.stat::before{content:attr(data-k) " ";color:var(--slate);font-size:10px;
+    letter-spacing:.12em;text-transform:uppercase}
+  .verdict{max-width:none;padding-top:8px}
+}
+@media (prefers-reduced-motion:no-preference){
+  .bar{animation:rise .7s cubic-bezier(.2,.7,.3,1) both}
+  @keyframes rise{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+  .bar{transform-origin:bottom}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="mast">
+  <p class="eyebrow">
+    <span><b>Octane Racing 2.0</b></span>
+    <span>#general-chat</span>
+    <span>10–13 Aug 2026</span>
+    <span>261 messages logged</span>
+  </p>
+  <h1>The chatter
+    <span class="thin">A four-day stage report on a sim racing server that mostly talked about rock climbing</span>
+  </h1>
+  <p class="deck">Nominally this channel is about rally. In practice it is about GPU prices, one man's cats, Eastern European salary bands, tendon injuries, and what time of night it is acceptable to call a photograph fake.</p>
+
+  <div class="strip">
+    <div class="metric"><span class="n">261</span><span class="k">Messages</span></div>
+    <div class="metric"><span class="n">15</span><span class="k">Participants</span></div>
+    <div class="metric"><span class="n">36</span><span class="k">Media posts</span></div>
+    <div class="metric flag"><span class="n">45%</span><span class="k">Sent in the 10pm hour</span></div>
+  </div>
+</header>
+
+<section>
+  <div class="shead"><span class="ss">Timing</span><h2>The 22:00 singularity</h2></div>
+  <p class="sub">Messages by hour of day, all four days combined. This server has no morning — not one message between 06:00 and 11:00. It has, instead, a 3am.</p>
+  <div class="clock">
+    <div class="bars">
+      <div class="bar dead" style="height:1%"></div>
+      <div class="bar dead" style="height:1%"></div>
+      <div class="bar dead" style="height:1%"></div>
+      <div class="bar hot" style="height:30%"><span class="v">35</span></div>
+      <div class="bar dead" style="height:1%"></div>
+      <div class="bar" style="height:2%"><span class="v">1</span></div>
+      <div class="bar dead" style="height:1%"></div>
+      <div class="bar dead" style="height:1%"></div>
+      <div class="bar dead" style="height:1%"></div>
+      <div class="bar dead" style="height:1%"></div>
+      <div class="bar dead" style="height:1%"></div>
+      <div class="bar" style="height:4%"><span class="v">3</span></div>
+      <div class="bar" style="height:3%"><span class="v">2</span></div>
+      <div class="bar" style="height:14%"><span class="v">15</span></div>
+      <div class="bar" style="height:15%"><span class="v">16</span></div>
+      <div class="bar dead" style="height:1%"></div>
+      <div class="bar dead" style="height:1%"></div>
+      <div class="bar" style="height:15%"><span class="v">16</span></div>
+      <div class="bar" style="height:5%"><span class="v">4</span></div>
+      <div class="bar" style="height:3%"><span class="v">2</span></div>
+      <div class="bar" style="height:12%"><span class="v">13</span></div>
+      <div class="bar" style="height:32%"><span class="v">37</span></div>
+      <div class="bar hot" style="height:100%"><span class="v">117</span></div>
+      <div class="bar dead" style="height:1%"></div>
+    </div>
+    <div class="hours">
+      <span>00</span><span>01</span><span>02</span><span class="mark">03</span><span>04</span><span>05</span>
+      <span>06</span><span>07</span><span>08</span><span>09</span><span>10</span><span>11</span>
+      <span>12</span><span>13</span><span>14</span><span>15</span><span>16</span><span>17</span>
+      <span>18</span><span>19</span><span>20</span><span>21</span><span class="mark">22</span><span>23</span>
+    </div>
+    <p class="clocknote">
+      <span class="key"><span class="sw"></span> Peak traffic</span>
+      <span class="key"><span class="sw q"></span> Normal traffic</span>
+      <span class="key"><span class="sw z"></span> Zero messages</span>
+    </p>
+  </div>
+</section>
+
+<section>
+  <div class="shead"><span class="ss">Route</span><h2>Where the conversation went</h2></div>
+  <p class="sub">Numbered as stages because the drift is genuinely chronological. Nobody steered. It just went.</p>
+
+  <div class="stage"><span class="num">SS1</span><div>
+    <h3>Hardware misery</h3>
+    <p>Simagic wheelbase upgrades judged not worth it. Escalates into the RTX 5090 costing 7–8K in Taxi615's country — more than a car that stays in one piece for three months.</p>
+  </div></div>
+
+  <div class="stage"><span class="num">SS2</span><div>
+    <h3>The €184,000 question</h3>
+    <p>Someone posts a supercar listing. Proposals for what to do with it: crash it (Kromchy), admire it in the garage (Shotgun Willie), sign up for Historic Rally and drive it properly (Voksy the Wheel Destroyer).</p>
+  </div></div>
+
+  <div class="stage"><span class="num">SS3</span><div>
+    <h3>Cars, real ones</h3>
+    <p>Traction control renamed "the owner's button." Modern safety and comfort features declared sickening. Henry Ford's 1922 line about black paint gets quoted and immediately corrupted into "once you go black you never go back — Taxi, 2026."</p>
+  </div></div>
+
+  <div class="stage"><span class="num">SS4</span><div>
+    <h3>The cat killer arc</h3>
+    <p>Taxi615 posts GTA 5 cat carnage and is renamed by a second account that narrates the ensuing chase like a war correspondent until a military tank ends it. He insists he loves cats and is trolling. Nobody believes him.</p>
+  </div></div>
+
+  <div class="stage"><span class="num">SS5</span><div>
+    <h3>Career planning, unexpectedly sincere</h3>
+    <p>Toasty is pivoting into business analytics; Voksy Sychophant dumps SQL, Power BI and regex courses on him. Becomes a real conversation about pay: ~€900 average locally, €5k for the good jobs, versus Voksy's $1.5k <em>per week</em>.</p>
+  </div></div>
+
+  <div class="stage"><span class="num">SS6</span><div>
+    <h3>Baltic diplomacy</h3>
+    <p>BestHL calls a photo AI slop, gets branded "angry man from flat country," retaliates with lakes and blind crests. Resolved amicably: "We can only colectively hate france."</p>
+  </div></div>
+
+  <div class="stage"><span class="num">SS7</span><div>
+    <h3>Climbing takes the channel</h3>
+    <p>steeze and Toasty discover a shared hobby and the server becomes a bouldering forum for two solid hours. Tension boards, 45-degree walls, 5.13s, Nalle Hukkataival, and whether you should be afraid of falling.</p>
+  </div></div>
+
+  <div class="stage"><span class="num">SS8</span><div>
+    <h3>Everyone is injured</h3>
+    <p>Tennis elbow (two cases), a four-week-old torn lumbrical, cortisone injections to stop an arm locking at 90 degrees, and a snowbank incident sustained while trying to drift a front-wheel-drive car.</p>
+  </div></div>
+</section>
+
+<section>
+  <div class="shead"><span class="ss">Classification</span><h2>Final standings</h2></div>
+  <p class="sub">Ranked by message count. Sleep verdicts issued by an unqualified authority on the basis of timestamps alone.</p>
+  <div class="tablewrap">
+  <table>
+    <thead><tr>
+      <th class="l" colspan="2">Driver</th><th>Msgs</th><th>Media</th><th>Words</th>
+      <th>Awake window</th><th class="l">Diagnosed sleep schedule</th>
+    </tr></thead>
+    <tbody>
+      <tr class="lead"><td class="pos">01</td><td class="l who">Toasty</td>
+        <td class="stat" data-k="Msgs">72</td><td class="stat" data-k="Media">7</td><td class="stat" data-k="Words">562</td>
+        <td class="window stat" data-k="Window">03:09–22:14</td>
+        <td class="verdict">Sleeps nineteen minutes a day, in the airport security line. Hit enter twice within the same minute 26 times, which is not typing, it is morse code for help.</td></tr>
+
+      <tr><td class="pos">02</td><td class="l who">Voksy the Wheel Destroyer</td>
+        <td class="stat" data-k="Msgs">38</td><td class="stat" data-k="Media">5</td><td class="stat" data-k="Words">208</td>
+        <td class="window stat" data-k="Window">03:18–22:38</td>
+        <td class="verdict">Claims 3am is his normal awake time and has been "since I was a kid," then edits it to "so like since 2 years." Works nights. Has personally repealed the circadian rhythm.</td></tr>
+
+      <tr><td class="pos">03</td><td class="l who">steeze</td>
+        <td class="stat" data-k="Msgs">30</td><td class="stat" data-k="Media">1</td><td class="stat" data-k="Words">416</td>
+        <td class="window stat" data-k="Window">19:50–22:21</td>
+        <td class="verdict">Exists only on the evening of 12 August. Materialized, delivered 416 words on bouldering, dematerialized. Sleeps in a hangboard.</td></tr>
+
+      <tr><td class="pos">04</td><td class="l who">Taxi615</td>
+        <td class="stat" data-k="Msgs">24</td><td class="stat" data-k="Media">4</td><td class="stat" data-k="Words">218</td>
+        <td class="window stat" data-k="Window">12:55–22:28</td>
+        <td class="verdict">Wakes at noon, immediately posts cats. Sleep quality rated excellent by him, concerning by the cats.</td></tr>
+
+      <tr><td class="pos">05</td><td class="l who">Voksy Sychophant</td>
+        <td class="stat" data-k="Msgs">24</td><td class="stat" data-k="Media">9</td><td class="stat" data-k="Words">213</td>
+        <td class="window stat" data-k="Window">13:15–22:40</td>
+        <td class="verdict">Only person present all four days and the top media poster. Does not sleep so much as buffer. Power went out at work and he called it an easy day.</td></tr>
+
+      <tr><td class="pos">06</td><td class="l who">Fake Taxi</td>
+        <td class="stat" data-k="Msgs">21</td><td class="stat" data-k="Media">2</td><td class="stat" data-k="Words">197</td>
+        <td class="window stat" data-k="Window">14:09–22:25</td>
+        <td class="verdict">Tied for most question marks in the server (9). Lies awake at night asking "realistically, what would you do with that."</td></tr>
+
+      <tr><td class="pos">07</td><td class="l who">Taxi the cat killer</td>
+        <td class="stat" data-k="Msgs">17</td><td class="stat" data-k="Media">5</td><td class="stat" data-k="Words">82</td>
+        <td class="window stat" data-k="Window">12:55–22:22</td>
+        <td class="verdict">6.8 words per message, zero questions, five attachments. Communicates primarily in war crimes footage. Does not sleep. Watches.</td></tr>
+
+      <tr><td class="pos">08</td><td class="l who">BestHL</td>
+        <td class="stat" data-k="Msgs">11</td><td class="stat" data-k="Media">0</td><td class="stat" data-k="Words">88</td>
+        <td class="window stat" data-k="Window">14:10–22:19</td>
+        <td class="verdict">Posted zero media in a channel that is 14% media. Sleeps facing Finland, coping.</td></tr>
+
+      <tr><td class="pos">09</td><td class="l who">G Carden</td>
+        <td class="stat" data-k="Msgs">6</td><td class="stat" data-k="Media">0</td><td class="stat" data-k="Words">74</td>
+        <td class="window stat" data-k="Window">05:46–22:15</td>
+        <td class="verdict">The 05:46 message is about tennis elbow. Wakes at dawn purely to assess his own tendons.</td></tr>
+
+      <tr><td class="pos">10</td><td class="l who">B. Kacper</td>
+        <td class="stat" data-k="Msgs">5</td><td class="stat" data-k="Media">2</td><td class="stat" data-k="Words">65</td>
+        <td class="window stat" data-k="Window">22:27–22:31</td>
+        <td class="verdict">Entire recorded lifetime: four minutes. Longest average message in the server. Surfaces only to quote Henry Ford, then returns to the sea.</td></tr>
+
+      <tr><td class="pos">11</td><td class="l who">Shotgun Willie</td>
+        <td class="stat" data-k="Msgs">4</td><td class="stat" data-k="Media">1</td><td class="stat" data-k="Words">29</td>
+        <td class="window stat" data-k="Window">21:43–22:16</td>
+        <td class="verdict">Lives in a hotel near a bouldering gym "for work." No further detail offered. Sleeps in a different city every night.</td></tr>
+
+      <tr><td class="pos">12</td><td class="l who">erikpantzar</td>
+        <td class="stat" data-k="Msgs">4</td><td class="stat" data-k="Media">0</td><td class="stat" data-k="Words">82</td>
+        <td class="window stat" data-k="Window">11:48–14:05</td>
+        <td class="verdict">Wrote the single longest message in the log (42 words) and it is a complaint about how much everyone else writes. Sleeps fine. Wakes to 200 unread.</td></tr>
+
+      <tr><td class="pos">13</td><td class="l who">snotrocket</td>
+        <td class="stat" data-k="Msgs">2</td><td class="stat" data-k="Media">0</td><td class="stat" data-k="Words">2</td>
+        <td class="window stat" data-k="Window">17:24–17:25</td>
+        <td class="verdict">Complete contribution to the historical record: "Where" and "Lol." Conserving energy for something none of us can see.</td></tr>
+
+      <tr><td class="pos">14</td><td class="l who">Kromchy</td>
+        <td class="stat" data-k="Msgs">2</td><td class="stat" data-k="Media">0</td><td class="stat" data-k="Words">6</td>
+        <td class="window stat" data-k="Window">21:33–22:09</td>
+        <td class="verdict">Six words total, and one of them is the best answer anyone gave to the supercar question. Sleeps 23 hours a day, wakes only when a one-word answer is required.</td></tr>
+
+      <tr><td class="pos">15</td><td class="l who">Neiro</td>
+        <td class="stat" data-k="Msgs">1</td><td class="stat" data-k="Media">0</td><td class="stat" data-k="Words">11</td>
+        <td class="window stat" data-k="Window">03:40–03:40</td>
+        <td class="verdict">One message, at 3:40 in the morning, about jumping on for a stage or two then leaving. Applies this philosophy to consciousness itself.</td></tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<section>
+  <div class="shead"><span class="ss">Scrutineering</span><h2>Irregularities noted</h2></div>
+  <p class="sub">Findings from the data that nobody asked for.</p>
+
+  <div class="finds">
+    <div class="find">
+      <span class="tag">Identity</span>
+      <h3>A quarter of the server is two people</h3>
+      <p>Of 15 participants, five are a variant of Taxi or Voksy. erikpantzar surfaces once to say he cannot follow the chat and that everyone naming themselves the same thing made it worse. He is correct.</p>
+    </div>
+    <div class="find">
+      <span class="tag">Word count</span>
+      <h3>Climbing beat racing</h3>
+      <p><span class="big">17 vs 8</span>Mentions of "climbing" and "bouldering" against mentions of "car." Add "sql" at seven and the server's actual subject matter finishes third.</p>
+    </div>
+    <div class="find">
+      <span class="tag">Dominance</span>
+      <h3>Toasty out-talked eleven people</h3>
+      <p><span class="big">28%</span>Share of all messages sent by one man — more than the bottom eleven participants combined, and 26 of them were sent inside the same minute as his previous one.</p>
+    </div>
+    <div class="find">
+      <span class="tag">Brevity</span>
+      <h3>The three-word philosophers</h3>
+      <p>Kromchy and snotrocket contributed eight words between them across four messages. Highest signal-to-noise ratio in the channel by a wide margin. Lowest everything else.</p>
+    </div>
+    <div class="find">
+      <span class="tag">Format</span>
+      <h3>Media is a dialect here</h3>
+      <p>36 of 261 messages are attachments with no text at all. An entire multi-day cat-hunting saga was narrated at roughly the verbal density of a telegram.</p>
+    </div>
+    <div class="find">
+      <span class="tag">Health</span>
+      <h3>A remarkable injury rate</h3>
+      <p>For a group whose primary hobby is sitting in a chair, this server has sustained two tennis elbows, one torn lumbrical, one course of cortisone and one snowbank.</p>
+    </div>
+  </div>
+
+  <blockquote>
+    <p>The log is an ouroboros. It ends with erikpantzar asking for exactly this — clean the chatter, give me the essentials in plain well written English — Voksy Sychophant adding "make no mistakes," and Fake Taxi's final message: "No GIFs???????" Toasty had already predicted the whole thing one message earlier, accusing Erik of feeding the chat to an AI. He was right about everything except who was going to do it.</p>
+    <cite>Sorry about the GIFs, Fake Taxi</cite>
+  </blockquote>
+</section>
+
+<footer>
+  <span>Octane Racing 2.0 · #general-chat</span>
+  <span>10 Aug 17:17 → 13 Aug 14:09</span>
+  <span>261 messages · 2,253 words · 15 drivers</span>
+</footer>
+
+</div>
+</body>
+</html>
