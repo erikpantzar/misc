@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Toxic Table Tennis — Stage Report</title>
+<meta name="description" content="One afternoon in the sim rally Discord, classified by penalty accrued.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@500;700;900&family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#DEDCD3;
+    --paper-2:#D3D0C5;
+    --ink:#191A17;
+    --ink-soft:#5B5C55;
+    --hazard:#E4B10A;
+    --penalty:#B3251E;
+    --moss:#3F5140;
+    --rule:rgba(25,26,23,.22);
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:"IBM Plex Sans",system-ui,sans-serif;
+    font-size:17px;
+    line-height:1.6;
+    background-image:
+      repeating-linear-gradient(0deg,rgba(25,26,23,.035) 0 1px,transparent 1px 4px);
+  }
+  .tape{
+    height:14px;
+    background:repeating-linear-gradient(135deg,var(--hazard) 0 18px,var(--ink) 18px 36px);
+  }
+  .wrap{max-width:940px;margin:0 auto;padding:0 22px}
+
+  /* ---- masthead ---- */
+  header{padding:44px 0 30px;border-bottom:3px solid var(--ink)}
+  .eyebrow{
+    font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spacing:.22em;
+    text-transform:uppercase;color:var(--ink-soft);margin:0 0 14px;
+  }
+  h1{
+    font-family:"Big Shoulders Display","Arial Narrow",sans-serif;
+    font-weight:900;font-size:clamp(58px,13vw,148px);line-height:.82;
+    margin:0;letter-spacing:-.01em;text-transform:uppercase;
+  }
+  h1 .thin{-webkit-text-stroke:2px var(--ink);color:transparent;display:block}
+  .deck{
+    margin:20px 0 0;max-width:52ch;font-size:19px;color:var(--ink);
+  }
+  .strip{
+    display:flex;flex-wrap:wrap;gap:0;margin-top:26px;
+    border-top:1px solid var(--rule);
+  }
+  .strip div{
+    flex:1 1 150px;padding:12px 14px 12px 0;
+    font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.06em;
+    color:var(--ink-soft);text-transform:uppercase;
+  }
+  .strip b{display:block;color:var(--ink);font-size:22px;letter-spacing:0;font-weight:600;margin-top:2px}
+
+  /* ---- sections ---- */
+  section{padding:52px 0;border-bottom:1px solid var(--rule)}
+  .sec-label{
+    font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spacing:.22em;
+    text-transform:uppercase;color:var(--penalty);margin:0 0 6px;
+  }
+  h2{
+    font-family:"Big Shoulders Display","Arial Narrow",sans-serif;
+    font-weight:700;font-size:clamp(34px,6vw,58px);line-height:.95;
+    margin:0 0 22px;text-transform:uppercase;letter-spacing:.005em;
+  }
+  p{max-width:66ch}
+  .lede{font-size:19px}
+  .strike{
+    font-family:"Big Shoulders Display","Arial Narrow",sans-serif;
+    font-weight:900;text-transform:uppercase;font-size:clamp(30px,6.5vw,60px);
+    line-height:.95;color:var(--penalty);margin:34px 0 26px;max-width:18ch;
+  }
+  ol.sparks{list-style:none;padding:0;margin:30px 0 0;counter-reset:spark}
+  ol.sparks li{
+    counter-increment:spark;position:relative;padding:18px 0 18px 66px;
+    border-top:1px solid var(--rule);max-width:72ch;
+  }
+  ol.sparks li::before{
+    content:"SS" counter(spark);position:absolute;left:0;top:19px;
+    font-family:"IBM Plex Mono",monospace;font-size:13px;font-weight:600;
+    color:var(--moss);letter-spacing:.05em;
+  }
+  ol.sparks h3{
+    font-family:"IBM Plex Sans",sans-serif;font-size:17px;font-weight:600;
+    margin:0 0 4px;
+  }
+  ol.sparks p{margin:0;color:var(--ink)}
+
+  /* ---- classification ---- */
+  .note{
+    font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.05em;
+    color:var(--ink-soft);text-transform:uppercase;margin:0 0 20px;
+  }
+  .row{
+    display:grid;
+    grid-template-columns:38px minmax(96px,1fr) minmax(0,2.1fr) 64px;
+    gap:16px;align-items:start;
+    padding:16px 0;border-top:1px solid var(--rule);
+  }
+  .row:first-of-type{border-top:2px solid var(--ink)}
+  .pos{
+    font-family:"IBM Plex Mono",monospace;font-size:13px;font-weight:600;
+    color:var(--ink-soft);padding-top:3px;
+  }
+  .who{
+    font-family:"Big Shoulders Display","Arial Narrow",sans-serif;
+    font-weight:700;font-size:27px;line-height:1;text-transform:uppercase;
+    padding-top:2px;
+  }
+  .charge{font-size:15.5px;line-height:1.5}
+  .bar{
+    display:block;height:7px;background:var(--penalty);margin:9px 0 0;
+    width:var(--w);max-width:100%;
+    transform-origin:left center;
+  }
+  .bar.clean{background:var(--moss)}
+  .pts{
+    font-family:"IBM Plex Mono",monospace;font-size:21px;font-weight:600;
+    text-align:right;padding-top:2px;font-variant-numeric:tabular-nums;
+  }
+  .pts small{display:block;font-size:10px;letter-spacing:.12em;color:var(--ink-soft);font-weight:400}
+  .row.leader .who{color:var(--penalty)}
+
+  /* ---- in-car audio ---- */
+  .quotes{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(268px,1fr));margin-top:8px}
+  figure{
+    margin:0;background:var(--paper-2);padding:18px 18px 15px;
+    border-left:3px solid var(--ink);
+  }
+  figure.hot{border-left-color:var(--penalty)}
+  figure blockquote{
+    margin:0;font-size:17.5px;line-height:1.45;
+  }
+  figure blockquote::before{content:"“"}
+  figure blockquote::after{content:"”"}
+  figcaption{
+    margin-top:11px;font-family:"IBM Plex Mono",monospace;font-size:11.5px;
+    letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);
+  }
+  figcaption b{color:var(--ink);font-weight:600}
+
+  /* ---- stewards ---- */
+  .stewards{background:var(--ink);color:var(--paper);margin:0;padding:52px 0 56px}
+  .stewards .wrap{max-width:940px}
+  .stewards .sec-label{color:var(--hazard)}
+  .stewards h2{color:var(--paper)}
+  .stewards p{color:#CFCDC4;font-size:19px}
+  .stewards em{color:var(--hazard);font-style:normal;font-weight:600}
+  .verdict{
+    margin-top:30px;padding-top:22px;border-top:1px solid rgba(222,220,211,.25);
+    font-family:"Big Shoulders Display","Arial Narrow",sans-serif;
+    font-weight:700;font-size:clamp(24px,4.5vw,40px);line-height:1.05;
+    text-transform:uppercase;color:var(--paper);max-width:24ch;
+  }
+  footer{padding:26px 0 46px;font-family:"IBM Plex Mono",monospace;font-size:11.5px;
+    letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft)}
+
+  @media (max-width:620px){
+    .row{grid-template-columns:30px 1fr 58px;gap:12px}
+    .charge{grid-column:1 / -1;padding-left:42px}
+    .strip div{flex-basis:44%}
+  }
+  @media (prefers-reduced-motion:no-preference){
+    .bar{animation:grow .9s cubic-bezier(.2,.8,.25,1) both}
+    @keyframes grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+  }
+  :focus-visible{outline:3px solid var(--penalty);outline-offset:2px}
+</style>
+</head>
+<body>
+<div class="tape" aria-hidden="true"></div>
+
+<div class="wrap">
+  <header>
+    <p class="eyebrow">Sim rally Discord · Stage report · One afternoon</p>
+    <h1>Toxic<span class="thin">Table</span>Tennis</h1>
+    <p class="deck">Nine competitors, one Czech tarmac rally, and a fuse that had been quietly burning since roughly March.</p>
+    <div class="strip">
+      <div>Duration<b>6h 49m</b></div>
+      <div>Entrants<b>11</b></div>
+      <div>Retirements<b>1 (forced)</b></div>
+      <div>Penalties issued<b>213</b></div>
+    </div>
+  </header>
+
+  <section>
+    <p class="sec-label">Shakedown</p>
+    <h2>A completely normal day</h2>
+    <p class="lede">It starts the way every day in there starts. Someone confesses to driving front-wheel drive and is gently shunned for it. Someone else is on leg three of an endurance rally at two in the morning, having lost the same door twice in the same corner. There is admin: a link, a start list, an argument about whether tarmac is easier than gravel or just differently humiliating.</p>
+    <p>Then it's the small stuff. Which car. Which notes. Whether you're allowed to run a rally blind or whether that's basically recce with extra steps. steeze tags a mountain biker who has never opened the game, purely to grow the sport. oka22 mentions, with visible enjoyment, that there's one stage in there nobody has driven before and declines to say which. The only injuries anyone reports all afternoon are to bodywork and to a tyre that moved one centimetre and cost ten seconds.</p>
+    <p class="strike">Then all of a sudden lightning struck.</p>
+    <p>Not one bolt. Three, about forty minutes apart, into ground that had been dry for months.</p>
+    <ol class="sparks">
+      <li>
+        <h3>The R5 is a brick</h3>
+        <p>Frenzy regrets his car choice. Jorma calls the R5 a brick. Frenzy replies "respectfully, skill issue," then summons oka22 to adjudicate — 🎙️, "i'm waiting," 🕐, "guess i will never get an answer 😿." Jorma later admits the whole thing was bait.</p>
+      </li>
+      <li>
+        <h3>Are you still on the controller</h3>
+        <p>An innocent question to steeze, except it reopens an old file. Frenzy: "oh wait hes the guy who actually thinks controller isnt respectable, i remember."</p>
+      </li>
+      <li>
+        <h3>Taxi wasn't trying</h3>
+        <p>Taxi615 explains he lost fifteen seconds in cuts and was just having fun on stream. Frenzy calls that cope, then implies he's lying about not practising. Taxi finally goes off, and the afternoon stops being about cars.</p>
+      </li>
+    </ol>
+    <p style="margin-top:34px">What follows is quick. Voksy arrives with the older, larger grudge. Frenzy threatens to leak DMs proving Voksy is fake to people he still chats to daily, and adds that he won't, because Voksy doesn't want to lose the only online group he has. Jorma observes that drama arrives whenever Frenzy does and suggests DMs. Frenzy calls the server an echo chamber. The server responds by holding what oka22 immediately christens the Great Ban Party. M0r94n and Neiro turn up afterwards for the victory lap. Taxi delivers the closing statement: settle it in DMs, own your shit. oka22 asks for an AI summary of the whole thing. Hello.</p>
+  </section>
+
+  <section>
+    <p class="sec-label">Final classification</p>
+    <h2>Penalty accrued</h2>
+    <p class="note">Classified worst-first. Leader is the most penalised.</p>
+
+    <div class="row leader">
+      <div class="pos">P1</div>
+      <div class="who">Frenzy</div>
+      <div class="charge">Serial needling, "cope cope cope," calling Taxi a liar to his face, DM-leak blackmail, the only-online-group line, a casual slur dropped mid-meme, plus six straight hours of "poor baby 🥺."<span class="bar" style="--w:100%"></span></div>
+      <div class="pts">78<small>pts</small></div>
+    </div>
+
+    <div class="row">
+      <div class="pos">P2</div>
+      <div class="who">oka22</div>
+      <div class="charge">Never insults a single person directly. Also runs the "hotlapper" drum for two hours, demands the DMs get leaked, and cheerfully offers to destroy his own echo chamber. Chaos jester, not a fighter.<span class="bar" style="--w:44%"></span></div>
+      <div class="pts">34<small>pts</small></div>
+    </div>
+
+    <div class="row">
+      <div class="pos">P3</div>
+      <div class="who">Voksy</div>
+      <div class="charge">Emote-spamming smugly at a man he is in the process of excluding. "He is Not welcome in this community again." Then apologises to steeze specifically for the crime of talking to him.<span class="bar" style="--w:38%"></span></div>
+      <div class="pts">30<small>pts</small></div>
+    </div>
+
+    <div class="row">
+      <div class="pos">P4</div>
+      <div class="who">Jorma</div>
+      <div class="charge">Lit spark one on purpose, admitted it in writing, then took the neutral-observer high ground while it burned. Also lit spark two.<span class="bar" style="--w:31%"></span></div>
+      <div class="pts">24<small>pts</small></div>
+    </div>
+
+    <div class="row">
+      <div class="pos">P5</div>
+      <div class="who">Taxi615</div>
+      <div class="charge">Mostly the injured party. "If some are this thinned skinned maybe get some treatment by a professional" is still a live round.<span class="bar" style="--w:23%"></span></div>
+      <div class="pts">18<small>pts</small></div>
+    </div>
+
+    <div class="row">
+      <div class="pos">P6</div>
+      <div class="who">M0r94n</div>
+      <div class="charge">Arrived after the ban to say Frenzy gave the community nothing and they finally returned the favour. Two sentences, no wasted motion.<span class="bar" style="--w:19%"></span></div>
+      <div class="pts">15<small>pts</small></div>
+    </div>
+
+    <div class="row">
+      <div class="pos">P7</div>
+      <div class="who">Neiro</div>
+      <div class="charge">Read the context, asked whether someone really had a hissyfit over that, seriously. Pure drive-by.<span class="bar" style="--w:10%"></span></div>
+      <div class="pts">8<small>pts</small></div>
+    </div>
+
+    <div class="row">
+      <div class="pos">P8</div>
+      <div class="who">steeze</div>
+      <div class="charge">Made popcorn. Defended only himself, on the grounds that he is a strong boy. Called a 2027 redemption arc. Penalised solely for lobbing "what are your thoughts on israel?" into an active fire.<span class="bar" style="--w:8%"></span></div>
+      <div class="pts">6<small>pts</small></div>
+    </div>
+
+    <div class="row">
+      <div class="pos">P9</div>
+      <div class="who">Tristen &amp; snaylor</div>
+      <div class="charge">Talked about cars. The entire time. Genuinely just there for the rally.<span class="bar clean" style="--w:4%"></span></div>
+      <div class="pts">0<small>pts</small></div>
+    </div>
+  </section>
+
+  <section>
+    <p class="sec-label">In-car audio</p>
+    <h2>Selected transmissions</h2>
+    <div class="quotes">
+      <figure class="hot">
+        <blockquote>cope cope cope sahur</blockquote>
+        <figcaption>19:33 · <b>Frenzy</b> — followed one minute later by "(joking)"</figcaption>
+      </figure>
+      <figure class="hot">
+        <blockquote>respectfully, skill issue</blockquote>
+        <figcaption>19:26 · <b>Frenzy</b> — the first bolt</figcaption>
+      </figure>
+      <figure class="hot">
+        <blockquote>Man really tired of you seriously all you do is shit talk people and manage to piss off almost everyone here.</blockquote>
+        <figcaption>20:13 · <b>Taxi615</b> — the fuse reaches the barrel</figcaption>
+      </figure>
+      <figure class="hot">
+        <blockquote>you dont wanna lose the only online group you have</blockquote>
+        <figcaption>20:30 · <b>Frenzy</b>, to Voksy, immediately followed by "thats all i will say"</figcaption>
+      </figure>
+      <figure class="hot">
+        <blockquote>if some are this thinned skinned maybe get some treatment by a professional</blockquote>
+        <figcaption>20:20 · <b>Taxi615</b> — return fire</figcaption>
+      </figure>
+      <figure>
+        <blockquote>do you realize its always shit talking and drama once you show up</blockquote>
+        <figcaption>20:25 · <b>Jorma</b> — the observation, from the man who started it</figcaption>
+      </figure>
+      <figure class="hot">
+        <blockquote>i know you guys are a small eco chamber just echoing each others thoughts</blockquote>
+        <figcaption>20:26 · <b>Frenzy</b></figcaption>
+      </figure>
+      <figure>
+        <blockquote>We are ready to see the real, dark side of Voksy</blockquote>
+        <figcaption>20:35 · <b>oka22</b>, gasoline in hand</figcaption>
+      </figure>
+      <figure class="hot">
+        <blockquote>All i will say, He is Not welcome in this community again</blockquote>
+        <figcaption>20:42 · <b>Voksy</b> — the door closing</figcaption>
+      </figure>
+      <figure class="hot">
+        <blockquote>Frenzy gave us nothing and we fiiiiiiinally returned the favor.</blockquote>
+        <figcaption>20:50 · <b>M0r94n</b>, arriving after the fact</figcaption>
+      </figure>
+      <figure>
+        <blockquote>let me make some popcorn if you all could hold on for a minute or two before continuing</blockquote>
+        <figcaption>20:23 · <b>steeze</b>, the only neutral in the building</figcaption>
+      </figure>
+      <figure>
+        <blockquote>Trolling is a right of passage here lol. This will be funny to read</blockquote>
+        <figcaption>20:57 · <b>Taxi615</b> — last word, and he was right</figcaption>
+      </figure>
+    </div>
+  </section>
+</div>
+
+<div class="stewards">
+  <div class="wrap">
+    <p class="sec-label">Stewards' decision</p>
+    <h2>The honest read</h2>
+    <p>Frenzy is the clear points leader and it isn't close. But he wasn't shadowboxing. <em>Jorma admits to baiting.</em> <em>oka22 spent the evening pouring petrol while smiling.</em> And the last twenty minutes are a pile-on delivered to a man who can no longer reply, by two people who weren't there for any of it.</p>
+    <p>Everyone in that room would tell you it's just banter, and for about eighty percent of the afternoon they'd be right. The trouble is that the same joke lands differently depending on how much history is sitting underneath it, and there was a lot of history sitting underneath this one.</p>
+    <p class="verdict">The tidiest line in the whole log is Taxi's: take it to DMs.</p>
+  </div>
+</div>
+
+<div class="wrap">
+  <footer>Compiled from 471 lines of chat log · No appeal window · Times are local to whoever was awake</footer>
+</div>
+<div class="tape" aria-hidden="true"></div>
+</body>
+</html>
