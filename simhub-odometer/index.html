@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="A five-reel mechanical distance meter prototype for SimHub."
+    />
+    <meta property="og:title" content="RBR Mechanical Distance Meter" />
+    <meta property="og:description" content="Five-reel SimHub prototype" />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:url"
+      content="https://erikpantzar.github.io/misc/simhub-odometer/"
+    />
+    <meta
+      property="og:image"
+      content="https://erikpantzar.github.io/misc/simhub-odometer/og.png"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <title>RBR Mechanical Distance Meter</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <main class="prototype-page">
+      <div class="prototype-heading">
+        <span class="eyebrow">RBR / SimHub prototype</span>
+        <h1>Mechanical distance meter</h1>
+        <p>Five proportional reels · distance shown in metres</p>
+      </div>
+
+      <section class="instrument" aria-label="300 metres travelled">
+        <div class="instrument-face">
+          <div class="reel-bank" aria-hidden="true">
+            <div class="digit-card" data-divisor="10000"><div class="reel"></div></div>
+            <div class="digit-card" data-divisor="1000"><div class="reel"></div></div>
+            <div class="digit-card" data-divisor="100"><div class="reel"></div></div>
+            <div class="digit-card" data-divisor="10"><div class="reel"></div></div>
+            <div class="digit-card" data-divisor="1"><div class="reel"></div></div>
+          </div>
+
+          <div class="fake-controls" aria-hidden="true">
+            <span class="control-label">START</span>
+            <span class="fake-button fake-button-start"></span>
+            <span class="control-label control-label-reset">RESET</span>
+            <span class="fake-button fake-button-reset"></span>
+          </div>
+        </div>
+        <span class="unit-label" aria-hidden="true">METRES</span>
+      </section>
+
+      <section class="test-panel" aria-label="Prototype test controls">
+        <div class="test-panel-heading">
+          <div>
+            <span class="panel-kicker">TEST CONTROLS</span>
+            <p>These controls are not part of the instrument.</p>
+          </div>
+          <output aria-live="polite">00300 m</output>
+        </div>
+
+        <label class="field-label" for="distance-range">Distance</label>
+        <input
+          id="distance-range"
+          class="range-input"
+          type="range"
+          min="0"
+          max="99999"
+          step="1"
+          value="300"
+        />
+
+        <div class="control-row">
+          <label class="number-field">
+            <span>Set metres</span>
+            <input id="distance-number" type="number" min="0" max="99999" value="300" />
+          </label>
+
+          <label class="number-field speed-field">
+            <span>Demo speed</span>
+            <select id="demo-speed">
+              <option value="8">8 m/s</option>
+              <option value="22" selected>22 m/s</option>
+              <option value="40">40 m/s</option>
+            </select>
+          </label>
+
+          <button class="demo-button" type="button">Run demo</button>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
