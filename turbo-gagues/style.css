@@ -15,8 +15,8 @@ button,input { font:inherit; }
 .digital-card .card-label { transform:rotate(.7deg); }.card-label small { font-size:7px; opacity:.58; white-space:nowrap; }
 .analog-gauge { position:relative; width:140px; height:140px; padding:5px; border-radius:50%; background:radial-gradient(circle at 42% 35%,#5a594d,#171814 62%,#070806 100%); box-shadow:0 7px 12px rgba(23,21,15,.38),inset 0 0 0 1px #797465,inset 0 0 0 4px #090a08; transition:box-shadow .16s ease; }
 .analog-gauge::before { content:""; position:absolute; inset:-3px; z-index:-1; border-radius:50%; opacity:.7; background:repeating-conic-gradient(#171713 0 4deg,#23231e 4deg 7deg); }
-.analog-gauge.state-peak { box-shadow:0 0 19px rgba(238,197,96,.62),0 7px 12px rgba(23,21,15,.42),inset 0 0 0 1px #a69a72,inset 0 0 0 4px #090a08; }
-.analog-gauge.state-fade { box-shadow:0 0 20px rgba(205,60,35,.63),0 7px 12px rgba(23,21,15,.42),inset 0 0 0 1px #8d4c3c,inset 0 0 0 4px #090a08; animation:fade-thump .54s ease-out 1; }
+.analog-gauge.state-peak { box-shadow:0 7px 12px rgba(23,21,15,.42),inset 0 0 0 1px #797465,inset 0 0 0 4px #090a08; }
+.analog-gauge.state-fade { box-shadow:0 7px 12px rgba(23,21,15,.42),inset 0 0 0 1px #797465,inset 0 0 0 4px #090a08; }
 .bezel-screw { position:absolute; z-index:7; width:7px; height:7px; border-radius:50%; background:radial-gradient(circle at 35% 30%,#aaa18b,#37372f 55%,#111); box-shadow:0 1px 2px #000; }.bezel-screw::after { content:""; position:absolute; left:1px; top:3px; width:5px; height:1px; background:#111; transform:rotate(-28deg); }.bezel-screw-one { top:13px; right:19px; }.bezel-screw-two { bottom:15px; left:17px; }.bezel-screw-two::after { transform:rotate(18deg); }
 .reset-plunger { position:absolute; z-index:-1; right:-9px; bottom:36px; width:12px; height:8px; border:1px solid #060705; border-radius:1px 4px 4px 1px; background:linear-gradient(#8f382a,#471b15); box-shadow:inset 0 1px rgba(255,255,255,.16),2px 2px 4px rgba(0,0,0,.35); }
 .bezel-ring { width:100%; height:100%; padding:8px; border-radius:inherit; background:linear-gradient(135deg,#050604,#404039 45%,#090a08 68%); }
@@ -40,8 +40,8 @@ button,input { font:inherit; }
 .digital-gauge { position:relative; width:212px; height:80px; color:#d9d2ae; border:2px solid #080906; border-radius:3px 6px 4px 2px; background:repeating-linear-gradient(93deg,rgba(255,255,255,.018) 0 1px,transparent 1px 4px),linear-gradient(#313126,#171812 48%,#0b0c09); box-shadow:inset 0 0 0 1px #4d4b3e,inset 0 0 18px #000,0 8px 13px rgba(23,21,15,.43); transform:rotate(-.35deg); transition:box-shadow .16s ease,filter .16s ease; }
 .digital-gauge::before { content:""; position:absolute; left:4px; right:4px; top:-5px; height:5px; border:1px solid #090a07; border-bottom:0; border-radius:3px 3px 0 0; background:#1a1b15; clip-path:polygon(2% 100%,5% 0,95% 0,98% 100%); }
 .digital-gauge::after { content:""; position:absolute; inset:5px; pointer-events:none; border-top:1px solid rgba(255,255,255,.06); border-bottom:1px solid rgba(0,0,0,.75); }
-.digital-gauge.state-peak { box-shadow:0 0 20px rgba(227,184,75,.58),inset 0 0 0 1px #6d6344,inset 0 0 18px #000,0 8px 13px rgba(23,21,15,.43); }
-.digital-gauge.state-fade { box-shadow:0 0 22px rgba(207,54,31,.62),inset 0 0 0 1px #6b382d,inset 0 0 18px #000,0 8px 13px rgba(23,21,15,.43); animation:fade-thump .54s ease-out 1; }
+.digital-gauge.state-peak { box-shadow:inset 0 0 0 1px #4d4b3e,inset 0 0 18px #000,0 8px 13px rgba(23,21,15,.43); }
+.digital-gauge.state-fade { box-shadow:inset 0 0 0 1px #4d4b3e,inset 0 0 18px #000,0 8px 13px rgba(23,21,15,.43); }
 .case-screw { position:absolute; width:5px; height:5px; border-radius:50%; background:#393a33; box-shadow:inset 1px 1px #666,0 1px 2px #000; }.case-screw::after { content:""; position:absolute; left:1px; top:2px; width:3px; height:1px; background:#111; transform:rotate(-20deg); }.screw-a { left:7px; top:7px; }.screw-b { right:7px; top:7px; }
 .screw-c { left:7px; bottom:6px; }.screw-d { right:7px; bottom:6px; }.screw-c::after { transform:rotate(21deg); }.screw-d::after { transform:rotate(55deg); }
 .dymo-tag { position:absolute; z-index:4; left:14px; top:-8px; padding:3px 8px 2px; color:#e1d9bc; background:#181916; border:1px solid #090a08; font:700 6px/1 "Courier New",monospace; letter-spacing:.08em; text-shadow:0 -1px #000; box-shadow:0 2px 3px rgba(0,0,0,.45),inset 0 1px rgba(255,255,255,.08); transform:rotate(-1.4deg); }
@@ -74,9 +74,6 @@ button,input { font:inherit; }
 .tuning-panel button { height:27px; border:1px solid #39382f; border-radius:2px; padding:0 10px; background:#b7af99; color:#292820; font:800 8px/1 "Arial Narrow",Arial,sans-serif; text-transform:uppercase; letter-spacing:.08em; box-shadow:inset 0 1px rgba(255,255,255,.18); cursor:pointer; }
 footer { max-width:760px; margin:12px auto 0; display:flex; justify-content:space-between; gap:20px; color:rgba(34,32,26,.47); font-size:9px; }footer code { padding:3px 5px; border:1px solid rgba(34,32,26,.2); background:rgba(228,221,201,.35); }footer span { text-align:right; }
 .glance-test .analog-gauge,.glance-test .digital-gauge { filter:blur(2.4px) saturate(.9) contrast(1.05); }.glance-test .card-label,.glance-test .instrument-legend { opacity:.24; }
-@keyframes fade-thump { 0% { transform:scale(1); } 42% { transform:scale(1.025); } 100% { transform:scale(1); } }
-.digital-gauge.state-fade { animation-name:fade-box-thump; }
-@keyframes fade-box-thump { 0% { transform:rotate(-.35deg) scale(1); } 42% { transform:rotate(-.35deg) scale(1.025); } 100% { transform:rotate(-.35deg) scale(1); } }
 @media (max-width:760px) { .tuning-panel { grid-template-columns:repeat(2,minmax(0,1fr)); }.tuning-panel button { grid-column:1/-1; }.bench-panel { flex-wrap:wrap; } }
 @media (max-width:600px) { .instrument-rack { align-items:center; flex-direction:column; }.prototype-card { width:min(100%,260px); }.bench-panel { align-items:stretch; flex-direction:column; }.mode-switch { align-self:stretch; }.mode-switch button { flex:1; }.tuning-panel { grid-template-columns:1fr; }.tuning-panel button { grid-column:auto; }footer { align-items:flex-start; flex-direction:column; }footer span { text-align:left; } }
-@media (prefers-reduced-motion:reduce) { .needle,.peak-needle { transition:none; }.analog-gauge.state-fade,.digital-gauge.state-fade { animation:none; } }
+@media (prefers-reduced-motion:reduce) { .needle,.peak-needle { transition:none; } }
