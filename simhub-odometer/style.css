@@ -20,6 +20,28 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+html.embedded,
+html.embedded body {
+  width: 342px;
+  height: 122px;
+  overflow: hidden;
+  background: transparent;
+}
+
+html.embedded .prototype-page {
+  width: 342px;
+  min-height: 122px;
+  padding: 0;
+  gap: 0;
+  justify-content: flex-start;
+  background: transparent;
+}
+
+html.embedded .prototype-heading,
+html.embedded .test-panel {
+  display: none;
+}
+
 button,
 input,
 select {
@@ -305,6 +327,11 @@ select {
   .instrument {
     transform: scale(0.88);
     margin-block: -7px;
+  }
+
+  html.embedded .instrument {
+    transform: none;
+    margin: 0;
   }
 
   .control-row {

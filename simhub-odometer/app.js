@@ -30,11 +30,15 @@ reelCards.forEach((card) => {
   reel.append(createDigit(-100), createDigit(0), createDigit(100));
 });
 
-function setDistance(metres) {
+function setDistance(metres, options = {}) {
   const value = Number(metres);
   if (!Number.isFinite(value)) return;
 
   targetDistance = Math.max(0, value);
+  if (options.immediate === true) {
+    displayDistance = targetDistance;
+    velocity = 0;
+  }
   const wrapped = Math.round(wrapDistance(targetDistance));
   distanceRange.value = wrapped;
   distanceNumber.value = wrapped;
