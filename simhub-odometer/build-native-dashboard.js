@@ -65,7 +65,7 @@ function text(name, value, left, top, width, height, size, color, options = {}) 
 
 const smoothDistance = `
 let target=Number($prop('DataCorePlugin.GameData.NewData.TrackPositionMeters'));
-if(!isFinite(target)||target<0) target=root.rbrOdoTarget==null?300:root.rbrOdoTarget;
+if(!isFinite(target)||target<0) target=root.rbrOdoTarget==null?0:root.rbrOdoTarget;
 let now=Date.now()/1000;
 if(root.rbrOdoValue==null){root.rbrOdoValue=target;root.rbrOdoTarget=target;root.rbrOdoVelocity=0;root.rbrOdoTime=now;}
 let dt=Math.min(Math.max(now-root.rbrOdoTime,0),0.05);root.rbrOdoTime=now;
@@ -213,7 +213,7 @@ const dashboard = {
       RenderingSkip: 0,
       Name: 'Odometer',
       InGameScreen: true,
-      IdleScreen: true,
+      IdleScreen: false,
       PitScreen: false,
       ScreenId: 'eb3b4180-4757-4fb6-9977-9f874ff5e221',
       AllowOverlays: true,
@@ -242,7 +242,7 @@ const dashboard = {
     SettingsBuilder: { Settings: [], IsEditMode: false },
     ScreenCount: 1,
     InGameScreensIndexs: [0],
-    IdleScreensIndexs: [0],
+    IdleScreensIndexs: [],
     MainPreviewIndex: 0,
     IsOverlay: true,
     OverlaySizeWarning: false,

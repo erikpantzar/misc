@@ -68,7 +68,9 @@ digit read `DataCorePlugin.GameData.NewData.TrackPositionMeters`, share a damped
 spring state, apply proportional reel motion for `[10000, 1000, 100, 10, 1]`,
 and add subtle speed-dependent jitter. The dashboard is 342 × 122 px with a
 transparent canvas and can be opened, copied, resized, or converted to an
-overlay in Dash Studio.
+overlay in Dash Studio. It is disabled on SimHub's idle screen and has no demo
+distance fallback; without valid telemetry it retains the last reading, or zero
+before the first valid update.
 
 Run `node build-native-dashboard.js` to regenerate the unpacked native dashboard
 source after changing its element definitions. Recreate the `.simhubdash` ZIP
