@@ -55,3 +55,21 @@ large backwards jump is treated as a stage restart and applied immediately.
 
 The hosted demo remains available at:
 https://erikpantzar.github.io/misc/simhub-odometer/
+
+## Native Dash Studio version
+
+`native-dashboard/RBR Mechanical Odometer.simhubdash` is a separate, fully
+native Dash Studio implementation. Double-click it to import it into SimHub.
+It does not use the Web page component or the files in SimHub's `Web` folder.
+
+The faceplate, five reel cards, moving digits, masks, labels, and decorative
+buttons are ordinary editable dashboard elements. JavaScript bindings on each
+digit read `DataCorePlugin.GameData.NewData.TrackPositionMeters`, share a damped
+spring state, apply proportional reel motion for `[10000, 1000, 100, 10, 1]`,
+and add subtle speed-dependent jitter. The dashboard is 342 × 122 px with a
+transparent canvas and can be opened, copied, resized, or converted to an
+overlay in Dash Studio.
+
+Run `node build-native-dashboard.js` to regenerate the unpacked native dashboard
+source after changing its element definitions. Recreate the `.simhubdash` ZIP
+package from the resulting `native-dashboard/RBR Mechanical Odometer` folder.

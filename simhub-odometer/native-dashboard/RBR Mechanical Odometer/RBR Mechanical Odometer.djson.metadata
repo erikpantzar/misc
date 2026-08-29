@@ -1,0 +1,28 @@
+{
+  "SettingsBuilder": {
+    "Settings": [],
+    "IsEditMode": false
+  },
+  "ScreenCount": 1,
+  "InGameScreensIndexs": [
+    0
+  ],
+  "IdleScreensIndexs": [
+    0
+  ],
+  "MainPreviewIndex": 0,
+  "IsOverlay": true,
+  "OverlaySizeWarning": false,
+  "MetadataVersion": 2,
+  "EnableOnDashboardMessaging": true,
+  "PitScreensIndexs": [],
+  "PreferredTouchMode": 0,
+  "SimHubVersion": "9.12.2",
+  "Category": "Rally",
+  "Title": "RBR Mechanical Odometer",
+  "Description": "Native five-reel mechanical stage-distance odometer for Richard Burns Rally.",
+  "Author": "Erik Pantzar",
+  "Width": 342,
+  "Height": 122,
+  "DashboardVersion": "1.0"
+}
