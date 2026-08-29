@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="A garage-built rally turbo boost and peak-memory gauge prototype for SimHub." />
+    <meta property="og:title" content="Rally Boost Gauge Study" />
+    <meta property="og:description" content="Spool. Peak. Fade. Period-style rally turbo instrumentation." />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="og.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <title>Rally Boost Gauge Study</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <main class="workbench">
+      <header class="intro">
+        <p class="eyebrow">Competition workshop · prototype 02</p>
+        <h1>Boost box / tell-tale</h1>
+        <p>A surplus industrial dial and a homemade LED box, modified to make full boost and high-RPM pressure loss impossible to miss.</p>
+      </header>
+
+      <section class="instrument-rack" id="instrument-rack" aria-label="Turbo gauge prototypes">
+        <article class="prototype-card analog-card">
+          <div class="card-label"><span>Modified mechanical tell-tale</span><small>140 px dial</small></div>
+          <div class="analog-gauge state-spool" id="analog-gauge" aria-label="Current boost 0.04 bar, peak 0.04 bar">
+            <span class="bezel-screw bezel-screw-one"></span><span class="bezel-screw bezel-screw-two"></span><span class="reset-plunger" aria-hidden="true"></span>
+            <div class="bezel-ring"><div class="gauge-face">
+              <div class="loss-sector"></div>
+              <div class="scale scale-0">0</div><div class="scale scale-05">.5</div><div class="scale scale-10">1</div><div class="scale scale-15">1.5</div><div class="scale scale-20">2</div>
+              <span class="max-scribble">MAX 1.6</span>
+              <div class="face-copy"><b>TURBO</b><span>kg/cm²-ish</span></div>
+              <div class="dial-annunciators"><span class="dial-state full"><i></i>FULL</span><span class="dial-state drop"><i></i>DROP</span></div>
+              <div class="needle peak-needle"></div><div class="needle live-needle"></div><div class="hub"></div><div class="glass-glint"></div>
+            </div></div>
+          </div>
+          <div class="instrument-legend"><span><i class="legend-live"></i>LIVE</span><span><i class="legend-peak"></i>MEMORY</span></div>
+        </article>
+
+        <article class="prototype-card digital-card">
+          <div class="card-label"><span>Home-built electronic monitor</span><small>212 × 80 px</small></div>
+          <div class="digital-gauge state-spool" id="digital-gauge" aria-label="Current boost 0.04 bar, peak 0.04 bar">
+            <span class="case-screw screw-a"></span><span class="case-screw screw-b"></span><span class="case-screw screw-c"></span><span class="case-screw screw-d"></span>
+            <span class="dymo-tag">TURBO BOX / MK.II</span>
+            <div class="smoked-window">
+              <div class="digital-topline"><span>BOOST</span><span class="peak-readout">PK 0.04</span></div>
+              <div class="digital-value">0.04</div><span class="digital-unit">BAR</span>
+              <div class="led-track" aria-hidden="true"></div><div class="fade-note">HOLD</div>
+            </div>
+            <div class="jewel-stack" aria-hidden="true"><span class="box-jewel full"><i></i>FULL</span><span class="box-jewel drop"><i></i>DROP</span></div>
+            <span class="toggle-switch" aria-hidden="true"><i></i>HOLD</span><span class="repair-mark">E.P. 91</span>
+          </div>
+          <div class="instrument-legend"><span>STAGE PEAK&nbsp; <b id="stage-peak">0.04</b> BAR</span></div>
+        </article>
+      </section>
+
+      <section class="bench-panel" aria-label="Prototype controls">
+        <div class="demo-status"><span class="status-lamp on" id="status-lamp"></span><strong id="phase-label">OFF BOOST</strong><small id="rpm-label">2300 RPM · automatic rally pull</small></div>
+        <div class="mode-switch" aria-label="Input mode"><button class="active" id="auto-button" type="button">Auto</button><button id="manual-button" type="button">Manual</button></div>
+        <button class="glance-button" id="glance-button" type="button">Glance test</button><button class="run-button" id="run-button" type="button">Pause</button>
+      </section>
+
+      <section class="tuning-panel" aria-label="Gauge tuning">
+        <label id="pressure-control" class="disabled-control"><span>Pressure <output id="pressure-output">0.80 bar</output></span><input id="pressure-range" type="range" min="0" max="2" step="0.01" value="0.8" disabled /></label>
+        <label><span>Gauge range <output id="max-output">2.0 bar</output></span><input id="max-range" type="range" min="1.5" max="3" step="0.5" value="2" /></label>
+        <label><span>Peak hold <output id="hold-output">3.5 sec</output></span><input id="hold-range" type="range" min="2" max="5" step="0.5" value="3.5" /></label>
+        <label><span>Needle return <output id="decay-output">2.5 sec</output></span><input id="decay-range" type="range" min="1" max="5" step="0.5" value="2.5" /></label>
+        <button id="reset-button" type="button">Reset memory</button>
+      </section>
+      <footer><code>window.rbrTurboGauge.setBoost(bar)</code><span>SimHub input hook reserved for the next stage</span></footer>
+    </main>
+  </body>
+</html>
