@@ -65,10 +65,10 @@ It does not use the Web page component or the files in SimHub's `Web` folder.
 The faceplate, five reel cards, moving digits, masks, labels, and decorative
 buttons are ordinary editable dashboard elements. JavaScript bindings on each
 digit read `DataCorePlugin.GameData.NewData.TrackPositionMeters` directly and
-apply proportional reel motion for `[10000, 1000, 100, 10, 1]`, plus subtle
-jitter derived from the live `SpeedKmh` property. The native dashboard does not
-interpolate or catch up to telemetry, so its digits and fractional reel offsets
-always represent SimHub's current stage-distance value. The dashboard is 342 × 122 px with a
+apply proportional reel motion for `[10000, 1000, 100, 10, 1]`. The native
+dashboard does not interpolate, catch up, or add speed-based jitter, so its
+digits and fractional reel offsets always represent SimHub's raw current
+stage-distance value. The dashboard is 342 × 122 px with a
 transparent canvas and can be opened, copied, resized, or converted to an
 overlay in Dash Studio. It is disabled on SimHub's idle screen and has no demo
 distance fallback; without valid telemetry it retains the last reading, or zero

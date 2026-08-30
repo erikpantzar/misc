@@ -79,10 +79,7 @@ return ((whole+${offset})%10+10)%10;`;
 function digitTopFormula(divisor, offset, index) {
   return `${liveDistance}
 let reel=distance/${divisor};let whole=Math.floor(reel);let progress=reel-whole;
-let speed=Number($prop('DataCorePlugin.GameData.NewData.SpeedKmh'));
-let movement=isFinite(speed)?Math.min(Math.abs(speed)/57.6,1):0;
-let jitter=Math.sin(Date.now()*0.026+${index}*1.7)*movement*0.45;
-return ${CARD_Y}+(${offset}+progress)*${CARD_HEIGHT}+jitter;`;
+return ${CARD_Y}+(${offset}+progress)*${CARD_HEIGHT};`;
 }
 
 const items = [];
