@@ -63,32 +63,24 @@ function text(name, value, left, top, width, height, size, color, options = {}) 
   };
 }
 
-const smoothDistance = `
+const liveDistance = `
 let target=Number($prop('DataCorePlugin.GameData.NewData.TrackPositionMeters'));
-if(!isFinite(target)||target<0) target=root.rbrOdoTarget==null?0:root.rbrOdoTarget;
-let now=Date.now()/1000;
-if(root.rbrOdoValue==null){root.rbrOdoValue=target;root.rbrOdoTarget=target;root.rbrOdoVelocity=0;root.rbrOdoTime=now;}
-let dt=Math.min(Math.max(now-root.rbrOdoTime,0),0.05);root.rbrOdoTime=now;
-let restart=target<root.rbrOdoTarget-25||(target<=5&&root.rbrOdoTarget>target+5);
-if(restart){root.rbrOdoValue=target;root.rbrOdoVelocity=0;}
-root.rbrOdoTarget=target;
-let difference=target-root.rbrOdoValue;
-root.rbrOdoVelocity+=(difference*42-root.rbrOdoVelocity*13)*dt;
-root.rbrOdoValue+=root.rbrOdoVelocity*dt;
-if(Math.abs(difference)<0.0005&&Math.abs(root.rbrOdoVelocity)<0.001){root.rbrOdoValue=target;root.rbrOdoVelocity=0;}
-let distance=((root.rbrOdoValue%100000)+100000)%100000;
+if(!isFinite(target)||target<0) target=root.rbrOdoLast==null?0:root.rbrOdoLast;
+else root.rbrOdoLast=target;
+let distance=((target%100000)+100000)%100000;
 `;
 
 function digitTextFormula(divisor, offset) {
-  return `${smoothDistance}
+  return `${liveDistance}
 let whole=Math.floor(distance/${divisor});
 return ((whole+${offset})%10+10)%10;`;
 }
 
 function digitTopFormula(divisor, offset, index) {
-  return `${smoothDistance}
+  return `${liveDistance}
 let reel=distance/${divisor};let whole=Math.floor(reel);let progress=reel-whole;
-let movement=Math.min(Math.abs(root.rbrOdoVelocity)/16,1);
+let speed=Number($prop('DataCorePlugin.GameData.NewData.SpeedKmh'));
+let movement=isFinite(speed)?Math.min(Math.abs(speed)/57.6,1):0;
 let jitter=Math.sin(Date.now()*0.026+${index}*1.7)*movement*0.45;
 return ${CARD_Y}+(${offset}+progress)*${CARD_HEIGHT}+jitter;`;
 }
