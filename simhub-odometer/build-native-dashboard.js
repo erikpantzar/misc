@@ -64,7 +64,7 @@ function text(name, value, left, top, width, height, size, color, options = {}) 
 }
 
 const liveDistance = `
-let target=Number($prop('GameRawData.NGPTelemetry.stage.distanceToEnd'));
+let target=Number($prop('GameRawData.DistanceFromStart'));
 if(!isFinite(target)||target<0) target=root.rbrOdoLast==null?0:root.rbrOdoLast;
 else root.rbrOdoLast=target;
 let distance=((target%100000)+100000)%100000;
@@ -264,7 +264,7 @@ for (const item of items) {
     const expression = entry.Formula?.Expression;
     if (!expression) continue;
     const result = Function('$prop', 'root', expression)(
-      (property) => property.endsWith('distanceToEnd') ? 3732.8 : null,
+      (property) => property.endsWith('DistanceFromStart') ? 3732.8 : null,
       testRoot,
     );
     if (result === undefined || (typeof result === 'number' && !Number.isFinite(result))) {
