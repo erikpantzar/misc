@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>From developer to AI builder · work in progress</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ultra&display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;600;700&display=swap">
+<style>
+  :root{--ink:#2A1A12;--paper:#F7EBD3;--accent:#E8631C;--gold:#F2A541}
+  *{box-sizing:border-box}
+  html,body{margin:0;height:100%;background:#120C08;color:var(--paper);font-family:'Libre Franklin',Arial,sans-serif;overflow:hidden}
+  #stage{position:absolute;left:50%;top:calc(50% - 26px);width:1920px;height:1080px;transform-origin:center center}
+  #stage section{position:absolute;inset:0;width:1920px;height:1080px;overflow:hidden}
+  #stage section:not(.on){display:none !important}
+  #stage section > :not([style*="position:absolute"]):not(aside){position:relative}
+  #stage section *{margin:0;box-sizing:border-box}
+  #stage ul{padding-left:1.2em}
+  #stage table{border-collapse:collapse;width:100%}
+  #stage th,#stage td{padding:.35em .6em;text-align:left;border-bottom:1px solid rgba(42,26,18,.18)}
+  #stage th{font-weight:700}
+  #bar{position:fixed;left:0;right:0;bottom:0;height:52px;display:flex;align-items:center;gap:16px;padding:0 16px;background:#1E140E;border-top:1px solid #3A2418;font-size:14px}
+  #bar button,#bar a{background:none;border:1px solid #5A3A28;color:var(--paper);border-radius:6px;padding:6px 12px;font:inherit;cursor:pointer;text-decoration:none}
+  #bar button:hover,#bar a:hover{border-color:var(--gold);color:var(--gold)}
+  #count{font-variant-numeric:tabular-nums;min-width:64px;text-align:center}
+  #title{flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#C9B08E}
+  .wip{color:var(--gold);font-weight:700;letter-spacing:2px;text-transform:uppercase;font-size:12px}
+  #notes{position:fixed;right:0;top:0;bottom:52px;width:min(420px,100vw);background:rgba(30,20,14,.97);border-left:1px solid #3A2418;padding:24px;overflow:auto;display:none;font-size:16px;line-height:1.5}
+  #notes.on{display:block}
+  #notes h2{font-family:'Ultra',Georgia,serif;font-weight:400;font-size:22px;margin:0 0 8px;color:var(--gold)}
+  #notes .t{color:#C9B08E;margin-bottom:12px}
+  #notes li{margin:6px 0}
+  #notes .next{margin-top:16px;color:var(--gold)}
+  @media (max-width:640px){#title,.hide-s{display:none}}
+</style>
+</head>
+<body>
+<div id="stage">
+<section id="cover" data-transition="fade" style="background:#1B5E92;color:#FFF6E4;font-family:'Libre Franklin', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;justify-content:space-between">
+<svg viewBox="0 0 1920 1080" width="1920" height="1080" aria-label="Open desert landscape at dusk with mesas, a setting sun and a cactus" style="position:absolute;left:0;top:0;width:1920px;height:1080px"><defs><linearGradient id="sky-cover" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1B5E92"/><stop offset="0.55" stop-color="#2F80B8"/><stop offset="0.8" stop-color="#F4A259"/></linearGradient></defs><rect width="1920" height="1080" fill="url(#sky-cover)"/><circle cx="1500" cy="700" r="110" fill="#FFD166"/><path d="M0 760 L180 760 L220 690 L520 690 L560 760 L900 760 L940 720 L1160 720 L1190 760 L1290 760 L1330 650 L1700 650 L1740 760 L1920 760 V1080 H0Z" fill="#C8693A"/><path d="M0 860 Q400 820 800 850 T1600 840 Q1760 834 1920 830 V1080 H0Z" fill="#9C3D1F"/><path d="M0 960 Q600 925 1200 948 T1920 940 V1080 H0Z" fill="#6B2A14"/><g fill="#3E1A0C"><path d="M1650 950 V820 a16 16 0 0 1 32 0 V950Z"/><path d="M1650 900 H1622 a14 14 0 0 1 -14 -14 V846 a11 11 0 0 1 22 0 V878 H1650Z"/><path d="M1682 884 H1706 V828 a11 11 0 0 1 22 0 V870 a14 14 0 0 1 -14 14 H1682Z"/></g></svg>
+<p style="font-size:28px;font-weight:700;color:#FFD166;letter-spacing:4px;text-transform:uppercase">A tale from the AI frontier</p>
+<div style="display:flex;flex-direction:column;gap:32px">
+<h1 style="font-family:'Ultra', Georgia, serif;font-size:112px;font-weight:400;line-height:1.05;color:#FFF6E4;text-shadow:0px 6px 0px #0F3A5C">From developer to AI builder</h1>
+<p style="font-size:36px;line-height:1.35;color:#FFF6E4;max-width:1600px">How my role changed, what it looks like in practice, and how you can get there</p>
+</div>
+<p style="font-size:28px;font-weight:600;color:#FFF6E4">[Your name] · [Event / team] · [Date]</p>
+
+</section>
+<section id="audience" data-transition="fade" style="background:#F7EBD3;color:#2A1A12;font-family:'Libre Franklin', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;gap:64px">
+<svg viewBox="0 0 1920 110" width="1920" height="110" aria-label="Desert horizon" style="position:absolute;left:0;bottom:0;width:1920px;height:110px"><path d="M0 110 V70 H140 L170 46 H360 L390 70 H760 L780 58 H930 L950 74 H1300 L1330 40 H1560 L1590 68 H1920 V110Z" fill="#E6C78E"/><path d="M0 110 V92 Q480 80 960 94 T1920 88 V110Z" fill="#D58A45"/></svg>
+<div style="display:flex;flex-direction:column;gap:16px">
+<p style="font-size:24px;font-weight:700;color:#B8401A;letter-spacing:3px;text-transform:uppercase">Before we ride</p>
+<h2 style="font-family:'Ultra', Georgia, serif;font-size:64px;font-weight:400;line-height:1.1;color:#2A1A12">Who this talk is for</h2>
+</div>
+<div style="display:flex;gap:32px">
+<div style="flex:1;display:flex;flex-direction:column;gap:20px;background:#FFF6E4;padding:48px;border:2px solid #E0C590;border-radius:12px">
+<h3 style="font-family:'Ultra', Georgia, serif;font-size:36px;font-weight:400;line-height:1.2;color:#B8401A">Developers</h3>
+<p style="font-size:28px;line-height:1.4;color:#5A4232">You write code and wonder what AI means for your role.</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:20px;background:#FFF6E4;padding:48px;border:2px solid #E0C590;border-radius:12px">
+<h3 style="font-family:'Ultra', Georgia, serif;font-size:36px;font-weight:400;line-height:1.2;color:#B8401A">Builders</h3>
+<p style="font-size:28px;line-height:1.4;color:#5A4232">You make things and want to build more, faster, with AI.</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:20px;background:#FFF6E4;padding:48px;border:2px solid #E0C590;border-radius:12px">
+<h3 style="font-family:'Ultra', Georgia, serif;font-size:36px;font-weight:400;line-height:1.2;color:#B8401A">Newcomers</h3>
+<p style="font-size:28px;line-height:1.4;color:#5A4232">You haven't started yet, and wonder if you've missed the wagon.</p>
+</div>
+</div>
+<p style="font-size:28px;line-height:1.4;color:#2A1A12"><b>Today I'm talking to:</b> [your audience, e.g. my team, a developer meetup]</p>
+
+</section>
+<section id="demo" data-transition="fade" style="background:#141B33;color:#FFF6E4;font-family:'Libre Franklin', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;gap:64px">
+<svg viewBox="0 0 1920 1080" width="1920" height="1080" aria-label="Desert at night with a full moon, stars and mesas" style="position:absolute;left:0;top:0;width:1920px;height:1080px"><defs><linearGradient id="sky-demo" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#141B33"/><stop offset="0.85" stop-color="#5B3358"/></linearGradient></defs><rect width="1920" height="1080" fill="url(#sky-demo)"/><g fill="#F7EBD3"><circle cx="1180" cy="90" r="3"/><circle cx="1320" cy="170" r="2"/><circle cx="1420" cy="70" r="3"/><circle cx="1760" cy="110" r="2"/><circle cx="1850" cy="260" r="3"/><circle cx="1240" cy="300" r="2"/><circle cx="1700" cy="360" r="2"/><circle cx="1500" cy="420" r="3"/></g><circle cx="1640" cy="630" r="60" fill="#F7EBD3"/><path d="M0 820 L260 820 L300 760 L620 760 L660 820 L1000 820 L1040 780 L1260 780 L1290 820 L1380 820 L1420 720 L1760 720 L1800 820 L1920 820 V1080 H0Z" fill="#3A2030"/><path d="M0 920 Q480 890 960 910 T1920 900 V1080 H0Z" fill="#24140F"/></svg>
+<div style="display:flex;flex-direction:column;gap:16px">
+<p style="font-size:24px;font-weight:700;color:#F2A541;letter-spacing:3px;text-transform:uppercase">Live demo · about 5 minutes</p>
+<h2 style="font-family:'Ultra', Georgia, serif;font-size:80px;font-weight:400;line-height:1.1;color:#FFF6E4">Let me show you how I work</h2>
+</div>
+<div style="display:flex;gap:32px">
+<div style="flex:1;display:flex;flex-direction:column;gap:16px;background:rgba(20,12,8,0.8);padding:48px;border:2px solid #6A4A5A;border-radius:12px">
+<p style="font-size:24px;font-weight:700;color:#F2A541;text-transform:uppercase;letter-spacing:3px">The task</p>
+<p style="font-size:28px;line-height:1.4;color:#F7EBD3">[A real task from my week, e.g. a bug I'll take all the way to a PR]</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:16px;background:rgba(20,12,8,0.8);padding:48px;border:2px solid #6A4A5A;border-radius:12px">
+<p style="font-size:24px;font-weight:700;color:#F2A541;text-transform:uppercase;letter-spacing:3px">The tool</p>
+<p style="font-size:28px;line-height:1.4;color:#F7EBD3">[Tool I'll use, e.g. Claude Code]</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:16px;background:rgba(20,12,8,0.8);padding:48px;border:2px solid #6A4A5A;border-radius:12px">
+<p style="font-size:24px;font-weight:700;color:#F2A541;text-transform:uppercase;letter-spacing:3px">Watch for</p>
+<p style="font-size:28px;line-height:1.4;color:#F7EBD3">How I give context, push back, and check the result.</p>
+</div>
+</div>
+
+</section>
+<section id="about-me" data-transition="fade" style="background:#EED9B0;color:#2A1A12;font-family:'Libre Franklin', Arial, sans-serif;padding:128px;display:grid;grid-template-columns:480px 1fr;gap:96px;align-items:center">
+<svg viewBox="0 0 1920 110" width="1920" height="110" aria-label="Desert horizon" style="position:absolute;left:0;bottom:0;width:1920px;height:110px"><path d="M0 110 V70 H140 L170 46 H360 L390 70 H760 L780 58 H930 L950 74 H1300 L1330 40 H1560 L1590 68 H1920 V110Z" fill="#DDB06A"/><path d="M0 110 V92 Q480 80 960 94 T1920 88 V110Z" fill="#C8702E"/></svg>
+<div style="width:480px;display:flex;flex-direction:column;align-items:center;gap:20px;background:#FFF6E4;padding:32px;border:4px solid #2A1A12;border-radius:4px">
+<p style="font-family:'Ultra', Georgia, serif;font-size:64px;line-height:1;color:#B8401A;letter-spacing:4px">WANTED</p>
+<div style="width:400px;height:400px;background:#E6C78E;display:flex;align-items:center;justify-content:center;border:2px solid #2A1A12">
+<p style="font-size:28px;color:#5A4232">[Your photo]</p>
+</div>
+<p style="font-size:24px;font-weight:700;color:#2A1A12;text-transform:uppercase;letter-spacing:3px">For building with AI</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:40px">
+<div style="display:flex;flex-direction:column;gap:16px">
+<p style="font-size:24px;font-weight:700;color:#B8401A;letter-spacing:3px;text-transform:uppercase">Who I am</p>
+<h2 style="font-family:'Ultra', Georgia, serif;font-size:64px;font-weight:400;line-height:1.1;color:#2A1A12">Howdy, I'm [Your name]</h2>
+</div>
+<div style="display:flex;flex-direction:column">
+<div style="display:flex;gap:40px;align-items:baseline;padding:24px 0;border-top:2px solid #C9A86E">
+<p style="font-size:24px;font-weight:700;color:#B8401A;text-transform:uppercase;letter-spacing:2px;width:240px">Background</p>
+<p style="font-size:28px;line-height:1.4;color:#5A4232;flex:1">[Where I come from: education, early career]</p>
+</div>
+<div style="display:flex;gap:40px;align-items:baseline;padding:24px 0;border-top:2px solid #C9A86E">
+<p style="font-size:24px;font-weight:700;color:#B8401A;text-transform:uppercase;letter-spacing:2px;width:240px">Along the way</p>
+<p style="font-size:28px;line-height:1.4;color:#5A4232;flex:1">[Key roles or turning points]</p>
+</div>
+<div style="display:flex;gap:40px;align-items:baseline;padding:24px 0;border-top:2px solid #C9A86E">
+<p style="font-size:24px;font-weight:700;color:#B8401A;text-transform:uppercase;letter-spacing:2px;width:240px">Today</p>
+<p style="font-size:28px;line-height:1.4;color:#5A4232;flex:1">[Current role and what I work on]</p>
+</div>
+<div style="display:flex;gap:40px;align-items:baseline;padding:24px 0;border-top:2px solid #C9A86E;border-bottom:2px solid #C9A86E">
+<p style="font-size:24px;font-weight:700;color:#B8401A;text-transform:uppercase;letter-spacing:2px;width:240px">The shift</p>
+<p style="font-size:28px;line-height:1.4;color:#5A4232;flex:1">[When I stopped mainly writing code and started directing AI]</p>
+</div>
+</div>
+</div>
+
+</section>
+<section id="premise" data-transition="fade" style="background:#F7EBD3;color:#2A1A12;font-family:'Libre Franklin', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;justify-content:center;gap:48px">
+<svg viewBox="0 0 1920 110" width="1920" height="110" aria-label="Desert horizon" style="position:absolute;left:0;bottom:0;width:1920px;height:110px"><path d="M0 110 V70 H140 L170 46 H360 L390 70 H760 L780 58 H930 L950 74 H1300 L1330 40 H1560 L1590 68 H1920 V110Z" fill="#E6C78E"/><path d="M0 110 V92 Q480 80 960 94 T1920 88 V110Z" fill="#D58A45"/></svg>
+<p style="font-size:24px;font-weight:700;color:#B8401A;letter-spacing:3px;text-transform:uppercase">Chapter one · The shift</p>
+<h2 style="font-family:'Ultra', Georgia, serif;font-size:80px;font-weight:400;line-height:1.15;color:#2A1A12">I used to write the code. Now I decide what gets built, and make sure it's right.</h2>
+<p style="font-size:28px;line-height:1.4;color:#5A4232;max-width:1300px">The work moved from typing solutions to producing them: defining problems, directing AI, and judging the result.</p>
+
+</section>
+<section id="role-shift" data-transition="fade" style="background:#F7EBD3;color:#2A1A12;font-family:'Libre Franklin', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;gap:56px">
+<svg viewBox="0 0 1920 110" width="1920" height="110" aria-label="Desert horizon" style="position:absolute;left:0;bottom:0;width:1920px;height:110px"><path d="M0 110 V70 H140 L170 46 H360 L390 70 H760 L780 58 H930 L950 74 H1300 L1330 40 H1560 L1590 68 H1920 V110Z" fill="#E6C78E"/><path d="M0 110 V92 Q480 80 960 94 T1920 88 V110Z" fill="#D58A45"/></svg>
+<div style="display:flex;flex-direction:column;gap:16px">
+<p style="font-size:24px;font-weight:700;color:#B8401A;letter-spacing:3px;text-transform:uppercase">The shift</p>
+<h2 style="font-family:'Ultra', Georgia, serif;font-size:64px;font-weight:400;line-height:1.1;color:#2A1A12">How the role changed</h2>
+</div>
+<table style="font-size:28px;color:#2A1A12;font-family:'Libre Franklin', Arial, sans-serif">
+<tr style="background:#2A1A12"><th style="width:30%;color:#F7EBD3"></th><th style="width:35%;color:#F2A541">As a developer</th><th style="width:35%;color:#F2A541">As an AI builder</th></tr>
+<tr><td><b>My main job</b></td><td>Write the code</td><td>Define the problem</td></tr>
+<tr style="background:#EED9B0"><td><b>My time goes to</b></td><td>Implementing</td><td>Instructing and reviewing</td></tr>
+<tr><td><b>I work with</b></td><td>My editor</td><td>Several AI agents at once</td></tr>
+<tr style="background:#EED9B0"><td><b>My value is</b></td><td>How fast I build</td><td>What I choose to build, and taste</td></tr>
+<tr><td><b>Done means</b></td><td>It compiles and runs</td><td>It's verified and solves the problem</td></tr>
+</table>
+
+</section>
+<section id="three-jobs" data-transition="fade" style="background:#EED9B0;color:#2A1A12;font-family:'Libre Franklin', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;gap:64px">
+<svg viewBox="0 0 1920 110" width="1920" height="110" aria-label="Desert horizon" style="position:absolute;left:0;bottom:0;width:1920px;height:110px"><path d="M0 110 V70 H140 L170 46 H360 L390 70 H760 L780 58 H930 L950 74 H1300 L1330 40 H1560 L1590 68 H1920 V110Z" fill="#DDB06A"/><path d="M0 110 V92 Q480 80 960 94 T1920 88 V110Z" fill="#C8702E"/></svg>
+<div style="display:flex;flex-direction:column;gap:16px">
+<p style="font-size:24px;font-weight:700;color:#B8401A;letter-spacing:3px;text-transform:uppercase">The shift</p>
+<h2 style="font-family:'Ultra', Georgia, serif;font-size:64px;font-weight:400;line-height:1.1;color:#2A1A12">The three jobs of an AI builder</h2>
+</div>
+<div style="display:flex;gap:32px">
+<div style="flex:1;display:flex;flex-direction:column;gap:24px;background:#FFF6E4;padding:48px;border-top:10px solid #E8631C;border-radius:12px">
+<h3 style="font-family:'Ultra', Georgia, serif;font-size:36px;font-weight:400;line-height:1.2;color:#2A1A12">Produce</h3>
+<p style="font-size:28px;line-height:1.4;color:#5A4232">Decide what problem to solve and why. Own the outcome from idea to shipped.</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:24px;background:#FFF6E4;padding:48px;border-top:10px solid #1FA3A3;border-radius:12px">
+<h3 style="font-family:'Ultra', Georgia, serif;font-size:36px;font-weight:400;line-height:1.2;color:#2A1A12">Instruct</h3>
+<p style="font-size:28px;line-height:1.4;color:#5A4232">Give the AI context, constraints and a clear way to verify the work.</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:24px;background:#FFF6E4;padding:48px;border-top:10px solid #E8631C;border-radius:12px">
+<h3 style="font-family:'Ultra', Georgia, serif;font-size:36px;font-weight:400;line-height:1.2;color:#2A1A12">Bring taste</h3>
+<p style="font-size:28px;line-height:1.4;color:#5A4232">Judge what's good. Push back, cut scope, and say no when it isn't right.</p>
+</div>
+</div>
+
+</section>
+<section id="frontier" data-transition="fade" style="background:#F7EBD3;color:#2A1A12;font-family:'Libre Franklin', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;gap:56px">
+<svg viewBox="0 0 1920 110" width="1920" height="110" aria-label="Desert horizon" style="position:absolute;left:0;bottom:0;width:1920px;height:110px"><path d="M0 110 V70 H140 L170 46 H360 L390 70 H760 L780 58 H930 L950 74 H1300 L1330 40 H1560 L1590 68 H1920 V110Z" fill="#E6C78E"/><path d="M0 110 V92 Q480 80 960 94 T1920 88 V110Z" fill="#D58A45"/></svg>
+<div style="display:flex;flex-direction:column;gap:16px">
+<p style="font-size:24px;font-weight:700;color:#137C7C;letter-spacing:3px;text-transform:uppercase">Chapter two · The frontier</p>
+<h2 style="font-family:'Ultra', Georgia, serif;font-size:64px;font-weight:400;line-height:1.1;color:#2A1A12">The frontier keeps moving</h2>
+</div>
+<div style="display:flex;gap:32px">
+<div style="flex:1;display:flex;flex-direction:column;gap:20px;background:#FFF6E4;padding:48px;border:2px solid #E0C590;border-radius:12px">
+<h3 style="font-family:'Ultra', Georgia, serif;font-size:36px;font-weight:400;line-height:1.2;color:#137C7C">New models</h3>
+<p style="font-size:28px;line-height:1.4;color:#5A4232">Every few months, a new one that's better at something.</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:20px;background:#FFF6E4;padding:48px;border:2px solid #E0C590;border-radius:12px">
+<h3 style="font-family:'Ultra', Georgia, serif;font-size:36px;font-weight:400;line-height:1.2;color:#137C7C">New tools</h3>
+<p style="font-size:28px;line-height:1.4;color:#5A4232">Agents, integrations and features that didn't exist last year.</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:20px;background:#FFF6E4;padding:48px;border:2px solid #E0C590;border-radius:12px">
+<h3 style="font-family:'Ultra', Georgia, serif;font-size:36px;font-weight:400;line-height:1.2;color:#137C7C">New ways to work</h3>
+<p style="font-size:28px;line-height:1.4;color:#5A4232">What worked six months ago may already be the slow way.</p>
+</div>
+</div>
+<p style="font-size:32px;line-height:1.4;color:#2A1A12;font-weight:600">Nobody has it all figured out. That's what makes it exciting.</p>
+
+</section>
+<section id="tinker" data-transition="fade" style="background:#EED9B0;color:#2A1A12;font-family:'Libre Franklin', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;gap:72px">
+<svg viewBox="0 0 1920 110" width="1920" height="110" aria-label="Desert horizon" style="position:absolute;left:0;bottom:0;width:1920px;height:110px"><path d="M0 110 V70 H140 L170 46 H360 L390 70 H760 L780 58 H930 L950 74 H1300 L1330 40 H1560 L1590 68 H1920 V110Z" fill="#DDB06A"/><path d="M0 110 V92 Q480 80 960 94 T1920 88 V110Z" fill="#C8702E"/></svg>
+<div style="display:flex;flex-direction:column;gap:16px">
+<p style="font-size:24px;font-weight:700;color:#137C7C;letter-spacing:3px;text-transform:uppercase">The frontier</p>
+<h2 style="font-family:'Ultra', Georgia, serif;font-size:64px;font-weight:400;line-height:1.1;color:#2A1A12">Most of the work is tinkering</h2>
+</div>
+<div style="display:flex;align-items:center;gap:20px">
+<div style="flex:1;display:flex;flex-direction:column;gap:16px;background:#FFF6E4;padding:32px;border:2px solid #C9A86E;border-radius:12px">
+<h3 style="font-family:'Ultra', Georgia, serif;font-size:36px;font-weight:400;line-height:1.2;color:#B8401A">Try</h3>
+<p style="font-size:24px;line-height:1.4;color:#5A4232">A new model, prompt or tool on a real task.</p>
+</div>
+<svg width="56" height="24" viewBox="0 0 56 24" style="flex:none" aria-hidden="true"><line x1="0" y1="12.0" x2="44" y2="12.0" stroke="#B8401A" stroke-width="4"/><path d="M40 2.0 L56 12.0 L40 22.0Z" fill="#B8401A"/></svg>
+<div style="flex:1;display:flex;flex-direction:column;gap:16px;background:#FFF6E4;padding:32px;border:2px solid #C9A86E;border-radius:12px">
+<h3 style="font-family:'Ultra', Georgia, serif;font-size:36px;font-weight:400;line-height:1.2;color:#B8401A">Measure</h3>
+<p style="font-size:24px;line-height:1.4;color:#5A4232">Did it save time? Is the result better?</p>
+</div>
+<svg width="56" height="24" viewBox="0 0 56 24" style="flex:none" aria-hidden="true"><line x1="0" y1="12.0" x2="44" y2="12.0" stroke="#B8401A" stroke-width="4"/><path d="M40 2.0 L56 12.0 L40 22.0Z" fill="#B8401A"/></svg>
+<div style="flex:1;display:flex;flex-direction:column;gap:16px;background:#FFF6E4;padding:32px;border:2px solid #C9A86E;border-radius:12px">
+<h3 style="font-family:'Ultra', Georgia, serif;font-size:36px;font-weight:400;line-height:1.2;color:#B8401A">Adjust</h3>
+<p style="font-size:24px;line-height:1.4;color:#5A4232">Change the instructions, the context or the model.</p>
+</div>
+<svg width="56" height="24" viewBox="0 0 56 24" style="flex:none" aria-hidden="true"><line x1="0" y1="12.0" x2="44" y2="12.0" stroke="#B8401A" stroke-width="4"/><path d="M40 2.0 L56 12.0 L40 22.0Z" fill="#B8401A"/></svg>
+<div style="flex:1;display:flex;flex-direction:column;gap:16px;background:#FFF6E4;padding:32px;border:2px solid #C9A86E;border-radius:12px">
+<h3 style="font-family:'Ultra', Georgia, serif;font-size:36px;font-weight:400;line-height:1.2;color:#B8401A">Refine</h3>
+<p style="font-size:24px;line-height:1.4;color:#5A4232">Keep what works and make it your new default.</p>
+</div>
+</div>
+<p style="font-size:32px;line-height:1.4;color:#2A1A12;font-weight:600">Then a new model arrives, and you go round again.</p>
+
+</section>
+<section id="models" data-transition="fade" style="background:#F7EBD3;color:#2A1A12;font-family:'Libre Franklin', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;gap:48px">
+<svg viewBox="0 0 1920 110" width="1920" height="110" aria-label="Desert horizon" style="position:absolute;left:0;bottom:0;width:1920px;height:110px"><path d="M0 110 V70 H140 L170 46 H360 L390 70 H760 L780 58 H930 L950 74 H1300 L1330 40 H1560 L1590 68 H1920 V110Z" fill="#E6C78E"/><path d="M0 110 V92 Q480 80 960 94 T1920 88 V110Z" fill="#D58A45"/></svg>
+<div style="display:flex;flex-direction:column;gap:16px">
+<p style="font-size:24px;font-weight:700;color:#137C7C;letter-spacing:3px;text-transform:uppercase">The frontier</p>
+<h2 style="font-family:'Ultra', Georgia, serif;font-size:64px;font-weight:400;line-height:1.1;color:#2A1A12">Every model has its own temperament</h2>
+</div>
+<div style="display:flex;gap:32px">
+<div style="flex:1;display:flex;flex-direction:column;gap:16px;background:#FFF6E4;padding:40px;border-top:10px solid #1FA3A3;border-radius:12px">
+<h3 style="font-family:'Ultra', Georgia, serif;font-size:36px;font-weight:400;line-height:1.2;color:#2A1A12">Quick hands</h3>
+<p style="font-size:28px;line-height:1.4;color:#5A4232">Small, fast models for drafts, sorting and summaries.</p>
+<p style="font-size:24px;line-height:1.4;color:#137C7C;font-weight:600">Talk to them: short and direct.</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:16px;background:#FFF6E4;padding:40px;border-top:10px solid #E8631C;border-radius:12px">
+<h3 style="font-family:'Ultra', Georgia, serif;font-size:36px;font-weight:400;line-height:1.2;color:#2A1A12">Deep thinkers</h3>
+<p style="font-size:28px;line-height:1.4;color:#5A4232">Larger reasoning models for planning, hard bugs and big decisions.</p>
+<p style="font-size:24px;line-height:1.4;color:#B8401A;font-weight:600">Talk to them: full context, room to think.</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:16px;background:#FFF6E4;padding:40px;border-top:10px solid #1FA3A3;border-radius:12px">
+<h3 style="font-family:'Ultra', Georgia, serif;font-size:36px;font-weight:400;line-height:1.2;color:#2A1A12">Specialists</h3>
+<p style="font-size:28px;line-height:1.4;color:#5A4232">Image, voice, search and code tools that do one job well.</p>
+<p style="font-size:24px;line-height:1.4;color:#137C7C;font-weight:600">Talk to them: in their own format.</p>
+</div>
+</div>
+<p style="font-size:28px;line-height:1.4;color:#2A1A12"><b>Every one has quirks:</b> [a quirk you've noticed, and how you work around it]</p>
+
+</section>
+<section id="loop" data-transition="fade" style="background:#2A1A12;color:#F7EBD3;font-family:'Libre Franklin', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;gap:72px">
+<svg viewBox="0 0 1920 110" width="1920" height="110" aria-label="Desert horizon" style="position:absolute;left:0;bottom:0;width:1920px;height:110px"><path d="M0 110 V70 H140 L170 46 H360 L390 70 H760 L780 58 H930 L950 74 H1300 L1330 40 H1560 L1590 68 H1920 V110Z" fill="#3E2619"/><path d="M0 110 V92 Q480 80 960 94 T1920 88 V110Z" fill="#5A3420"/></svg>
+<div style="display:flex;flex-direction:column;gap:16px">
+<p style="font-size:24px;font-weight:700;color:#F2A541;letter-spacing:3px;text-transform:uppercase">Chapter three · In practice</p>
+<h2 style="font-family:'Ultra', Georgia, serif;font-size:64px;font-weight:400;line-height:1.1;color:#FFF6E4">My working loop</h2>
+</div>
+<div style="display:flex;align-items:center;gap:24px">
+<div style="flex:1;display:flex;flex-direction:column;gap:16px;background:#3A2418;padding:48px;border:2px solid #6B4630;border-radius:12px">
+<p style="font-size:24px;font-weight:700;color:#C9B08E;text-transform:uppercase;letter-spacing:3px">Me</p>
+<h3 style="font-family:'Ultra', Georgia, serif;font-size:36px;font-weight:400;color:#F2A541">Define</h3>
+<p style="font-size:28px;line-height:1.4;color:#F7EBD3">The problem, and how we'll verify it's solved.</p>
+</div>
+<svg width="72" height="24" viewBox="0 0 72 24" style="flex:none" aria-hidden="true"><line x1="0" y1="12.0" x2="60" y2="12.0" stroke="#F2A541" stroke-width="4"/><path d="M56 2.0 L72 12.0 L56 22.0Z" fill="#F2A541"/></svg>
+<div style="flex:1;display:flex;flex-direction:column;gap:16px;background:#3A2418;padding:48px;border:2px solid #6B4630;border-radius:12px">
+<p style="font-size:24px;font-weight:700;color:#C9B08E;text-transform:uppercase;letter-spacing:3px">Me + AI</p>
+<h3 style="font-family:'Ultra', Georgia, serif;font-size:36px;font-weight:400;color:#F2A541">Direct</h3>
+<p style="font-size:28px;line-height:1.4;color:#F7EBD3">Agree a plan in phases. AI builds while I steer.</p>
+</div>
+<svg width="72" height="24" viewBox="0 0 72 24" style="flex:none" aria-hidden="true"><line x1="0" y1="12.0" x2="60" y2="12.0" stroke="#F2A541" stroke-width="4"/><path d="M56 2.0 L72 12.0 L56 22.0Z" fill="#F2A541"/></svg>
+<div style="flex:1;display:flex;flex-direction:column;gap:16px;background:#3A2418;padding:48px;border:2px solid #6B4630;border-radius:12px">
+<p style="font-size:24px;font-weight:700;color:#C9B08E;text-transform:uppercase;letter-spacing:3px">Me</p>
+<h3 style="font-family:'Ultra', Georgia, serif;font-size:36px;font-weight:400;color:#F2A541">Judge</h3>
+<p style="font-size:28px;line-height:1.4;color:#F7EBD3">Review with taste, check the proof, then ship.</p>
+</div>
+</div>
+<p style="font-size:32px;color:#F7EBD3;font-weight:600">I own both ends of the loop. AI does most of the middle.</p>
+
+</section>
+<section id="examples" data-transition="fade" style="background:#F7EBD3;color:#2A1A12;font-family:'Libre Franklin', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;gap:56px">
+<svg viewBox="0 0 1920 110" width="1920" height="110" aria-label="Desert horizon" style="position:absolute;left:0;bottom:0;width:1920px;height:110px"><path d="M0 110 V70 H140 L170 46 H360 L390 70 H760 L780 58 H930 L950 74 H1300 L1330 40 H1560 L1590 68 H1920 V110Z" fill="#E6C78E"/><path d="M0 110 V92 Q480 80 960 94 T1920 88 V110Z" fill="#D58A45"/></svg>
+<div style="display:flex;flex-direction:column;gap:16px">
+<p style="font-size:24px;font-weight:700;color:#B8401A;letter-spacing:3px;text-transform:uppercase">In practice</p>
+<h2 style="font-family:'Ultra', Georgia, serif;font-size:64px;font-weight:400;line-height:1.1;color:#2A1A12">Hands-on examples</h2>
+</div>
+<div style="display:flex;gap:32px">
+<div style="flex:1;display:flex;flex-direction:column;gap:20px;background:#FFF6E4;padding:48px;border:2px solid #E0C590;border-radius:12px">
+<h3 style="font-family:'Ultra', Georgia, serif;font-size:36px;font-weight:400;line-height:1.2;color:#2A1A12">Bug to PR</h3>
+<p style="font-size:28px;line-height:1.4;color:#5A4232">The demo: from noticing an issue to a tested pull request.</p>
+<p style="font-size:24px;color:#137C7C;font-weight:700">My role: define, verify, review</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:20px;background:#FFF6E4;padding:48px;border:2px solid #E0C590;border-radius:12px">
+<h3 style="font-family:'Ultra', Georgia, serif;font-size:36px;font-weight:400;line-height:1.2;color:#2A1A12">[Example 2]</h3>
+<p style="font-size:28px;line-height:1.4;color:#5A4232">[e.g. a feature built from a one-page spec]</p>
+<p style="font-size:24px;color:#137C7C;font-weight:700">My role: [__]</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:20px;background:#FFF6E4;padding:48px;border:2px solid #E0C590;border-radius:12px">
+<h3 style="font-family:'Ultra', Georgia, serif;font-size:36px;font-weight:400;line-height:1.2;color:#2A1A12">[Example 3]</h3>
+<p style="font-size:28px;line-height:1.4;color:#5A4232">[e.g. an internal tool built in an afternoon]</p>
+<p style="font-size:24px;color:#137C7C;font-weight:700">My role: [__]</p>
+</div>
+</div>
+
+</section>
+<section id="toolkit" data-transition="fade" style="background:#EED9B0;color:#2A1A12;font-family:'Libre Franklin', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;gap:56px">
+<svg viewBox="0 0 1920 110" width="1920" height="110" aria-label="Desert horizon" style="position:absolute;left:0;bottom:0;width:1920px;height:110px"><path d="M0 110 V70 H140 L170 46 H360 L390 70 H760 L780 58 H930 L950 74 H1300 L1330 40 H1560 L1590 68 H1920 V110Z" fill="#DDB06A"/><path d="M0 110 V92 Q480 80 960 94 T1920 88 V110Z" fill="#C8702E"/></svg>
+<div style="display:flex;flex-direction:column;gap:16px">
+<p style="font-size:24px;font-weight:700;color:#B8401A;letter-spacing:3px;text-transform:uppercase">In practice</p>
+<h2 style="font-family:'Ultra', Georgia, serif;font-size:64px;font-weight:400;line-height:1.1;color:#2A1A12">My saddlebag of tools</h2>
+</div>
+<table style="font-size:28px;color:#2A1A12;font-family:'Libre Franklin', Arial, sans-serif">
+<tr style="background:#2A1A12"><th style="width:28%;color:#F2A541">Tool</th><th style="width:52%;color:#F2A541">What I use it for</th><th style="width:20%;color:#F2A541">How often</th></tr>
+<tr style="background:#FFF6E4"><td>Claude (chat)</td><td>Thinking out loud, writing, research</td><td>[Daily]</td></tr>
+<tr style="background:#F7EBD3"><td>Claude Code</td><td>Building directly in my repositories</td><td>[Daily]</td></tr>
+<tr style="background:#FFF6E4"><td>[Tool]</td><td>[What you use it for]</td><td>[__]</td></tr>
+<tr style="background:#F7EBD3"><td>[Tool]</td><td>[What you use it for]</td><td>[__]</td></tr>
+</table>
+
+</section>
+<section id="my-day" data-transition="fade" style="background:#F7EBD3;color:#2A1A12;font-family:'Libre Franklin', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;gap:72px">
+<svg viewBox="0 0 1920 110" width="1920" height="110" aria-label="Desert horizon" style="position:absolute;left:0;bottom:0;width:1920px;height:110px"><path d="M0 110 V70 H140 L170 46 H360 L390 70 H760 L780 58 H930 L950 74 H1300 L1330 40 H1560 L1590 68 H1920 V110Z" fill="#E6C78E"/><path d="M0 110 V92 Q480 80 960 94 T1920 88 V110Z" fill="#D58A45"/></svg>
+<div style="display:flex;flex-direction:column;gap:16px">
+<p style="font-size:24px;font-weight:700;color:#B8401A;letter-spacing:3px;text-transform:uppercase">In practice</p>
+<h2 style="font-family:'Ultra', Georgia, serif;font-size:64px;font-weight:400;line-height:1.1;color:#2A1A12">A typical day on the trail</h2>
+</div>
+<div style="display:flex;gap:32px">
+<div style="flex:1;display:flex;flex-direction:column;gap:20px;padding-top:32px;border-top:8px solid #E8631C">
+<p style="font-size:24px;font-weight:700;color:#B8401A;text-transform:uppercase;letter-spacing:3px">Morning</p>
+<h3 style="font-family:'Ultra', Georgia, serif;font-size:36px;font-weight:400;line-height:1.2;color:#2A1A12">Plan the day</h3>
+<p style="font-size:28px;line-height:1.4;color:#5A4232">[e.g. summarize inbox and notes into priorities]</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:20px;padding-top:32px;border-top:8px solid #E8631C">
+<p style="font-size:24px;font-weight:700;color:#B8401A;text-transform:uppercase;letter-spacing:3px">Deep work</p>
+<h3 style="font-family:'Ultra', Georgia, serif;font-size:36px;font-weight:400;line-height:1.2;color:#2A1A12">Direct agents</h3>
+<p style="font-size:28px;line-height:1.4;color:#5A4232">[e.g. run two or three tasks in parallel]</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:20px;padding-top:32px;border-top:8px solid #E8631C">
+<p style="font-size:24px;font-weight:700;color:#B8401A;text-transform:uppercase;letter-spacing:3px">Afternoon</p>
+<h3 style="font-family:'Ultra', Georgia, serif;font-size:36px;font-weight:400;line-height:1.2;color:#2A1A12">Review</h3>
+<p style="font-size:28px;line-height:1.4;color:#5A4232">[e.g. read diffs, test, give feedback]</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:20px;padding-top:32px;border-top:8px solid #E8631C">
+<p style="font-size:24px;font-weight:700;color:#B8401A;text-transform:uppercase;letter-spacing:3px">End of day</p>
+<h3 style="font-family:'Ultra', Georgia, serif;font-size:36px;font-weight:400;line-height:1.2;color:#2A1A12">Tinker</h3>
+<p style="font-size:28px;line-height:1.4;color:#5A4232">[e.g. try something new, refine my setup]</p>
+</div>
+</div>
+
+</section>
+<section id="lessons" data-transition="fade" style="background:#EED9B0;color:#2A1A12;font-family:'Libre Franklin', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;gap:56px">
+<svg viewBox="0 0 1920 110" width="1920" height="110" aria-label="Desert horizon" style="position:absolute;left:0;bottom:0;width:1920px;height:110px"><path d="M0 110 V70 H140 L170 46 H360 L390 70 H760 L780 58 H930 L950 74 H1300 L1330 40 H1560 L1590 68 H1920 V110Z" fill="#DDB06A"/><path d="M0 110 V92 Q480 80 960 94 T1920 88 V110Z" fill="#C8702E"/></svg>
+<div style="display:flex;flex-direction:column;gap:16px">
+<p style="font-size:24px;font-weight:700;color:#B8401A;letter-spacing:3px;text-transform:uppercase">In practice</p>
+<h2 style="font-family:'Ultra', Georgia, serif;font-size:64px;font-weight:400;line-height:1.1;color:#2A1A12">What I've learned</h2>
+</div>
+<div style="display:flex;gap:32px">
+<div style="flex:1;display:flex;flex-direction:column;gap:24px;background:#FFF6E4;padding:48px;border-top:10px solid #1FA3A3;border-radius:12px">
+<h3 style="font-family:'Ultra', Georgia, serif;font-size:36px;font-weight:400;color:#137C7C">Works well</h3>
+<ul style="font-size:28px;line-height:1.5;color:#5A4232">
+<li>First drafts of almost anything</li>
+<li>Explaining unfamiliar code or topics</li>
+<li>[Your example]</li>
+</ul>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:24px;background:#FFF6E4;padding:48px;border-top:10px solid #E8631C;border-radius:12px">
+<h3 style="font-family:'Ultra', Georgia, serif;font-size:36px;font-weight:400;color:#B8401A">Watch out for</h3>
+<ul style="font-size:28px;line-height:1.5;color:#5A4232">
+<li>Confident answers that are wrong</li>
+<li>Vague requests giving vague results</li>
+<li>[Your example]</li>
+</ul>
+</div>
+</div>
+
+</section>
+<section id="idea-board" data-transition="fade" style="background:#A8481C;color:#2A1A12;font-family:'Libre Franklin', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;gap:48px">
+<div style="display:flex;flex-direction:column;gap:16px">
+<p style="font-size:24px;font-weight:700;color:#FFF6E4;letter-spacing:3px;text-transform:uppercase">Chapter four · Inspiration</p>
+<h2 style="font-family:'Ultra', Georgia, serif;font-size:64px;font-weight:400;line-height:1.1;color:#FFF6E4">Wanted: things you could build</h2>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:24px">
+<div style="display:flex;flex-direction:column;gap:12px;background:#FFF6E4;padding:28px;border:3px solid #2A1A12;border-radius:4px">
+<p style="font-size:24px;font-weight:700;color:#B8401A;letter-spacing:3px">WANTED</p>
+<h3 style="font-family:'Ultra', Georgia, serif;font-size:32px;font-weight:400;line-height:1.15;color:#2A1A12">Personal dashboard</h3>
+<p style="font-size:24px;line-height:1.35;color:#5A4232">Tasks, calendar and notes on one page.</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:12px;background:#FFF6E4;padding:28px;border:3px solid #2A1A12;border-radius:4px">
+<p style="font-size:24px;font-weight:700;color:#B8401A;letter-spacing:3px">WANTED</p>
+<h3 style="font-family:'Ultra', Georgia, serif;font-size:32px;font-weight:400;line-height:1.15;color:#2A1A12">Notes to actions</h3>
+<p style="font-size:24px;line-height:1.35;color:#5A4232">Meeting notes turned into tasks and owners.</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:12px;background:#FFF6E4;padding:28px;border:3px solid #2A1A12;border-radius:4px">
+<p style="font-size:24px;font-weight:700;color:#B8401A;letter-spacing:3px">WANTED</p>
+<h3 style="font-family:'Ultra', Georgia, serif;font-size:32px;font-weight:400;line-height:1.15;color:#2A1A12">The tool nobody built</h3>
+<p style="font-size:24px;line-height:1.35;color:#5A4232">The small app your team has wanted for years.</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:12px;background:#FFF6E4;padding:28px;border:3px solid #2A1A12;border-radius:4px">
+<p style="font-size:24px;font-weight:700;color:#B8401A;letter-spacing:3px">WANTED</p>
+<h3 style="font-family:'Ultra', Georgia, serif;font-size:32px;font-weight:400;line-height:1.15;color:#2A1A12">Review sheriff</h3>
+<p style="font-size:24px;line-height:1.35;color:#5A4232">An AI check that runs on every pull request.</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:12px;background:#FFF6E4;padding:28px;border:3px solid #2A1A12;border-radius:4px">
+<p style="font-size:24px;font-weight:700;color:#B8401A;letter-spacing:3px">WANTED</p>
+<h3 style="font-family:'Ultra', Georgia, serif;font-size:32px;font-weight:400;line-height:1.15;color:#2A1A12">Release notes</h3>
+<p style="font-size:24px;line-height:1.35;color:#5A4232">Merged changes written up as a changelog.</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:12px;background:#FFF6E4;padding:28px;border:3px solid #2A1A12;border-radius:4px">
+<p style="font-size:24px;font-weight:700;color:#B8401A;letter-spacing:3px">WANTED</p>
+<h3 style="font-family:'Ultra', Georgia, serif;font-size:32px;font-weight:400;line-height:1.15;color:#2A1A12">Data scout</h3>
+<p style="font-size:24px;line-height:1.35;color:#5A4232">Ask a spreadsheet questions in plain words.</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:12px;background:#FFF6E4;padding:28px;border:3px solid #2A1A12;border-radius:4px">
+<p style="font-size:24px;font-weight:700;color:#B8401A;letter-spacing:3px">WANTED</p>
+<h3 style="font-family:'Ultra', Georgia, serif;font-size:32px;font-weight:400;line-height:1.15;color:#2A1A12">Afternoon prototype</h3>
+<p style="font-size:24px;line-height:1.35;color:#5A4232">A clickable demo of an idea, by tonight.</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:12px;background:#FFF6E4;padding:28px;border:3px solid #2A1A12;border-radius:4px">
+<p style="font-size:24px;font-weight:700;color:#B8401A;letter-spacing:3px">WANTED</p>
+<h3 style="font-family:'Ultra', Georgia, serif;font-size:32px;font-weight:400;line-height:1.15;color:#2A1A12">Trail guide</h3>
+<p style="font-size:24px;line-height:1.35;color:#5A4232">An AI that explains a new codebase or topic.</p>
+</div>
+</div>
+
+</section>
+<section id="workflows" data-transition="fade" style="background:#F7EBD3;color:#2A1A12;font-family:'Libre Franklin', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;gap:48px">
+<svg viewBox="0 0 1920 110" width="1920" height="110" aria-label="Desert horizon" style="position:absolute;left:0;bottom:0;width:1920px;height:110px"><path d="M0 110 V70 H140 L170 46 H360 L390 70 H760 L780 58 H930 L950 74 H1300 L1330 40 H1560 L1590 68 H1920 V110Z" fill="#E6C78E"/><path d="M0 110 V92 Q480 80 960 94 T1920 88 V110Z" fill="#D58A45"/></svg>
+<div style="display:flex;flex-direction:column;gap:16px">
+<p style="font-size:24px;font-weight:700;color:#137C7C;letter-spacing:3px;text-transform:uppercase">Inspiration</p>
+<h2 style="font-family:'Ultra', Georgia, serif;font-size:64px;font-weight:400;line-height:1.1;color:#2A1A12">Workflow recipes to try</h2>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px">
+<div style="display:flex;flex-direction:column;gap:12px;background:#FFF6E4;padding:32px;border-top:8px solid #1FA3A3;border-radius:12px">
+<h3 style="font-family:'Ultra', Georgia, serif;font-size:32px;font-weight:400;line-height:1.15;color:#2A1A12">Issue to PR</h3>
+<p style="font-size:24px;line-height:1.4;color:#5A4232">Write the issue, define the check, plan in phases, let AI build, review.</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:12px;background:#FFF6E4;padding:32px;border-top:8px solid #E8631C;border-radius:12px">
+<h3 style="font-family:'Ultra', Georgia, serif;font-size:32px;font-weight:400;line-height:1.15;color:#2A1A12">Parallel posse</h3>
+<p style="font-size:24px;line-height:1.4;color:#5A4232">Run two or three AI sessions on separate tasks and review each as it lands.</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:12px;background:#FFF6E4;padding:32px;border-top:8px solid #1FA3A3;border-radius:12px">
+<h3 style="font-family:'Ultra', Georgia, serif;font-size:32px;font-weight:400;line-height:1.15;color:#2A1A12">Spec first</h3>
+<p style="font-size:24px;line-height:1.4;color:#5A4232">Write one page on the goal, let AI ask questions, then build.</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:12px;background:#FFF6E4;padding:32px;border-top:8px solid #E8631C;border-radius:12px">
+<h3 style="font-family:'Ultra', Georgia, serif;font-size:32px;font-weight:400;line-height:1.15;color:#2A1A12">Morning brief</h3>
+<p style="font-size:24px;line-height:1.4;color:#5A4232">AI sums up inbox, calendar and notes into today's priorities.</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:12px;background:#FFF6E4;padding:32px;border-top:8px solid #1FA3A3;border-radius:12px">
+<h3 style="font-family:'Ultra', Georgia, serif;font-size:32px;font-weight:400;line-height:1.15;color:#2A1A12">Project memory</h3>
+<p style="font-size:24px;line-height:1.4;color:#5A4232">A rules file with your conventions, so every session starts with context.</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:12px;background:#FFF6E4;padding:32px;border:3px dashed #C9A86E;border-radius:12px">
+<h3 style="font-family:'Ultra', Georgia, serif;font-size:32px;font-weight:400;line-height:1.15;color:#B8401A">[Your recipe]</h3>
+<p style="font-size:24px;line-height:1.4;color:#5A4232">[A setup you rely on that others could copy]</p>
+</div>
+</div>
+
+</section>
+<section id="never-late" data-transition="fade" style="background:#FCE3B0;color:#2A1A12;font-family:'Libre Franklin', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;gap:40px">
+<svg viewBox="0 0 1920 1080" width="1920" height="1080" aria-label="Sunrise over an open desert" style="position:absolute;left:0;top:0;width:1920px;height:1080px"><defs><linearGradient id="sky-never" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FCE3B0"/><stop offset="0.5" stop-color="#FAD08A"/><stop offset="0.8" stop-color="#F59E4C"/></linearGradient></defs><rect width="1920" height="1080" fill="url(#sky-never)"/><circle cx="960" cy="840" r="170" fill="#E8631C"/><path d="M0 840 L240 840 L280 790 L560 790 L600 840 L1340 840 L1380 770 L1680 770 L1720 840 L1920 840 V1080 H0Z" fill="#B8401A"/><path d="M0 930 Q480 900 960 920 T1920 910 V1080 H0Z" fill="#7A2E14"/></svg>
+<p style="font-size:24px;font-weight:700;color:#7A2E14;letter-spacing:3px;text-transform:uppercase">Chapter five · How you get there</p>
+<h2 style="font-family:'Ultra', Georgia, serif;font-size:88px;font-weight:400;line-height:1.1;color:#2A1A12">Never worked with AI? You can saddle up today.</h2>
+<p style="font-size:32px;line-height:1.4;color:#2A1A12;max-width:1300px">The tools get easier with every release. Start now, and you can be as productive as anyone who started years ago.</p>
+
+</section>
+<section id="start-steps" data-transition="fade" style="background:#F7EBD3;color:#2A1A12;font-family:'Libre Franklin', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;gap:64px">
+<svg viewBox="0 0 1920 110" width="1920" height="110" aria-label="Desert horizon" style="position:absolute;left:0;bottom:0;width:1920px;height:110px"><path d="M0 110 V70 H140 L170 46 H360 L390 70 H760 L780 58 H930 L950 74 H1300 L1330 40 H1560 L1590 68 H1920 V110Z" fill="#E6C78E"/><path d="M0 110 V92 Q480 80 960 94 T1920 88 V110Z" fill="#D58A45"/></svg>
+<div style="display:flex;flex-direction:column;gap:16px">
+<p style="font-size:24px;font-weight:700;color:#B8401A;letter-spacing:3px;text-transform:uppercase">How you get there</p>
+<h2 style="font-family:'Ultra', Georgia, serif;font-size:64px;font-weight:400;line-height:1.1;color:#2A1A12">Start small, then ride further</h2>
+</div>
+<div style="display:flex;gap:32px">
+<div style="flex:1;display:flex;flex-direction:column;gap:24px;background:#FFF6E4;padding:48px;border:2px solid #E0C590;border-radius:12px">
+<p style="font-family:'Ultra', Georgia, serif;font-size:64px;color:#E8631C;line-height:1">1</p>
+<h3 style="font-family:'Ultra', Georgia, serif;font-size:36px;font-weight:400;line-height:1.2;color:#2A1A12">Start small</h3>
+<p style="font-size:28px;line-height:1.4;color:#5A4232">One tool, one real task. Nothing fancy.</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:24px;background:#FFF6E4;padding:48px;border:2px solid #E0C590;border-radius:12px">
+<p style="font-family:'Ultra', Georgia, serif;font-size:64px;color:#E8631C;line-height:1">2</p>
+<h3 style="font-family:'Ultra', Georgia, serif;font-size:36px;font-weight:400;line-height:1.2;color:#2A1A12">Feel it out</h3>
+<p style="font-size:28px;line-height:1.4;color:#5A4232">Try things, notice what works, and adjust.</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:24px;background:#FFF6E4;padding:48px;border:2px solid #E0C590;border-radius:12px">
+<p style="font-family:'Ultra', Georgia, serif;font-size:64px;color:#E8631C;line-height:1">3</p>
+<h3 style="font-family:'Ultra', Georgia, serif;font-size:36px;font-weight:400;line-height:1.2;color:#2A1A12">Grow confidence</h3>
+<p style="font-size:28px;line-height:1.4;color:#5A4232">Take on bigger problems as your trust builds.</p>
+</div>
+</div>
+
+</section>
+<section id="prompt-anatomy" data-transition="fade" style="background:#EED9B0;color:#2A1A12;font-family:'Libre Franklin', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;gap:48px">
+<svg viewBox="0 0 1920 110" width="1920" height="110" aria-label="Desert horizon" style="position:absolute;left:0;bottom:0;width:1920px;height:110px"><path d="M0 110 V70 H140 L170 46 H360 L390 70 H760 L780 58 H930 L950 74 H1300 L1330 40 H1560 L1590 68 H1920 V110Z" fill="#DDB06A"/><path d="M0 110 V92 Q480 80 960 94 T1920 88 V110Z" fill="#C8702E"/></svg>
+<div style="display:flex;flex-direction:column;gap:16px">
+<p style="font-size:24px;font-weight:700;color:#B8401A;letter-spacing:3px;text-transform:uppercase">How you get there</p>
+<h2 style="font-family:'Ultra', Georgia, serif;font-size:64px;font-weight:400;line-height:1.1;color:#2A1A12">Instructions that work</h2>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:32px">
+<div style="display:flex;flex-direction:column;gap:12px;background:#FFF6E4;padding:40px;border-left:8px solid #E8631C;border-radius:12px">
+<h3 style="font-family:'Ultra', Georgia, serif;font-size:36px;font-weight:400;color:#2A1A12">Goal</h3>
+<p style="font-size:28px;line-height:1.35;color:#5A4232">“Fix the wrong order date on the confirmation page.”</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:12px;background:#FFF6E4;padding:40px;border-left:8px solid #1FA3A3;border-radius:12px">
+<h3 style="font-family:'Ultra', Georgia, serif;font-size:36px;font-weight:400;color:#2A1A12">Context</h3>
+<p style="font-size:28px;line-height:1.35;color:#5A4232">“It only happens for users in some time zones.”</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:12px;background:#FFF6E4;padding:40px;border-left:8px solid #1FA3A3;border-radius:12px">
+<h3 style="font-family:'Ultra', Georgia, serif;font-size:36px;font-weight:400;color:#2A1A12">Constraints</h3>
+<p style="font-size:28px;line-height:1.35;color:#5A4232">“Keep the change small. Don't touch the emails.”</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:12px;background:#FFF6E4;padding:40px;border-left:8px solid #E8631C;border-radius:12px">
+<h3 style="font-family:'Ultra', Georgia, serif;font-size:36px;font-weight:400;color:#2A1A12">Verification</h3>
+<p style="font-size:28px;line-height:1.35;color:#5A4232">“Write a failing test first, then make it pass.”</p>
+</div>
+</div>
+
+</section>
+<section id="mindset" data-transition="fade" style="background:#F7EBD3;color:#2A1A12;font-family:'Libre Franklin', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;gap:48px">
+<svg viewBox="0 0 1920 110" width="1920" height="110" aria-label="Desert horizon" style="position:absolute;left:0;bottom:0;width:1920px;height:110px"><path d="M0 110 V70 H140 L170 46 H360 L390 70 H760 L780 58 H930 L950 74 H1300 L1330 40 H1560 L1590 68 H1920 V110Z" fill="#E6C78E"/><path d="M0 110 V92 Q480 80 960 94 T1920 88 V110Z" fill="#D58A45"/></svg>
+<div style="display:flex;flex-direction:column;gap:16px">
+<p style="font-size:24px;font-weight:700;color:#B8401A;letter-spacing:3px;text-transform:uppercase">How you get there</p>
+<h2 style="font-family:'Ultra', Georgia, serif;font-size:64px;font-weight:400;line-height:1.1;color:#2A1A12">Think like a trail boss</h2>
+</div>
+<div style="display:flex;flex-direction:column">
+<div style="display:flex;gap:48px;align-items:baseline;padding:32px 0;border-top:3px solid #C9A86E">
+<h3 style="font-family:'Ultra', Georgia, serif;font-size:36px;font-weight:400;color:#B8401A;width:620px">Treat output as a draft</h3>
+<p style="font-size:28px;line-height:1.4;color:#5A4232;flex:1">You own the result. Read it, check it, and edit before it goes anywhere.</p>
+</div>
+<div style="display:flex;gap:48px;align-items:baseline;padding:32px 0;border-top:3px solid #C9A86E">
+<h3 style="font-family:'Ultra', Georgia, serif;font-size:36px;font-weight:400;color:#B8401A;width:620px">Iterate, don't restart</h3>
+<p style="font-size:28px;line-height:1.4;color:#5A4232;flex:1">Say what's off and ask for a revision. The second answer is usually better.</p>
+</div>
+<div style="display:flex;gap:48px;align-items:baseline;padding:32px 0;border-top:3px solid #C9A86E;border-bottom:3px solid #C9A86E">
+<h3 style="font-family:'Ultra', Georgia, serif;font-size:36px;font-weight:400;color:#B8401A;width:620px">Let it ask you</h3>
+<p style="font-size:28px;line-height:1.4;color:#5A4232;flex:1">End with “ask me anything you need first.” It surfaces gaps you missed.</p>
+</div>
+</div>
+
+</section>
+<section id="imagination" data-transition="fade" style="background:#1B5E92;color:#FFF6E4;font-family:'Libre Franklin', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;gap:40px">
+<svg viewBox="0 0 1920 1080" width="1920" height="1080" aria-label="Wide open desert under a big blue sky" style="position:absolute;left:0;top:0;width:1920px;height:1080px"><defs><linearGradient id="sky-imagination" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1B5E92"/><stop offset="0.55" stop-color="#2F80B8"/><stop offset="0.85" stop-color="#F6C177"/></linearGradient></defs><rect width="1920" height="1080" fill="url(#sky-imagination)"/><path d="M0 880 L380 880 L410 850 L560 850 L590 880 L1500 880 L1520 862 L1640 862 L1660 880 L1920 880 V1080 H0Z" fill="#D58A45"/><path d="M0 950 Q480 930 960 945 T1920 940 V1080 H0Z" fill="#B8541E"/><path d="M0 1010 Q700 990 1300 1005 T1920 1000 V1080 H0Z" fill="#7A2E14"/></svg>
+<p style="font-size:24px;font-weight:700;color:#FFD166;letter-spacing:3px;text-transform:uppercase">The open range</p>
+<h2 style="font-family:'Ultra', Georgia, serif;font-size:96px;font-weight:400;line-height:1.1;color:#FFF6E4;text-shadow:0px 6px 0px #0F3A5C">The only fence out here is your imagination.</h2>
+<p style="font-size:32px;line-height:1.4;color:#FFF6E4;max-width:1300px">What you can build is limited only by what you can picture. So keep exploring, and keep learning.</p>
+
+</section>
+<section id="statement" data-transition="fade" style="background:#E8631C;color:#2A1A12;font-family:'Libre Franklin', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;gap:40px">
+<svg viewBox="0 0 1920 1080" width="1920" height="1080" aria-label="Sunset over the desert with dark mesas" style="position:absolute;left:0;top:0;width:1920px;height:1080px"><defs><linearGradient id="sky-statement" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E8631C"/><stop offset="0.85" stop-color="#F6C177"/></linearGradient></defs><rect width="1920" height="1080" fill="url(#sky-statement)"/><circle cx="1480" cy="800" r="140" fill="#FFE29A"/><path d="M0 820 L300 820 L340 750 L700 750 L740 820 L1100 820 L1140 780 L1300 780 L1330 820 L1920 820 V1080 H0Z" fill="#B8401A"/><path d="M0 900 Q480 870 960 890 T1920 880 V1080 H0Z" fill="#7A2E14"/><path d="M0 990 Q600 965 1200 985 T1920 978 V1080 H0Z" fill="#2A1A12"/></svg>
+<h2 style="font-family:'Ultra', Georgia, serif;font-size:112px;font-weight:400;line-height:1.05;color:#2A1A12">Start small.<br>Keep exploring.<br>Keep learning.</h2>
+<p style="font-size:32px;line-height:1.4;color:#2A1A12;max-width:1200px;font-weight:600">Pick one real problem this week. Define it, direct the AI, and judge the result yourself.</p>
+
+</section>
+<section id="closing" data-transition="fade" style="background:#141B33;color:#F7EBD3;font-family:'Libre Franklin', Arial, sans-serif;padding:128px;display:grid;grid-template-columns:1fr 1fr;gap:96px;align-items:start">
+<svg viewBox="0 0 1920 1080" width="1920" height="1080" aria-label="Desert at night with stars and mesas" style="position:absolute;left:0;top:0;width:1920px;height:1080px"><defs><linearGradient id="sky-closing" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#141B33"/><stop offset="0.85" stop-color="#5B3358"/></linearGradient></defs><rect width="1920" height="1080" fill="url(#sky-closing)"/><g fill="#F7EBD3"><circle cx="180" cy="80" r="2"/><circle cx="420" cy="60" r="3"/><circle cx="760" cy="90" r="2"/><circle cx="1100" cy="70" r="3"/><circle cx="1500" cy="60" r="2"/><circle cx="1800" cy="90" r="3"/><circle cx="980" cy="640" r="2"/><circle cx="1720" cy="660" r="2"/></g><path d="M0 820 L260 820 L300 760 L620 760 L660 820 L1000 820 L1040 780 L1260 780 L1290 820 L1380 820 L1420 720 L1760 720 L1800 820 L1920 820 V1080 H0Z" fill="#3A2030"/><path d="M0 920 Q480 890 960 910 T1920 900 V1080 H0Z" fill="#24140F"/></svg>
+<div style="display:flex;flex-direction:column;gap:24px">
+<p style="font-size:24px;font-weight:700;color:#F2A541;letter-spacing:3px;text-transform:uppercase">Before we ride off</p>
+<h2 style="font-family:'Ultra', Georgia, serif;font-size:112px;font-weight:400;line-height:1.05;color:#FFF6E4">Questions?</h2>
+</div>
+<div style="display:flex;flex-direction:column;gap:28px">
+<p style="font-size:24px;font-weight:700;color:#F2A541;letter-spacing:3px;text-transform:uppercase">Resources</p>
+<ul style="font-size:28px;line-height:1.6;color:#F7EBD3">
+<li>[Link to a beginner guide]</li>
+<li>[Internal channel or community]</li>
+<li>[The ideas board and workflow recipes]</li>
+</ul>
+<p style="font-size:28px;color:#FFF6E4;font-weight:600">[Your name] · [contact]</p>
+</div>
+
+</section>
+</div>
+<aside id="notes" aria-live="polite"></aside>
+<nav id="bar">
+  <span class="wip hide-s">Work in progress</span>
+  <button id="prev" aria-label="Previous slide">←</button>
+  <span id="count"></span>
+  <button id="next" aria-label="Next slide">→</button>
+  <span id="title"></span>
+  <button id="notesBtn" title="Speaker notes (N)">Notes</button>
+  <a href="script.html">Script</a>
+  <a href="rehearse.html">Rehearse</a>
+  <button id="fs" class="hide-s" title="Fullscreen (F)">⛶</button>
+</nav>
+<script>
+const DATA = [{"id": "cover", "title": "From developer to AI builder", "target": 45, "endsAt": 45, "chapter": "Intro: who this talk is for and a quick live demo of how I work", "bullets": ["Welcome. Thank people for coming.", "One line on the topic: how my job went from writing code to producing solutions with AI.", "Promise: an honest look, a live demo, and a path anyone here can follow."], "next": "First, who I'm talking to.", "optional": false}, {"id": "audience", "title": "Who this talk is for", "target": 60, "endsAt": 105, "chapter": "", "bullets": ["Show of hands: who writes code daily? Who uses AI for most of it? Who hasn't really started?", "Name the three groups on screen: developers, builders, newcomers.", "To newcomers: you haven't missed the wagon. I'll come back to that."], "next": "Rather than tell you, let me show you.", "optional": false}, {"id": "demo", "title": "Let me show you how I work", "target": 300, "endsAt": 405, "chapter": "", "bullets": ["Set the scene: a real task from my week, start to finish.", "Find the issue, write it down, decide how we verify, plan in phases, build, open the PR.", "Narrate the why, not the clicks. Point out where I give context and where I push back.", "If something breaks: say so calmly and keep going. That's part of the lesson.", "Follow the demo script doc for the full scene."], "next": "So who is this person who just did that?", "optional": false}, {"id": "about-me", "title": "Howdy, I'm [Your name]", "target": 90, "endsAt": 495, "chapter": "About me: who I am and where I come from", "bullets": ["Background: where I come from. Keep it short.", "One or two turning points in my career.", "Today: my role and what I work on.", "The shift: when I stopped mainly writing code and started directing AI."], "next": "That shift is what this talk is about.", "optional": false}, {"id": "premise", "title": "I used to write the code. Now I decide what gets built, and make sure it's right.", "target": 75, "endsAt": 570, "chapter": "The shift: from developer to AI builder, and the three jobs of the new role", "bullets": ["Read the line slowly: I used to write the code. Now I decide what gets built, and make sure it's right.", "Pause. Let it land.", "The work moved from typing solutions to producing them."], "next": "Here's what that looks like side by side.", "optional": false}, {"id": "role-shift", "title": "How the role changed", "target": 120, "endsAt": 690, "chapter": "", "bullets": ["Walk the table row by row: main job, time, who I work with, value, what done means.", "Developer skills aren't wasted. Knowing how code works is what lets me judge AI output.", "Ask the room: which row feels most true for you already?"], "next": "If I boil the new role down, it's three jobs.", "optional": false}, {"id": "three-jobs", "title": "The three jobs of an AI builder", "target": 105, "endsAt": 795, "chapter": "", "bullets": ["Produce: decide what's worth solving and own the outcome.", "Instruct: context, constraints and a way to verify.", "Bring taste: the hardest one to hand over. Say no, cut scope.", "Tie back: you saw all three in the demo."], "next": "And the ground under these jobs keeps shifting.", "optional": false}, {"id": "frontier", "title": "The frontier keeps moving", "target": 90, "endsAt": 885, "chapter": "The frontier: the work keeps changing, it is mostly tinkering, and every model has its own temperament", "bullets": ["New models, new tools and new ways of working arrive every few months.", "Give one recent example that changed how I work.", "Nobody has it all figured out. That's what makes it exciting."], "next": "Which means most of my work looks like this.", "optional": false}, {"id": "tinker", "title": "Most of the work is tinkering", "target": 90, "endsAt": 975, "chapter": "", "bullets": ["Try something new on a real task.", "Measure: did it save time, is the result better?", "Adjust the instructions, context or model. Refine what works into a default.", "Then a new model arrives, and you go round again."], "next": "And every model behaves a little differently.", "optional": false}, {"id": "models", "title": "Every model has its own temperament", "target": 90, "endsAt": 1065, "chapter": "", "bullets": ["Quick hands: short and direct instructions.", "Deep thinkers: full context and room to think.", "Specialists: talk to them in their own format.", "Share a quirk I've learned to work around."], "next": "So how does all this fit into a working day?", "optional": false}, {"id": "loop", "title": "My working loop", "target": 75, "endsAt": 1140, "chapter": "In practice: my working loop, hands-on examples, tools, a typical day and lessons", "bullets": ["Define: the problem and how we verify it.", "Direct: a plan in phases, AI builds while I steer.", "Judge: review with taste, check the proof, ship.", "I own both ends of the loop. AI does most of the middle."], "next": "Let me show a few real examples.", "optional": false}, {"id": "examples", "title": "Hands-on examples", "target": 180, "endsAt": 1320, "chapter": "", "bullets": ["Bug to PR: the demo you just saw, about 30 seconds as a recap.", "Example 2: the problem, what I told the AI, where I stepped in, the result.", "Example 3: same structure. Show a screenshot or result if possible."], "next": "Here's what I use to do this.", "optional": false}, {"id": "toolkit", "title": "My saddlebag of tools", "target": 60, "endsAt": 1380, "chapter": "", "bullets": ["Walk through my tools and what each one is for.", "Mention one I tried and dropped.", "This list will look different in six months.", "Optional slide: skip if running long."], "next": "And here's how it fits into a day.", "optional": true}, {"id": "my-day", "title": "A typical day on the trail", "target": 60, "endsAt": 1440, "chapter": "", "bullets": ["Morning plan, deep work directing agents, afternoon review, end of day tinkering.", "Keep examples concrete and a little mundane.", "Optional slide: skip if running long."], "next": "Not everything goes smoothly, though.", "optional": true}, {"id": "lessons", "title": "What I've learned", "target": 75, "endsAt": 1515, "chapter": "", "bullets": ["Works well: first drafts, explaining unfamiliar code, my own example.", "Watch out: confident wrong answers, vague requests giving vague results.", "Short story: one time it saved me, one time it led me astray."], "next": "Now, let's get your imagination going.", "optional": false}, {"id": "idea-board", "title": "Wanted: things you could build", "target": 75, "endsAt": 1590, "chapter": "Inspiration: an ideas board of things to build and workflow recipes", "bullets": ["A wanted board of things you could build.", "Point out two I've built myself and how long they took.", "Steal any of these as your first project."], "next": "And here are some ways to set up the work.", "optional": false}, {"id": "workflows", "title": "Workflow recipes to try", "target": 75, "endsAt": 1665, "chapter": "", "bullets": ["Recipes are setups you can reuse every week.", "Walk through one in detail, for example Project memory or Parallel posse.", "Optional slide: shorten to one recipe if running long."], "next": "Which brings me to you.", "optional": true}, {"id": "never-late", "title": "Never worked with AI? You can saddle up today.", "target": 75, "endsAt": 1740, "chapter": "How you get there: you can start today, start small, and grow with good instructions and mindset", "bullets": ["If you haven't used AI in the last few years, that's fine.", "Much of what early adopters learned is already outdated. Today's tools are easier.", "Start now, and you can be as productive as anyone. Curiosity beats history."], "next": "So how do you actually start?", "optional": false}, {"id": "start-steps", "title": "Start small, then ride further", "target": 60, "endsAt": 1800, "chapter": "", "bullets": ["Start small: one tool, one real task.", "Feel it out: try, notice, adjust.", "Grow confidence: bigger problems as trust builds."], "next": "When you do ask, ask well.", "optional": false}, {"id": "prompt-anatomy", "title": "Instructions that work", "target": 60, "endsAt": 1860, "chapter": "", "bullets": ["Goal, context, constraints, verification: what you'd tell a colleague.", "Verification is the one people skip, and it makes the result trustworthy.", "These examples match the demo."], "next": "And keep this mindset.", "optional": false}, {"id": "mindset", "title": "Think like a trail boss", "target": 45, "endsAt": 1905, "chapter": "", "bullets": ["Treat output as a draft. You own the result.", "Iterate instead of restarting.", "Let it ask you questions first."], "next": "One last thought.", "optional": false}, {"id": "imagination", "title": "The only fence out here is your imagination.", "target": 30, "endsAt": 1935, "chapter": "Wrap-up: imagination is the limit, keep exploring, questions", "bullets": ["Read it slowly: the only fence out here is your imagination.", "Pause. What you can build is limited by what you can picture."], "next": "So here's my ask.", "optional": false}, {"id": "statement", "title": "Start small. Keep exploring. Keep learning.", "target": 30, "endsAt": 1965, "chapter": "", "bullets": ["Start small. Keep exploring. Keep learning.", "Pick one real problem this week. Define it, direct the AI, judge the result.", "Invite people to share what they tried."], "next": "Thank you. Questions?", "optional": false}, {"id": "closing", "title": "Questions?", "target": 300, "endsAt": 2265, "chapter": "", "bullets": ["Q&A. Repeat each question so everyone hears it.", "Backup question if quiet: what do I not use AI for?", "Point to resources and how to reach me."], "next": "", "optional": false}];
+const slides = [...document.querySelectorAll('#stage > section')];
+const stage = document.getElementById('stage');
+let i = Math.max(0, Math.min(slides.length - 1, (parseInt(location.hash.slice(1)) || 1) - 1));
+const fmt = s => `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`;
+function fit() {
+  const s = Math.min(innerWidth / 1920, (innerHeight - 52) / 1080);
+  stage.style.transform = `translate(-50%,-50%) scale(${s})`;
+}
+function show() {
+  slides.forEach((el, k) => el.classList.toggle('on', k === i));
+  const d = DATA[i];
+  document.getElementById('count').textContent = `${i + 1} / ${slides.length}`;
+  document.getElementById('title').textContent = d.title;
+  const n = document.getElementById('notes');
+  n.innerHTML = `<h2>${d.title}</h2><div class="t">⏱ ${fmt(d.target)} · ends at ${fmt(d.endsAt)}${d.optional ? ' · optional' : ''}</div><ul>${d.bullets.map(b => `<li>${b}</li>`).join('')}</ul>${d.next ? `<div class="next">→ ${d.next}</div>` : ''}`;
+  history.replaceState(null, '', `#${i + 1}`);
+}
+const go = k => { i = Math.max(0, Math.min(slides.length - 1, k)); show(); };
+document.getElementById('prev').onclick = () => go(i - 1);
+document.getElementById('next').onclick = () => go(i + 1);
+document.getElementById('notesBtn').onclick = () => document.getElementById('notes').classList.toggle('on');
+document.getElementById('fs').onclick = () => document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen();
+addEventListener('keydown', e => {
+  if (['ArrowRight', 'PageDown', ' '].includes(e.key)) { e.preventDefault(); go(i + 1); }
+  else if (['ArrowLeft', 'PageUp'].includes(e.key)) go(i - 1);
+  else if (e.key === 'Home') go(0);
+  else if (e.key === 'End') go(slides.length - 1);
+  else if (e.key === 'n' || e.key === 'N') document.getElementById('notes').classList.toggle('on');
+  else if (e.key === 'f' || e.key === 'F') document.getElementById('fs').click();
+});
+let x0 = null;
+addEventListener('touchstart', e => { x0 = e.touches[0].clientX; }, {passive: true});
+addEventListener('touchend', e => { if (x0 === null) return; const dx = e.changedTouches[0].clientX - x0; if (Math.abs(dx) > 40) go(i + (dx < 0 ? 1 : -1)); x0 = null; });
+addEventListener('resize', fit);
+fit(); show();
+</script>
+</body>
+</html>
