@@ -261,9 +261,9 @@ textarea.field { resize: none; overflow: hidden; display: block; line-height: 1.
     let clock = 0;
     active.forEach((s, i) => {
       s.n = i + 1;
-      s.est = s.qa ? Number(meta.qa_seconds) || 0 : estimate(s, wpm);
+      s.est = s.qa ? Number(meta.qa_seconds) || 0 : s.appendix ? 0 : estimate(s, wpm);
       s.start = clock;
-      if (!s.qa) clock += s.est;
+      if (!s.qa && !s.appendix) clock += s.est;
       s.end = clock;
     });
     for (const s of cut) s.est = estimate(s, wpm);
@@ -514,17 +514,17 @@ textarea.field { resize: none; overflow: hidden; display: block; line-height: 1.
     c.root.classList.toggle('locked', locked);
     c.num.textContent = pad(s.n);
     setVal(c.chapter, s.chapter);
-    c.clock.textContent = s.qa ? 'after the talk' : `${fmt(s.start)} → ${fmt(s.end)}`;
-    c.time.textContent = s.qa ? `Q&A ${fmt(s.est)}` : fmt(s.est);
+    c.clock.textContent = s.qa ? 'after the talk' : s.appendix ? 'appendix, not talked' : `${fmt(s.start)} → ${fmt(s.end)}`;
+    c.time.textContent = s.qa ? `Q&A ${fmt(s.est)}` : s.appendix ? 'reading' : fmt(s.est);
     updateFrame(c.frame, `Slide ${pad(s.n)}: ${s.theme || ''}`, s.theme);
     c.status.textContent = s.status || 'draft';
     c.status.dataset.status = s.status || 'draft';
     c.status.disabled = !editable();
     c.status.setAttribute('aria-label', `Status ${s.status || 'draft'}. Click to change.`);
-    c.targetWrap.hidden = !!s.qa;
+    c.targetWrap.hidden = !!s.qa || !!s.appendix;
     setVal(c.target, fmt(s.seconds || 0));
     const delta = s.seconds ? (s.est - s.seconds) / s.seconds : 0;
-    c.pace.hidden = !!s.qa || !s.seconds;
+    c.pace.hidden = !!s.qa || !!s.appendix || !s.seconds;
     c.pace.className = `chip ${delta > 0.15 ? 'pace-over' : ''}`;
     c.pace.textContent = `${delta >= 0 ? '+' : '−'}${Math.round(Math.abs(delta) * 100)}% vs target`;
     c.video.hidden = !(s.fixed_seconds > 0);
@@ -564,7 +564,7 @@ textarea.field { resize: none; overflow: hidden; display: block; line-height: 1.
     const order = next ? (cur.order + next.order) / 2 : cur.order + 10;
     const newId = randomId('s-');
     createDoc('slides', {
-      id: newId, order, chapter: cur.chapter || '', theme: '', seconds: 60, fixed_seconds: 0, qa: false,
+      id: newId, order, chapter: cur.chapter || '', theme: '', seconds: cur.appendix ? 0 : 60, fixed_seconds: 0, qa: false, appendix: !!cur.appendix,
       script: '', change: '', todo: '', status: 'draft', cut: false, cut_reason: '',
     });
     state.scrollNext = newId;
@@ -572,10 +572,11 @@ textarea.field { resize: none; overflow: hidden; display: block; line-height: 1.
   }
   function restore(id) {
     const v = view();
-    const last = v.active[v.active.length - 1];
+    const talked = v.active.filter(s => !s.appendix);
+    const last = talked[talked.length - 1];
     let order = last ? last.order + 10 : 10;
     if (last && last.qa) {
-      const before = v.active[v.active.length - 2];
+      const before = talked[talked.length - 2];
       order = before ? (before.order + last.order) / 2 : last.order - 1;
     }
     edit('slides', id, { cut: false, cut_reason: '', order }, 0);
@@ -648,7 +649,7 @@ textarea.field { resize: none; overflow: hidden; display: block; line-height: 1.
     const bar = $('bar');
     bar.classList.toggle('over', v.total > budget);
     keepFocus(bar, () => {
-      bar.replaceChildren(...v.active.filter(s => !s.qa).map(s => {
+      bar.replaceChildren(...v.active.filter(s => !s.qa && !s.appendix).map(s => {
         const seg = el('button', { type: 'button', id: `seg-${s.id}`, className: 'seg', textContent: pad(s.n) });
         seg.dataset.id = s.id;
         seg.style.setProperty('--chap', chapColor(v, s.chapter));

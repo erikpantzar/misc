@@ -390,6 +390,13 @@
    ]
   },
   {
+   "id": "t-jenny",
+   "order": 25,
+   "title": "The spinning jenny: better tools, more work",
+   "note": "Spinning got many times faster, yet people ended up working more hours and far more people worked in textiles. My bet: AI goes the same way, more work and more people, not fewer. Sourced numbers coming from the research worker. Suggested spot: right after the role shift.",
+   "slides": []
+  },
+  {
    "id": "t-three-jobs",
    "order": 30,
    "title": "Three jobs: produce, instruct, bring taste",
@@ -418,6 +425,13 @@
    ]
   },
   {
+   "id": "t-plan-mode",
+   "order": 55,
+   "title": "Plan mode: agree the plan before any code",
+   "note": "The AI reads the code and proposes a plan, but changes nothing until I approve it. It's define and direct in practice. Could be shown in the demo video. No slide yet.",
+   "slides": []
+  },
+  {
    "id": "t-emdb",
    "order": 60,
    "title": "A real example: the emdb revival",
@@ -437,6 +451,13 @@
    ]
   },
   {
+   "id": "t-mcp",
+   "order": 75,
+   "title": "MCP: plugging the AI into your tools",
+   "note": "One standard plug that lets the AI use your tools and data: GitHub, Linear, Slack, docs. Fits next to the workflow recipes. No slide yet.",
+   "slides": []
+  },
+  {
    "id": "t-never-late",
    "order": 80,
    "title": "Never too late: start small",
@@ -444,6 +465,15 @@
    "slides": [
     "never-late",
     "start-steps"
+   ]
+  },
+  {
+   "id": "t-prompting",
+   "order": 88,
+   "title": "Prompt engineering",
+   "note": "Today only the prompt-anatomy slide covers it (the four parts). Overlaps 'Instructions that work'. Grow that slide, or add one with a few more tricks?",
+   "slides": [
+    "prompt-anatomy"
    ]
   },
   {
@@ -474,6 +504,13 @@
    "slides": [
     "closing"
    ]
+  },
+  {
+   "id": "t-appendix",
+   "order": 120,
+   "title": "Appendix, not talked through: models under the hood",
+   "note": "One slide each, a TLDR plus a link: what an LLM is, how a model is made (data, training, weights), why sizes differ, Haiku vs Sonnet vs Opus. Full reading list: erikpantzar.github.io/misc/work-in-progress/reading.html",
+   "slides": []
   }
  ]
 }
