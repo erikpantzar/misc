@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Further reading · From developer to AI builder</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ultra&display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;600;700&display=swap">
+<style>
+  :root{--ink:#2A1A12;--soft:#5A4232;--paper:#F7EBD3;--card:#FFF6E4;--line:#E0C590;--rust:#B8401A;--teal:#137C7C}
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:'Libre Franklin',Arial,sans-serif;font-size:17px;line-height:1.55;overflow-wrap:break-word}
+  main{max-width:820px;margin:0 auto;padding:32px 16px 80px}
+  nav{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px;font-size:14px}
+  nav a{color:var(--ink);border:1px solid var(--line);background:var(--card);border-radius:6px;padding:6px 12px;text-decoration:none}
+  h1{font-family:'Ultra',Georgia,serif;font-weight:400;font-size:clamp(30px,6vw,44px);line-height:1.1;margin:0 0 8px}
+  .lead{color:var(--soft);margin:0 0 24px}
+  h2{font-family:'Ultra',Georgia,serif;font-weight:400;font-size:22px;color:var(--rust);margin:40px 0 12px;padding-top:16px;border-top:3px solid var(--line)}
+  section{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px 20px;margin:12px 0;scroll-margin-top:16px}
+  section h3{margin:0 0 8px;font-size:20px}
+  .tldr{margin:0 0 12px}
+  .tldr b{color:var(--teal);font-size:13px;letter-spacing:1px;text-transform:uppercase;margin-right:6px}
+  ol{margin:0;padding-left:22px}
+  li{margin:10px 0}
+  li a{color:var(--rust);font-weight:600}
+  .why{display:block;color:var(--soft)}
+  .meta{display:inline-block;font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--teal);border:1px solid var(--teal);border-radius:4px;padding:0 6px;margin-left:6px;white-space:nowrap}
+  code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:15px;background:var(--paper);border:1px solid var(--line);border-radius:4px;padding:0 4px}
+  .note{font-size:15px;color:var(--soft);border-left:3px solid var(--rust);padding-left:10px;margin:12px 0 0}
+  footer{margin-top:40px;font-size:14px;color:var(--soft)}
+  @media print{nav{display:none}body{background:#fff;font-size:12pt}section{border-color:#ccc;break-inside:avoid}}
+</style>
+</head>
+<body>
+<main>
+<nav><a href="index.html">← Deck</a><a href="#llm">LLM</a><a href="#training">Training</a><a href="#size">Size</a><a href="#models">Models</a><a href="#prompting">Prompting</a><a href="#mcp">MCP</a><a href="#plan-mode">Plan mode</a><a href="#spinning-jenny">Spinning jenny</a></nav>
+<h1>Further reading</h1>
+<p class="lead">From the talk “From developer to AI builder”. Each topic has a short summary and a few links, best first. Checked October 2026.</p>
+
+<h2>The basics</h2>
+
+<section id="llm">
+<h3>What is an LLM?</h3>
+<p class="tldr"><b>TLDR</b>A large language model is trained on huge amounts of text to predict the next piece of text, again and again. It reads and writes in tokens: small chunks that can be whole words or parts of words. The context window is its working memory: everything it can look at while answering. Under the hood it is a big file of numbers (the parameters) plus a fairly small program that runs them.</p>
+<ol>
+<li><a href="https://www.youtube.com/watch?v=zjkBMFhNj_g">Intro to Large Language Models</a> <span class="meta">video, 1 h</span><span class="why">Andrej Karpathy’s classic starting point, including the “two files” picture of a model.</span></li>
+<li><a href="https://www.youtube.com/watch?v=LPZh9BOjkQs">Large Language Models explained briefly</a> <span class="meta">video, 8 min</span><span class="why">3Blue1Brown’s short animated version, if you only have a coffee break.</span></li>
+<li><a href="https://writings.stephenwolfram.com/2023/02/what-is-chatgpt-doing-and-why-does-it-work/">What Is ChatGPT Doing … and Why Does It Work?</a> <span class="meta">article, 1–2 h</span><span class="why">Stephen Wolfram walks through next-word prediction step by step, with lots of pictures.</span></li>
+<li><a href="https://platform.claude.com/docs/en/about-claude/glossary">Glossary</a> <span class="meta">docs, 10 min</span><span class="why">Anthropic’s plain definitions of tokens, context window, pretraining and more.</span></li>
+</ol>
+</section>
+
+<section id="training">
+<h3>How a model is made</h3>
+<p class="tldr"><b>TLDR</b>First comes pretraining: the model reads a huge pile of text and learns to predict the next word. That gives a model that knows a lot but isn’t good at following instructions. Post-training fixes that: fine-tuning on examples, then feedback where people rank answers (RLHF). Anthropic also uses Constitutional AI, where the model gives feedback on its own answers using a written list of principles. Training data stops at a date, the knowledge cutoff, so the model knows little about what happened after it.</p>
+<ol>
+<li><a href="https://www.youtube.com/watch?v=7xTGNNLPyMI">Deep Dive into LLMs like ChatGPT</a> <span class="meta">video, 3.5 h</span><span class="why">Karpathy goes through the whole pipeline, from internet text to chat assistant.</span></li>
+<li><a href="https://www.anthropic.com/research/constitutional-ai-harmlessness-from-ai-feedback">Constitutional AI: Harmlessness from AI Feedback</a> <span class="meta">research post + paper</span><span class="why">How Anthropic trains with a list of principles and AI feedback instead of only human labels.</span></li>
+<li><a href="https://arxiv.org/abs/2203.02155">Training language models to follow instructions with human feedback</a> <span class="meta">paper, 1 h</span><span class="why">The InstructGPT paper that made RLHF the standard recipe. Read the abstract and the figures.</span></li>
+<li><a href="https://platform.claude.com/docs/en/about-claude/models/overview">Models overview</a> <span class="meta">docs, 5 min</span><span class="why">Lists each Claude model’s knowledge cutoff, next to its other specs.</span></li>
+</ol>
+</section>
+
+<section id="size">
+<h3>Weights and size</h3>
+<p class="tldr"><b>TLDR</b>Weights (or parameters) are the numbers the model learns during training. Research on scaling laws found that models get better in a predictable way with more parameters, more data and more compute, and that data and size should grow together. Bigger models also cost more to run, so labs make smaller ones too, for example by distillation: training a small model to copy a big one. Open-weight models are ones whose weights you can download and run yourself.</p>
+<ol>
+<li><a href="https://arxiv.org/abs/2001.08361">Scaling Laws for Neural Language Models</a> <span class="meta">paper, abstract 2 min</span><span class="why">The 2020 paper showing quality improves smoothly with size, data and compute.</span></li>
+<li><a href="https://arxiv.org/abs/2203.15556">Training Compute-Optimal Large Language Models</a> <span class="meta">paper, abstract 2 min</span><span class="why">“Chinchilla”: a smaller model trained on more data beat much bigger ones.</span></li>
+<li><a href="https://arxiv.org/abs/1503.02531">Distilling the Knowledge in a Neural Network</a> <span class="meta">paper, abstract 2 min</span><span class="why">The original idea of squeezing a big model into a small one.</span></li>
+<li><a href="https://huggingface.co/docs/hub/models">Hugging Face Hub: Models</a> <span class="meta">docs, 10 min</span><span class="why">Where open-weight models live and how to download them.</span></li>
+</ol>
+<p class="note">Anthropic doesn’t publish how many parameters Claude models have.</p>
+</section>
+
+<section id="models">
+<h3>Haiku, Sonnet, Opus, and choosing a model</h3>
+<p class="tldr"><b>TLDR</b>Claude comes in tiers. Haiku is the fastest and cheapest, for high-volume simple work. Sonnet balances speed and intelligence. Opus is for long agentic coding and hard knowledge work, and Fable sits above it for the hardest reasoning. Anthropic suggests starting with Opus for most work, or starting cheap with Haiku and moving up only when tests show you need to, and compare models on your own tasks. Models also differ in speed, price per token and context window. To compare across vendors, leaderboards rank models by human votes or by benchmarks, speed and price.</p>
+<ol>
+<li><a href="https://platform.claude.com/docs/en/about-claude/models/choosing-a-model">Choosing the right model</a> <span class="meta">docs, 10 min</span><span class="why">Anthropic’s own guide: criteria, two ways to start, when to upgrade.</span></li>
+<li><a href="https://platform.claude.com/docs/en/about-claude/models/overview">Models overview</a> <span class="meta">docs, 5 min</span><span class="why">Today’s lineup side by side: speed, price, context window, knowledge cutoff.</span></li>
+<li><a href="https://artificialanalysis.ai/models">Artificial Analysis: model comparison</a> <span class="meta">leaderboard</span><span class="why">Compares models from all vendors on quality, price, speed and context window.</span></li>
+<li><a href="https://arena.ai/leaderboard">Arena leaderboard</a> <span class="meta">leaderboard</span><span class="why">Rankings built from people voting between two anonymous answers.</span></li>
+</ol>
+<p class="note">At the time of writing (October 2026): Haiku 5.5 from $0.10 in / $0.50 out, Sonnet 5.5 $2 / $10, Opus 5.5 $4 / $20, Fable 5.1 $10 / $50, per million tokens. All four have a 1M-token context window. Prices change, so check the overview.</p>
+</section>
+
+<h2>From the talk</h2>
+
+<section id="prompting">
+<h3>Prompt engineering</h3>
+<p class="tldr"><b>TLDR</b>Prompting is giving instructions the way you would brief a smart new colleague who doesn’t know your project. Be clear and direct, explain why, give examples and context. A useful test: would a colleague with no background understand your prompt? Before tuning a prompt, decide what success looks like and how you’ll test it.</p>
+<ol>
+<li><a href="https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices">Prompting best practices</a> <span class="meta">docs, 30 min</span><span class="why">Anthropic’s living reference. The “General principles” part is the place to start.</span></li>
+<li><a href="https://github.com/anthropics/prompt-eng-interactive-tutorial">Interactive prompt engineering tutorial</a> <span class="meta">course, a few hours</span><span class="why">Hands-on exercises. Written for older models, so the docs win where they differ.</span></li>
+<li><a href="https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/overview">Prompt engineering overview</a> <span class="meta">docs, 5 min</span><span class="why">What to have in place before you start: success criteria and a way to test.</span></li>
+</ol>
+</section>
+
+<section id="mcp">
+<h3>MCP, the Model Context Protocol</h3>
+<p class="tldr"><b>TLDR</b>MCP is an open standard for connecting AI apps to outside systems: files, databases, search engines, design tools like Figma. Think of it as a USB-C port for AI apps. A server offers tools (actions), resources (data) and prompts (templates), and an app like Claude Code connects to it. Anthropic introduced it in late 2024 and handed it to a fund under the Linux Foundation in December 2025.</p>
+<ol>
+<li><a href="https://modelcontextprotocol.io/docs/getting-started/intro">What is the Model Context Protocol?</a> <span class="meta">docs, 5 min</span><span class="why">The official one-page intro, with the USB-C picture.</span></li>
+<li><a href="https://modelcontextprotocol.io/docs/learn/architecture">Architecture overview</a> <span class="meta">docs, 20 min</span><span class="why">Hosts, clients, servers, and the three things a server can offer.</span></li>
+<li><a href="https://code.claude.com/docs/en/mcp">Connect Claude Code to tools via MCP</a> <span class="meta">docs, 15 min</span><span class="why">How to add a server to Claude Code in practice.</span></li>
+<li><a href="https://www.anthropic.com/news/donating-the-model-context-protocol-and-establishing-of-the-agentic-ai-foundation">Donating MCP and establishing the Agentic AI Foundation</a> <span class="meta">article, 5 min</span><span class="why">Why Anthropic handed MCP to a neutral home under the Linux Foundation.</span></li>
+</ol>
+</section>
+
+<section id="plan-mode">
+<h3>Plan mode in Claude Code</h3>
+<p class="tldr"><b>TLDR</b>In plan mode Claude reads code, explores and writes a plan, but doesn’t edit your files until you approve it. Turn it on with Shift+Tab, or start with <code>claude --permission-mode plan</code>. You can edit the plan before it starts. It is worth it when the change touches many files, you’re unsure of the approach or you don’t know the code. If you could describe the change in one sentence, skip it.</p>
+<ol>
+<li><a href="https://code.claude.com/docs/en/best-practices#explore-first-then-plan-then-code">Explore first, then plan, then code</a> <span class="meta">docs, 5 min</span><span class="why">The four-step workflow and when planning isn’t worth it.</span></li>
+<li><a href="https://code.claude.com/docs/en/permission-modes#analyze-before-you-edit-with-plan-mode">Analyze before you edit with plan mode</a> <span class="meta">docs, 5 min</span><span class="why">How to turn it on, approve a plan and edit it with Ctrl+G.</span></li>
+<li><a href="https://code.claude.com/docs/en/common-workflows#plan-before-editing">Plan before editing</a> <span class="meta">docs, 2 min</span><span class="why">The shortest version, in the common workflows recipes.</span></li>
+</ol>
+</section>
+
+<section id="spinning-jenny">
+<h3>The spinning jenny: more efficient, more work</h3>
+<p class="tldr"><b>TLDR</b>James Hargreaves built the spinning jenny around 1764–65. Instead of one thread, one spinner could now run eight spindles, and later machines had over a hundred. England didn’t work less after it. Voth’s study of court records finds the working year grew by somewhere between 14 and 32 percent between the 1750s and 1830, mostly because people stopped taking “Saint Monday” and holy days off, not clearly because days got longer. The handloom weavers lost out: in 1806 they earned about twice what factory workers did, and by 1820 about 25% less. The Jevons paradox names the pattern: when something gets cheaper to use, we often use more of it in total.</p>
+<ol>
+<li><a href="https://eh.net/book_reviews/time-and-work-in-england-1750-1830/">Review of Voth, “Time and Work in England 1750–1830”</a> <span class="meta">review, 10 min</span><span class="why">The key study on working hours, with its method and limits explained.</span></li>
+<li><a href="https://shapingwork.mit.edu/research/research-insight-what-can-the-early-industrial-revolution-teach-us-about-technology-and-work-in-the-age-of-ai/">What can the early Industrial Revolution teach us about work in the age of AI?</a> <span class="meta">article, 10 min</span><span class="why">Acemoglu and Johnson on the handloom weavers, and what it means for AI.</span></li>
+<li><a href="https://en.wikipedia.org/wiki/Jevons_paradox">Jevons paradox</a> <span class="meta">article, 15 min</span><span class="why">Jevons’ 1865 coal argument, plus when the effect does and doesn’t hold.</span></li>
+<li><a href="https://en.wikipedia.org/wiki/Spinning_jenny">Spinning jenny</a> <span class="meta">article, 5 min</span><span class="why">The machine itself: who, when, how many spindles, and the riots.</span></li>
+</ol>
+<p class="note">Historians argue about the numbers. Voth’s range is wide (14 to 32 percent), and most of his witnesses were men, so it says less about women’s work. Older claims that medieval peasants worked only about 150 days a year (made popular by Juliet Schor) are disputed. Head counts of handloom weavers vary between sources.</p>
+</section>
+
+<footer>Erik Pantzar · <a href="index.html">Back to the deck</a></footer>
+</main>
+</body>
+</html>
