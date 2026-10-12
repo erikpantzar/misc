@@ -68,6 +68,22 @@ h2 { font: 400 20px var(--display); margin: 0; }
 .strip, .topics, .cut-row { display: flex; overflow-x: auto; align-items: start; overscroll-behavior-x: contain; }
 .strip { position: relative; gap: 20px; scroll-snap-type: x mandatory; padding-block: 14px 20px; }
 .topics { gap: 14px; padding-block: 12px 14px; }
+.updates { display: grid; gap: 10px; max-width: 1200px; }
+.workers { display: flex; flex-wrap: wrap; gap: 8px; }
+.worker { display: grid; gap: 2px; min-width: 0; max-width: 100%; padding: 6px 12px; border: 1px solid var(--line); border-left: 4px solid var(--muted); border-radius: 6px; background: var(--panel); font-size: 14px; }
+.worker[data-state="running"] { border-left-color: var(--gold); }
+.worker[data-state="done"] { border-left-color: var(--ok); }
+.worker[data-state="failed"] { border-left-color: var(--danger); }
+.worker span { color: var(--muted); font-size: 13px; }
+.feed { list-style: none; margin: 0; padding: 0; max-height: 260px; overflow-y: auto; border: 1px solid var(--line); border-radius: 8px; background: var(--panel); }
+.feed li { display: grid; grid-template-columns: 72px minmax(0, 1fr); gap: 10px; padding: 8px 12px; border-bottom: 1px solid var(--line); font-size: 14px; }
+.feed li:last-child { border-bottom: 0; }
+.feed li.fresh { background: var(--hl); }
+.feed time { color: var(--muted); font-size: 13px; font-variant-numeric: tabular-nums; }
+.feed .who { font-weight: 700; margin-right: 6px; }
+.feed .refs { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+.feed a { color: var(--accent); overflow-wrap: anywhere; }
+.feed .chip { cursor: pointer; }
 .cut-row { gap: 16px; padding-block: 12px 8px; }
 .col { flex: 0 0 clamp(280px, calc(100vw - 48px), 480px); min-width: 0; scroll-snap-align: start; display: grid; gap: 10px; background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 14px; }
 .col.locked { border-color: var(--line-strong); }
@@ -164,6 +180,15 @@ textarea.field { resize: none; overflow: hidden; display: block; line-height: 1.
   <div class="legends" id="legends"></div>
 </section>
 
+<section class="updates" id="updates" aria-label="Updates as they land" hidden>
+  <div class="row-head">
+    <h2>Updates</h2>
+    <span class="hint">Workers and changes as they land</span>
+  </div>
+  <div class="workers" id="workers"></div>
+  <ol class="feed" id="feed" aria-live="polite"></ol>
+</section>
+
 <div class="row-head">
   <h2>Topics</h2>
   <span class="hint">What the talk must cover</span>
@@ -203,7 +228,7 @@ textarea.field { resize: none; overflow: hidden; display: block; line-height: 1.
     writeAllowed: null,
     slidesSeen: false,
     db: null,
-    server: { slides: new Map(), topics: new Map(), meta: null },
+    server: { slides: new Map(), topics: new Map(), updates: new Map(), workers: new Map(), meta: null },
     current: null,
     focusNext: null,
     scrollNext: null,
@@ -820,6 +845,43 @@ textarea.field { resize: none; overflow: hidden; display: block; line-height: 1.
     if (!nodes.length) row.replaceChildren(el('p', { className: 'empty-note', textContent: 'Nothing cut.' }));
   }
 
+  const ago = iso => {
+    const min = Math.round((Date.now() - Date.parse(iso)) / 60000);
+    if (!Number.isFinite(min)) return '';
+    if (min < 1) return 'just now';
+    if (min < 60) return `${min} min ago`;
+    return new Date(iso).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  };
+  function renderUpdates(v) {
+    const live = state.mode === 'live';
+    $('updates').hidden = !live;
+    if (!live) return;
+    const workers = [...state.server.workers.values()].sort((a, b) => String(b.updated || '').localeCompare(String(a.updated || '')));
+    $('workers').replaceChildren(...(workers.length ? workers.map(w => {
+      const node = el('div', { className: 'worker' },
+        el('b', { textContent: w.name || w.id }),
+        el('span', { textContent: [w.state, w.where, w.task, w.updated && ago(w.updated)].filter(Boolean).join(' · ') }));
+      node.dataset.state = w.state || '';
+      return node;
+    }) : [el('p', { className: 'empty-note', textContent: 'No workers running.' })]));
+    const items = [...state.server.updates.values()].sort((a, b) => String(b.at || '').localeCompare(String(a.at || '')));
+    const slides = new Map(v.slides.map(s => [s.id, s]));
+    $('feed').replaceChildren(...(items.length ? items.map(u => {
+      const refs = (u.slides || []).filter(id => slides.has(id)).map(id => {
+        const s = slides.get(id);
+        const chip = el('button', { type: 'button', className: 'chip', textContent: s.cut ? `cut · ${id}` : `${pad(s.n)} · ${id}` });
+        chip.addEventListener('click', () => goTo(id));
+        return chip;
+      });
+      if (u.link) refs.push(el('a', { href: u.link, target: '_blank', rel: 'noopener', textContent: u.link }));
+      const fresh = Date.now() - Date.parse(u.at) < 15 * 60000;
+      return el('li', { className: fresh ? 'fresh' : '' },
+        el('time', { dateTime: u.at || '', textContent: ago(u.at) }),
+        el('div', {}, el('span', { className: 'who', textContent: u.who || '' }), u.text || '',
+          refs.length ? el('div', { className: 'refs' }, ...refs) : null));
+    }) : [el('li', {}, el('time'), el('div', { className: 'empty-note', textContent: 'Nothing yet.' }))]));
+  }
+
   function render() {
     const v = view();
     renderHeader(v);
@@ -827,6 +889,7 @@ textarea.field { resize: none; overflow: hidden; display: block; line-height: 1.
     renderTimeline(v);
     renderTopics(v);
     renderCut(v);
+    renderUpdates(v);
     showSave();
     if (state.scrollNext && cols.has(state.scrollNext)) {
       const id = state.scrollNext;
@@ -878,6 +941,8 @@ textarea.field { resize: none; overflow: hidden; display: block; line-height: 1.
     state.db = db;
     db.collection('slides').onSnapshot(collect('slides'), onSnapshotError);
     db.collection('topics').onSnapshot(collect('topics'), onSnapshotError);
+    db.collection('updates').onSnapshot(collect('updates'), onSnapshotError);
+    db.collection('workers').onSnapshot(collect('workers'), onSnapshotError);
     db.doc('meta/talk').onSnapshot(snap => {
       state.server.meta = snap.exists ? snap.data() : null;
       render();
@@ -898,5 +963,6 @@ textarea.field { resize: none; overflow: hidden; display: block; line-height: 1.
   if (document.fonts) document.fonts.ready.then(() => document.querySelectorAll('textarea.field').forEach(grow));
   render();
   connect();
+  setInterval(() => renderUpdates(view()), 60000);
 })();
 </script>
