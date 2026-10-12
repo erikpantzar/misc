@@ -306,8 +306,12 @@ textarea.field { resize: none; overflow: hidden; display: block; line-height: 1.
     }
   }
   function grow(node) {
+    if (!node.isConnected) {
+      requestAnimationFrame(() => { if (node.isConnected) grow(node); });
+      return;
+    }
     node.style.height = 'auto';
-    node.style.height = node.scrollHeight + 2 + 'px';
+    if (node.scrollHeight) node.style.height = node.scrollHeight + 2 + 'px';
   }
   function keepFocus(container, rebuild) {
     const id = container.contains(document.activeElement) ? document.activeElement.id : null;
