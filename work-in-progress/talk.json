@@ -1,0 +1,479 @@
+{
+ "meta": {
+  "title": "From developer to AI builder",
+  "wpm": 130,
+  "budget_seconds": 1800,
+  "qa_seconds": 900
+ },
+ "slides": [
+  {
+   "id": "cover",
+   "order": 10,
+   "chapter": "Intro",
+   "theme": "Open the door: welcome, the topic in one line, and what they'll get.",
+   "seconds": 45,
+   "fixed_seconds": 0,
+   "qa": false,
+   "script": "[walk to the middle, wait for the room to settle] Hi everyone, and thanks for coming. Thanks to [meetup name] for having me.\n\nTonight is about how my job changed. Not so long ago I was a developer who wrote code all day. These days I'm more of an AI builder. I decide what gets built, I hand the building to AI, and I check that it's right.\n\nI'll keep this honest. No hype, no \"AI will replace us all\". You'll get how the role shifted, a video of me doing real work, and a trail you can follow starting tomorrow. [click]",
+   "change": "",
+   "todo": "Fill in [meetup name] on the cover and in the script.",
+   "status": "reviewed",
+   "cut": false,
+   "cut_reason": ""
+  },
+  {
+   "id": "audience",
+   "order": 20,
+   "chapter": "Intro",
+   "theme": "Find out who's in the room and make the newcomers feel welcome.",
+   "seconds": 60,
+   "fixed_seconds": 0,
+   "qa": false,
+   "script": "Before we ride, a quick check. [ask for a show of hands] Who here writes code most days? [pause] Nice, most of you. Keep your hand up if AI writes most of that code for you. [pause] And who hasn't really started with AI yet? Be honest, nobody's grading you.\n\nGood. That's pretty much the three groups on the screen. Developers, who write code and wonder what AI means for their job. Builders, who make things and want to make more, faster. And newcomers, who haven't started and maybe feel they've missed the wagon.\n\nTo the newcomers: you haven't. Honestly, starting now might even be an advantage, because you skip a lot of the clumsy early years. I'll come back to that later, I promise. [click]",
+   "change": "Drop the \"Today I'm talking to: [..]\" line from the slide.",
+   "todo": "",
+   "status": "reviewed",
+   "cut": false,
+   "cut_reason": ""
+  },
+  {
+   "id": "about-me",
+   "order": 30,
+   "chapter": "Intro",
+   "theme": "Who's talking, in four short lines, ending on the shift.",
+   "seconds": 60,
+   "fixed_seconds": 0,
+   "qa": false,
+   "script": "So who am I? I'm Erik. I've done frontend and web development in Stockholm for a lot of years. Buttons, forms, layouts, the stuff people actually click on. I've always cared most about how things feel to use, and that hasn't changed.\n\nI'm a consultant at Sigma Technology, and through Sigma I'm placed at Teneo. There I build Teneo X, a product where you build, test and run your own voice and chat agents. So I work with AI in the product, and with AI to build the product. Double dose.\n\nAnd the shift: these days I call myself an AI generalist. AI is my engineering team. I'm the reviewer. [pause] That one sentence is pretty much what this talk is about. [click]",
+   "change": "Trimmed from 1:45 to 1:00. One line each: background, Sigma at Teneo, Teneo X, the shift. No company stats.",
+   "todo": "Add your photo to the WANTED poster on the about-me slide.",
+   "status": "reviewed",
+   "cut": false,
+   "cut_reason": ""
+  },
+  {
+   "id": "premise",
+   "order": 40,
+   "chapter": "The shift",
+   "theme": "State the core idea plainly and let it land.",
+   "seconds": 75,
+   "fixed_seconds": 0,
+   "qa": false,
+   "script": "[read slowly] I used to write the code. Now I decide what gets built, and make sure it's right. [pause]\n\nThat's the whole shift. For most of my career, my value was in my fingers. How fast I could type out a solution, how well I knew the framework, how many shortcuts I had in my editor.\n\nToday, the typing part is mostly done by AI. Not all of it, but most of it. What's left for me is the part on either side. Before: figuring out what the problem actually is, and what done looks like. After: checking that what came back is right, and good, and something I'd put my name on.\n\nSo the work didn't go away. It moved. And honestly, it got more interesting. From typing solutions to producing them. Defining problems, directing the AI, and judging the result. Let me show you what that looks like side by side. [click]",
+   "change": "",
+   "todo": "",
+   "status": "reviewed",
+   "cut": false,
+   "cut_reason": ""
+  },
+  {
+   "id": "role-shift",
+   "order": 50,
+   "chapter": "The shift",
+   "theme": "Make the change concrete, row by row, and reassure developers their skills still count.",
+   "seconds": 120,
+   "fixed_seconds": 0,
+   "qa": false,
+   "script": "Here's the before and after. I'll go row by row.\n\nMy main job. As a developer, I wrote the code. As an AI builder, I define the problem. Writing a clear problem turns out to be harder than writing the fix. If I can't explain it, the AI can't build it.\n\nWhere my time goes. It used to be implementing. Now it's instructing and reviewing. A lot of reading. More reading than I've done since school, honestly.\n\nWho I work with. It used to be me and my editor. Now it's several AI agents at once, each on its own task. Think of it as a small team that never gets tired and never gets bored, but also never pushes back unless you ask it to.\n\nMy value. It used to be how fast I build. Now it's what I choose to build, and taste. Knowing what's good and what isn't.\n\nAnd what done means. It used to be: it compiles and runs. Now it's: it's verified, and it solves the actual problem. That's a higher bar, not a lower one. Code that runs but solves the wrong thing doesn't count anymore.\n\n[pause] And to the developers in the room: none of your skills are wasted. Knowing how code works is exactly what lets me judge what the AI hands back. Without that, I'd just be nodding along.\n\n[ask the room] Which of these rows already feels true for you? [let one or two people answer, then click]",
+   "change": "",
+   "todo": "",
+   "status": "reviewed",
+   "cut": false,
+   "cut_reason": ""
+  },
+  {
+   "id": "three-jobs",
+   "order": 60,
+   "chapter": "The shift",
+   "theme": "Boil the new role down to three jobs and prime them to spot each one in the video.",
+   "seconds": 105,
+   "fixed_seconds": 0,
+   "qa": false,
+   "script": "If I boil the new role down, it's three jobs.\n\nOne: produce. That means deciding what problem is worth solving, and why. And owning the outcome, all the way from idea to shipped. If it breaks, it's on me, not on the AI. A lot of the time, the best call is deciding what not to build. The AI doesn't get the angry message in the morning. I do.\n\nTwo: instruct. Give the AI the context, the constraints, and a clear way to check the work. If I'd hand a new colleague a task, what would I tell them? Same thing here. The more vague I am, the more vague the result. Garbage in, very confident garbage out.\n\nThree: bring taste. This is the hardest one to hand over. Looking at something that technically works and saying, no, that's not it. Pushing back. Cutting scope. Saying no when it isn't right. The AI will happily build anything you ask for. It has no sense of when to stop. You do.\n\n[pause] Later on I'll show you a video of me fixing a small issue from start to finish. Watch for all three jobs in there. Where I decide what matters, where I instruct, and where I push back. [click]",
+   "change": "Replace \"you saw all three in the demo\" with: watch for all three in the video coming up.",
+   "todo": "",
+   "status": "reviewed",
+   "cut": false,
+   "cut_reason": ""
+  },
+  {
+   "id": "frontier",
+   "order": 70,
+   "chapter": "The frontier",
+   "theme": "The ground keeps shifting, so the job is mostly tinkering; one real story of a recent change.",
+   "seconds": 105,
+   "fixed_seconds": 0,
+   "qa": false,
+   "script": "And the ground under these jobs keeps moving. New models every few months. New tools. New ways of working. What worked six months ago may already be the slow way.\n\nSo most of my work is tinkering. [point at the loop] Try something new on a real task. Measure: did it save time, is the result better? Adjust the instructions or the model. Keep what works as the new default. Drop what doesn't, without feeling bad about it. Then a new model shows up and you go round again.\n\nA recent example. A few weeks ago, one chat did one task. Now my main session works like a manager. It splits the work and hands pieces out to helper agents, little workers that each do one job and report back. Over two weeks, from mid September to early October, that was about five hundred handed-out tasks, with five to seven sessions open at once on most weekdays. I also have a second laptop running extra AI accounts. One night it worked through a pile of review work. My backlog shrank while I slept.\n\nMy job in all that wasn't typing. It was deciding what to hand out, and checking what came back. [pause] And nobody has this figured out. Not me, not the big companies. That's what makes it fun. [click]",
+   "change": "Merged with the tinker slide: try, measure, adjust, refine, then a new model arrives and you go round again. Adds one real recent-change story (subagents as the team).",
+   "todo": "",
+   "status": "reviewed",
+   "cut": false,
+   "cut_reason": ""
+  },
+  {
+   "id": "loop",
+   "order": 80,
+   "chapter": "In practice",
+   "theme": "The working loop, define, direct, judge, and set up the video.",
+   "seconds": 75,
+   "fixed_seconds": 0,
+   "qa": false,
+   "script": "So what does this look like on a normal task? This is my working loop. Three steps, and I go round it many times a day, on tasks big and small.\n\nDefine. That's me. What's the problem, and how will we know it's solved? I agree on the check before anything gets built. Otherwise the AI decides when it's done, and it's very optimistic about that.\n\nDirect. That's me and the AI together. We agree on a plan in small steps. Then the AI builds, and I steer. If it drifts off the plan, I pull it back. Small steps make that easy to spot.\n\nJudge. That's me again. I review it with taste, I look at the proof that it works, and then it ships.\n\n[pause] I own both ends of the loop. The AI does most of the middle.\n\nIn the video coming up, watch for those three. Define, direct, judge. [click]",
+   "change": "Now sets up the video: \"watch for define, direct, judge\".",
+   "todo": "",
+   "status": "reviewed",
+   "cut": false,
+   "cut_reason": ""
+  },
+  {
+   "id": "demo",
+   "order": 90,
+   "chapter": "In practice",
+   "theme": "A pre-recorded run of a real small task from issue to shipped, narrated live.",
+   "seconds": 240,
+   "fixed_seconds": 240,
+   "qa": false,
+   "script": "[before the video] This is a real task, just a small one. It's my own hobby project, a movie database app called emdb. It's public, so I can show you everything. The tool is [tool, e.g. Claude Code]. The task is an open issue: make the search look and feel better when you're using it. I recorded this so nobody has to watch me wait on wifi. [video starts]\n\n[video: the GitHub issue \"Search focused\" with the two screenshots] Here's the issue. It's mostly two pictures. That's typical. Real issues are rarely a full spec.\n\n[video: the issue pasted into the session, Erik asks it to suggest a check] First step is define. Before anything gets built, I ask: how do we know this is done? We agree on it. The search box gets a clear focused style, results show up the way the picture shows, and the build and existing tests still pass.\n\n[video: the AI writes a short plan in steps] Now direct. It proposes a plan in a few steps. I read it. I cut one step, because it wanted to touch the header too, and that's not this issue.\n\n[video: files changing, terminal output scrolling] This is the AI building. This part I'll fast forward. It's honestly the least interesting part now.\n\n[video: Erik looks at the result in the browser] Here's judge. It works. But the focus style is too loud, it looks like an error state. [video: Erik's pushback message] So I push back, one line: softer, use the accent colour, match the rest of the app.\n\n[video: second version in the browser] Second try. That's the one. [video: build and checks passing] And here's the proof: the check we agreed on at the start passes.\n\n[video: pull request, then the live site] Pull request, merged, and it's live on GitHub Pages. [video ends]\n\n[after the video] About four minutes, cut down from about [real duration]. My typing in all of that: a couple of sentences. My thinking: all of it. [click]",
+   "change": "Was a live demo at slide 3; now a pre-recorded ~4 min video here, narrated live. Uses Erik's public movie-database app emdb (erikpantzar.github.io/emdb), never Teneo code. Tentative task: issue #37 \"Search focused\" (or #36 \"Stylish heading\"). Slide text (task/tool/watch for) needs updating to match.",
+   "todo": "Record the ~4 min video on emdb (issue #37 or #36), never Teneo code.\nConfirm the tool name: [tool, e.g. Claude Code].\nFill [real duration] with the uncut time of the session.\nRewrite the narration beats to match what is actually on screen once recorded.\nUpdate the demo slide text (task, tool, watch for).",
+   "status": "reviewed",
+   "cut": false,
+   "cut_reason": ""
+  },
+  {
+   "id": "examples",
+   "order": 100,
+   "chapter": "In practice",
+   "theme": "One bigger real example, the emdb revival, and where Erik stepped in.",
+   "seconds": 60,
+   "fixed_seconds": 0,
+   "qa": false,
+   "script": "That app you just saw in the video? Until a week ago it was a movie database I built back in 2020. Old stack, gathering dust.\n\nOn one evening, October fifth, I revived it. Moved it to a new stack, added new features, gave it a proper cinematic redesign, and published it to GitHub Pages. About an hour and forty minutes, start to finish.\n\nWhere did I step in? I decided what it should become. I set the bar for done. I said no to a couple of designs that looked generic. And I clicked through every page before it went live. The AI did the moving and the typing. I did the deciding and the checking. [click]",
+   "change": "One example only, no demo recap: the emdb revival.",
+   "todo": "",
+   "status": "reviewed",
+   "cut": false,
+   "cut_reason": ""
+  },
+  {
+   "id": "idea-board",
+   "order": 110,
+   "chapter": "Inspiration",
+   "theme": "A wanted board of things to build, with three Erik built himself.",
+   "seconds": 75,
+   "fixed_seconds": 0,
+   "qa": false,
+   "script": "Now let's get your imagination going. Here's a wanted board. Things you could build. Steal any of them as your first project.\n\nA few of these I've built myself. [point] The personal dashboard. Mine has a view for work, a recap of what happened, and my tasks. I built it in one day, on September thirtieth.\n\n[point] Review sheriff. It's a skill, basically a saved set of instructions, that reads the review comments on my pull requests, checks each one against the actual code, and fixes the ones that hold up. The ones that don't, it tells me why. That took about a day.\n\n[point] Afternoon prototype. I needed a landing page, so I had three versions built in parallel, picked the best parts of each, and combined them. About two hours.\n\nNone of these are big. That's the point. Pick something small that annoys you. [click]",
+   "change": "Point out three he built himself: personal dashboard, review sheriff, afternoon prototype.",
+   "todo": "",
+   "status": "reviewed",
+   "cut": false,
+   "cut_reason": ""
+  },
+  {
+   "id": "workflows",
+   "order": 120,
+   "chapter": "Inspiration",
+   "theme": "Reusable setups, with project memory walked through in detail.",
+   "seconds": 75,
+   "fixed_seconds": 0,
+   "qa": false,
+   "script": "Those were things to build. These are ways to set up the work. Recipes you can reuse every week.\n\nI'll walk through one: project memory. It's a plain text file of rules that every AI session reads first. My conventions, how I like things done, what never to touch. So I don't have to explain myself every single morning.\n\nThe trick is keeping it short. I have one rule for that file: if removing a line wouldn't change the AI's behaviour, it's gone. No essays, no nice-to-knows. Every line has to earn its spot.\n\nAnd one rule inside it that matters most: before anything gets built, we agree on a pass or fail check. A test, a command, something that says yes or no. That one line has saved me more time than any fancy tool.\n\nThe others on the board, the parallel posse, spec first, the morning brief, are all worth a try. [click]",
+   "change": "Highlight one recipe: project memory, with the \"if removing a line wouldn't change the AI's behaviour, it's gone\" rule and a pass/fail check agreed before any build.",
+   "todo": "",
+   "status": "draft",
+   "cut": false,
+   "cut_reason": ""
+  },
+  {
+   "id": "never-late",
+   "order": 130,
+   "chapter": "How you get there",
+   "theme": "Speak to the newcomers: it's not too late, start now.",
+   "seconds": 75,
+   "fixed_seconds": 0,
+   "qa": false,
+   "script": "Now, back to the newcomers. I promised.\n\n[read the slide] Never worked with AI? You can saddle up today.\n\nIf you haven't really used AI in the last few years, that's fine. Here's the thing nobody tells you. A lot of what the early adopters learned is already outdated. All those tricks for coaxing a good answer out of a model in 2023? Most of them don't matter anymore. The tools got better and easier.\n\nSo the head start is smaller than it looks. If you start now, with today's tools, you can be as productive as someone who started years ago. Curiosity beats history here. You don't need to catch up on three years of hype. You just need to start with what's here today.\n\n[pause] And for those of us who did start early: same goes for us. We have to keep relearning too. Nobody gets to sit still. [click]",
+   "change": "",
+   "todo": "",
+   "status": "draft",
+   "cut": false,
+   "cut_reason": ""
+  },
+  {
+   "id": "start-steps",
+   "order": 140,
+   "chapter": "How you get there",
+   "theme": "Three simple steps to get going.",
+   "seconds": 60,
+   "fixed_seconds": 0,
+   "qa": false,
+   "script": "So how do you actually start? Three steps.\n\nOne: start small. One tool, one real task. Not a toy example, something you actually need done this week. Nothing fancy. Writing a test, cleaning up a messy function, drafting a README.\n\nTwo: feel it out. Try things. Notice what works and what doesn't. Adjust. You'll learn more from one real task than from ten tutorials.\n\nThree: grow confidence. As you start trusting it on small things, take on bigger problems. Trust gets built the same way it does with a new colleague. A little at a time. And you'll find your own limits for what you hand over.\n\nAnd when you ask it to do something, ask well. [click]",
+   "change": "",
+   "todo": "",
+   "status": "draft",
+   "cut": false,
+   "cut_reason": ""
+  },
+  {
+   "id": "prompt-anatomy",
+   "order": 150,
+   "chapter": "How you get there",
+   "theme": "The four parts of a good instruction, using the emdb demo task as the example.",
+   "seconds": 60,
+   "fixed_seconds": 0,
+   "qa": false,
+   "script": "Here's what a good instruction looks like. It's the same thing you'd tell a colleague. These lines are from the video. Four parts.\n\nGoal: make the search box clearly show when it's focused, and show results like the mockup.\n\nContext: it's my movie app, and the issue has two screenshots.\n\nConstraints: only touch the search, keep the app's colours, leave the header alone. That one stops it from wandering off and redesigning half the app.\n\nAnd verification: the build and tests pass, and it matches the screenshots. [pause] This last one is the part people skip. It's also the part that makes the result something you can trust. [click]",
+   "change": "Replace the old \"wrong order date\" example lines with the emdb demo task. Goal: \"Make the search box clearly show when it's focused, and show the results like the mockup in the issue.\" Context: \"It's my movie app emdb. The issue has two screenshots of how it should look.\" Constraints: \"Only touch the search. Keep the app's colours and fonts. Don't touch the header.\" Verification: \"The build and existing tests pass, and the focused search and results match the screenshots.\"",
+   "todo": "Update the four example lines on the prompt-anatomy slide to the emdb task (see change).",
+   "status": "draft",
+   "cut": false,
+   "cut_reason": ""
+  },
+  {
+   "id": "mindset",
+   "order": 160,
+   "chapter": "How you get there",
+   "theme": "Three habits of a trail boss, with one short story of being led astray.",
+   "seconds": 45,
+   "fixed_seconds": 0,
+   "qa": false,
+   "script": "Last, the mindset. Think like a trail boss. Treat the output as a draft. You own it. Once, the AI quietly hard-coded a default grocery store about 450 kilometres away. Prices and deals all came from the wrong shop. It looked right. It was wrong.\n\nIterate, don't restart. Say what's off and ask for another go. The second answer is usually better. And let it ask you questions first. End with \"ask me anything you need first.\" It finds the gaps you missed. [click]",
+   "change": "Weave in the \"led astray\" story under \"treat output as a draft\" (default grocery store ~450 km away).",
+   "todo": "",
+   "status": "draft",
+   "cut": false,
+   "cut_reason": ""
+  },
+  {
+   "id": "imagination",
+   "order": 170,
+   "chapter": "Wrap-up",
+   "theme": "The big closing thought: the limit is what you can picture.",
+   "seconds": 30,
+   "fixed_seconds": 0,
+   "qa": false,
+   "script": "[read slowly] The only fence out here is your imagination. [pause]\n\nWhat you can build now is limited mostly by what you can picture, and how clearly you can describe it. The typing isn't the bottleneck anymore. If you can picture it and explain it, you can probably build it. That was not true five years ago. So keep exploring, and keep learning. [click]",
+   "change": "",
+   "todo": "",
+   "status": "draft",
+   "cut": false,
+   "cut_reason": ""
+  },
+  {
+   "id": "statement",
+   "order": 180,
+   "chapter": "Wrap-up",
+   "theme": "The call to action: one real problem this week.",
+   "seconds": 30,
+   "fixed_seconds": 0,
+   "qa": false,
+   "script": "So here's my ask. Start small. Keep exploring. Keep learning.\n\nPick one real problem this week. Define it, direct the AI, and judge the result yourself. Not a big one. A real one. Something that bugs you. And then come find me, or tell me online, what you tried. I'd genuinely like to hear it. [pause] Thank you. [click]",
+   "change": "",
+   "todo": "",
+   "status": "draft",
+   "cut": false,
+   "cut_reason": ""
+  },
+  {
+   "id": "closing",
+   "order": 190,
+   "chapter": "Wrap-up",
+   "theme": "Thank-you and Q&A, with backup questions if the room is quiet.",
+   "seconds": 0,
+   "fixed_seconds": 0,
+   "qa": true,
+   "script": "Thank you so much. I've got about fifteen minutes for questions. Anything goes, including \"that sounds terrible\". [take questions; repeat each one out loud so everyone, and the recording, hears it]\n\n[if quiet] A question I get a lot is...\n\nBackup 1. What do I NOT use AI for? Deciding what's worth building, and the final yes or no on anything that ships. Also anything where I can't check the result, because then I can't judge it. And sometimes a two-line fix is just faster to type myself.\n\nBackup 2. Doesn't this make juniors obsolete? I don't think so, but it changes how you learn. Juniors can ship much more, much earlier. The risk is skipping the understanding, so use AI to explain things, not just to do them. You still need to know how code works to judge it.\n\nBackup 3. How do I check the AI's work? Same as a colleague's pull request. I agree on a check before it builds, a test or a command that says pass or fail. Then I read the diff, the list of changes, and click through the real thing. If I can't verify it, it doesn't ship.\n\nBackup 4. What does it cost? [cost, e.g. a monthly subscription of around X per seat]. Compared to an hour of a developer's time, it pays for itself fast. Start on the cheapest plan and see if you hit the limits.\n\nBackup 5. What about company code and privacy? Follow your company's rules first. That's not optional. Use business plans where your code isn't used for training, and never paste secrets or customer data. It's also why the video tonight used my own hobby project.\n\n[when time's up] Thanks again. Slides and links are at [resource links], and you can reach me at [contact].",
+   "change": "",
+   "todo": "Fill [resource links] and [contact] on the closing slide and in the script.\nFill [cost] with your real plan and price.\nCheck Backup 5 matches your employer's actual AI policy.",
+   "status": "draft",
+   "cut": false,
+   "cut_reason": ""
+  },
+  {
+   "id": "models",
+   "order": 1000,
+   "chapter": "The frontier",
+   "theme": "Every model has its own temperament",
+   "seconds": 90,
+   "fixed_seconds": 0,
+   "qa": false,
+   "script": "Quick hands: short and direct instructions.\n\nDeep thinkers: full context and room to think.\n\nSpecialists: talk to them in their own format.\n\nShare a quirk I've learned to work around.",
+   "change": "",
+   "todo": "",
+   "status": "draft",
+   "cut": true,
+   "cut_reason": "Cut by Erik in the walkthrough to save time; model quirks can come up in Q&A."
+  },
+  {
+   "id": "toolkit",
+   "order": 1010,
+   "chapter": "In practice",
+   "theme": "My saddlebag of tools",
+   "seconds": 60,
+   "fixed_seconds": 0,
+   "qa": false,
+   "script": "Walk through my tools and what each one is for.\n\nMention one I tried and dropped.\n\nThis list will look different in six months.\n\nOptional slide: skip if running long.",
+   "change": "",
+   "todo": "",
+   "status": "draft",
+   "cut": true,
+   "cut_reason": "Cut to fit 30 minutes; tools come up in Q&A and the demo shows the main one."
+  },
+  {
+   "id": "my-day",
+   "order": 1020,
+   "chapter": "In practice",
+   "theme": "A typical day on the trail",
+   "seconds": 60,
+   "fixed_seconds": 0,
+   "qa": false,
+   "script": "Morning plan, deep work directing agents, afternoon review, end of day tinkering.\n\nKeep examples concrete and a little mundane.\n\nOptional slide: skip if running long.",
+   "change": "",
+   "todo": "",
+   "status": "draft",
+   "cut": true,
+   "cut_reason": "Cut to fit 30 minutes; the frontier story already covers how a day looks now."
+  },
+  {
+   "id": "lessons",
+   "order": 1030,
+   "chapter": "In practice",
+   "theme": "What I've learned",
+   "seconds": 75,
+   "fixed_seconds": 0,
+   "qa": false,
+   "script": "Works well: first drafts, explaining unfamiliar code, my own example.\n\nWatch out: confident wrong answers, vague requests giving vague results.\n\nShort story: one time it saved me, one time it led me astray.",
+   "change": "",
+   "todo": "",
+   "status": "draft",
+   "cut": true,
+   "cut_reason": "Cut to fit 30 minutes; the led-astray story moved to the mindset slide."
+  },
+  {
+   "id": "tinker",
+   "order": 1040,
+   "chapter": "The frontier",
+   "theme": "Most of the work is tinkering",
+   "seconds": 90,
+   "fixed_seconds": 0,
+   "qa": false,
+   "script": "Try something new on a real task.\n\nMeasure: did it save time, is the result better?\n\nAdjust the instructions, context or model. Refine what works into a default.\n\nThen a new model arrives, and you go round again.",
+   "change": "",
+   "todo": "",
+   "status": "draft",
+   "cut": true,
+   "cut_reason": "Merged into the frontier slide."
+  }
+ ],
+ "topics": [
+  {
+   "id": "t-room",
+   "order": 10,
+   "title": "Who's in the room and who I am",
+   "note": "Welcome everyone, read the room, and say who I am in a few lines.",
+   "slides": [
+    "cover",
+    "audience",
+    "about-me"
+   ]
+  },
+  {
+   "id": "t-role-shift",
+   "order": 20,
+   "title": "The role shift: from writing code to define, direct, judge",
+   "note": "The core claim: the job moved from typing code to deciding and checking.",
+   "slides": [
+    "premise",
+    "role-shift"
+   ]
+  },
+  {
+   "id": "t-three-jobs",
+   "order": 30,
+   "title": "Three jobs: produce, instruct, bring taste",
+   "note": "Boil the new role down to three jobs anyone can name.",
+   "slides": [
+    "three-jobs"
+   ]
+  },
+  {
+   "id": "t-frontier",
+   "order": 40,
+   "title": "The frontier keeps moving, so most work is tinkering",
+   "note": "Tools change every few months, so the work is trying, measuring and adjusting.",
+   "slides": [
+    "frontier"
+   ]
+  },
+  {
+   "id": "t-loop",
+   "order": 50,
+   "title": "My working loop, shown on a real task",
+   "note": "Show define, direct, judge on a real task, not slides about it.",
+   "slides": [
+    "loop",
+    "demo"
+   ]
+  },
+  {
+   "id": "t-emdb",
+   "order": 60,
+   "title": "A real example: the emdb revival",
+   "note": "One concrete project from start to finish, with where I stepped in.",
+   "slides": [
+    "examples"
+   ]
+  },
+  {
+   "id": "t-ideas",
+   "order": 70,
+   "title": "Ideas and recipes to steal",
+   "note": "Give people things to build and setups to reuse.",
+   "slides": [
+    "idea-board",
+    "workflows"
+   ]
+  },
+  {
+   "id": "t-never-late",
+   "order": 80,
+   "title": "Never too late: start small",
+   "note": "Newcomers haven't missed anything; one tool and one task is enough to start.",
+   "slides": [
+    "never-late",
+    "start-steps"
+   ]
+  },
+  {
+   "id": "t-instructions",
+   "order": 90,
+   "title": "Instructions that work, and the mindset",
+   "note": "Goal, context, constraints, verification, and treat output as a draft.",
+   "slides": [
+    "prompt-anatomy",
+    "mindset"
+   ]
+  },
+  {
+   "id": "t-close",
+   "order": 100,
+   "title": "Close: imagination and one real problem this week",
+   "note": "End on imagination and a concrete ask for this week.",
+   "slides": [
+    "imagination",
+    "statement"
+   ]
+  },
+  {
+   "id": "t-qa",
+   "order": 110,
+   "title": "Q&A with backup questions",
+   "note": "Take questions, with backups ready if the room is quiet.",
+   "slides": [
+    "closing"
+   ]
+  }
+ ]
+}
