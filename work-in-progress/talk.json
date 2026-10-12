@@ -82,6 +82,21 @@
    "cut_reason": ""
   },
   {
+   "id": "spinning-jenny",
+   "order": 55,
+   "chapter": "The shift",
+   "theme": "A history lesson: the spinning jenny made spinning much faster, and people ended up working more, not less. My bet is AI goes the same way.",
+   "seconds": 75,
+   "fixed_seconds": 0,
+   "qa": false,
+   "script": "Quick history lesson. Around 1764, in England, a guy called James Hargreaves builds the spinning jenny. Before, one spinner worked one thread. Now one spinner runs eight at once. Later machines ran over a hundred.\n\nSo people worked less, right? [pause] Nope. A historian went through old court records, where witnesses mention what they were doing and when. Between 1750 and 1830 the working year got longer. About 15 to 30 percent. Mostly because people stopped taking Mondays off, and the holy days disappeared.\n\nThere's a name for this pattern. The Jevons paradox. Make something cheaper to use, and we often end up using more of it. Coal back then. Thread. Now, code.\n\nAnd not everyone won. The handloom weavers lost out badly.\n\nSo this isn't a law of nature. It's my bet. AI makes building software cheaper, so we'll want a lot more of it. More things to build, and I think more people building them. [click]",
+   "change": "",
+   "todo": "Check you're happy with the bet framing: \"more people building\" is your guess, no source gives a head count. Check the hours range (15 to 30 percent, Voth's 14-32%) and the Monday/holy days line against the reading page.",
+   "status": "draft",
+   "cut": false,
+   "cut_reason": ""
+  },
+  {
    "id": "three-jobs",
    "order": 60,
    "chapter": "The shift",
@@ -142,6 +157,21 @@
    "cut_reason": ""
   },
   {
+   "id": "plan-mode",
+   "order": 95,
+   "chapter": "In practice",
+   "theme": "Plan mode: the AI reads the code and writes a plan, but changes nothing until I approve it. Define and direct, made concrete.",
+   "seconds": 60,
+   "fixed_seconds": 0,
+   "qa": false,
+   "script": "Remember the loop? Define, direct, judge. Here's a tool that makes the first two concrete. It's called plan mode.\n\nIn plan mode the AI reads the code, looks around and writes a plan. But it doesn't touch a single file until I say yes. You turn it on with Shift and Tab. Then you read the plan, and you can edit it before you approve.\n\nSo I see the route before we ride out. Not after.\n\nIs it always worth it? No. It adds a step. If you could describe the change in one sentence, skip it. Use it when the change touches many files, when you're unsure how to do it, or when you don't know the code. [click]",
+   "change": "",
+   "todo": "If the demo video shows plan mode, say so here. Check the Shift+Tab shortcut still works in your version before the talk.",
+   "status": "draft",
+   "cut": false,
+   "cut_reason": ""
+  },
+  {
    "id": "examples",
    "order": 100,
    "chapter": "In practice",
@@ -182,6 +212,21 @@
    "script": "Those were things to build. These are ways to set up the work. Recipes you can reuse every week.\n\nI'll walk through one: project memory. It's a plain text file of rules that every AI session reads first. My conventions, how I like things done, what never to touch. So I don't have to explain myself every single morning.\n\nThe trick is keeping it short. I have one rule for that file: if removing a line wouldn't change the AI's behaviour, it's gone. No essays, no nice-to-knows. Every line has to earn its spot.\n\nAnd one rule inside it that matters most: before anything gets built, we agree on a pass or fail check. A test, a command, something that says yes or no. That one line has saved me more time than any fancy tool.\n\nThe others on the board, the parallel posse, spec first, the morning brief, are all worth a try. [click]",
    "change": "Highlight one recipe: project memory, with the \"if removing a line wouldn't change the AI's behaviour, it's gone\" rule and a pass/fail check agreed before any build.",
    "todo": "",
+   "status": "draft",
+   "cut": false,
+   "cut_reason": ""
+  },
+  {
+   "id": "mcp",
+   "order": 125,
+   "chapter": "Inspiration",
+   "theme": "MCP: one standard plug that lets the AI use other tools and data, like a USB-C port for AI apps.",
+   "seconds": 60,
+   "fixed_seconds": 0,
+   "qa": false,
+   "script": "One more piece of setup. A lot of what I need lives outside my code. That's what MCP is for. Model Context Protocol. It's an open standard for connecting AI apps to other systems. Files, databases, search, design tools like Figma. The people behind it put it like this: think of it as a USB-C port for AI apps. One plug, lots of things fit.\n\nA small server sits in front of a tool and offers actions and data. Your AI app, like Claude Code, plugs into it.\n\nAn everyday example. Someone hands you a design in Figma. Plug in a Figma server, and the AI can look at the design itself, instead of you describing it. [click]",
+   "change": "",
+   "todo": "Check the Figma example matches a server you've actually used, or swap in one you have. Optional if time allows: Anthropic introduced MCP in late 2024 and handed it to a fund under the Linux Foundation in December 2025.",
    "status": "draft",
    "cut": false,
    "cut_reason": ""
@@ -292,6 +337,70 @@
    "cut_reason": ""
   },
   {
+   "id": "apx-llm",
+   "order": 500,
+   "chapter": "Appendix",
+   "theme": "What is an LLM? Appendix TLDR plus link.",
+   "seconds": 0,
+   "fixed_seconds": 0,
+   "qa": false,
+   "appendix": true,
+   "script": "A large language model is trained on huge amounts of text to predict the next piece of text, again and again. It reads and writes in tokens: small chunks of words. The context window is its working memory. Underneath, it's a big file of numbers (the parameters) plus a small program that runs them.\n\nRead more: https://erikpantzar.github.io/misc/work-in-progress/reading.html#llm",
+   "change": "",
+   "todo": "Check the TLDR reads well on screen.",
+   "status": "draft",
+   "cut": false,
+   "cut_reason": ""
+  },
+  {
+   "id": "apx-training",
+   "order": 510,
+   "chapter": "Appendix",
+   "theme": "How a model is made: data, pretraining, post-training. Appendix TLDR plus link.",
+   "seconds": 0,
+   "fixed_seconds": 0,
+   "qa": false,
+   "appendix": true,
+   "script": "Pretraining: the model reads a huge pile of text and learns to predict the next word. Post-training teaches it to follow instructions: fine-tuning on examples, then people ranking answers (RLHF). Anthropic also uses Constitutional AI, where the model gives feedback on its own answers from a written list of principles. The training data stops at a date, the knowledge cutoff.\n\nRead more: https://erikpantzar.github.io/misc/work-in-progress/reading.html#training",
+   "change": "",
+   "todo": "Check the TLDR reads well on screen.",
+   "status": "draft",
+   "cut": false,
+   "cut_reason": ""
+  },
+  {
+   "id": "apx-size",
+   "order": 520,
+   "chapter": "Appendix",
+   "theme": "Weights and why model sizes differ. Appendix TLDR plus link.",
+   "seconds": 0,
+   "fixed_seconds": 0,
+   "qa": false,
+   "appendix": true,
+   "script": "Weights, or parameters, are the numbers a model learns in training. Models get better in a predictable way with more parameters, more data and more compute. Bigger models cost more to run, so labs also make small ones, for example by distillation: training a small model to copy a big one. Open-weight models are ones you can download and run yourself.\n\nRead more: https://erikpantzar.github.io/misc/work-in-progress/reading.html#size",
+   "change": "",
+   "todo": "Check the TLDR reads well on screen.",
+   "status": "draft",
+   "cut": false,
+   "cut_reason": ""
+  },
+  {
+   "id": "apx-models",
+   "order": 530,
+   "chapter": "Appendix",
+   "theme": "Haiku, Sonnet, Opus and Fable: how models differ and how to pick. Appendix TLDR plus link.",
+   "seconds": 0,
+   "fixed_seconds": 0,
+   "qa": false,
+   "appendix": true,
+   "script": "Claude comes in tiers: Haiku is fastest and cheapest, Sonnet balances speed and intelligence, Opus is for long agentic coding and hard work, and Fable sits above it for the hardest reasoning. They also differ in speed, price per token and context window. Start with Opus for most work, or start cheap with Haiku and move up when tests show you need to. Compare models on your own tasks.\n\nRead more: https://erikpantzar.github.io/misc/work-in-progress/reading.html#models",
+   "change": "",
+   "todo": "Check the lineup (Haiku, Sonnet, Opus, Fable) is still current on talk day.",
+   "status": "draft",
+   "cut": false,
+   "cut_reason": ""
+  },
+  {
    "id": "models",
    "order": 1000,
    "chapter": "The frontier",
@@ -394,7 +503,9 @@
    "order": 25,
    "title": "The spinning jenny: better tools, more work",
    "note": "Spinning got many times faster, yet people ended up working more hours and far more people worked in textiles. My bet: AI goes the same way, more work and more people, not fewer. Sourced numbers coming from the research worker. Suggested spot: right after the role shift.",
-   "slides": []
+   "slides": [
+    "spinning-jenny"
+   ]
   },
   {
    "id": "t-three-jobs",
@@ -429,7 +540,9 @@
    "order": 55,
    "title": "Plan mode: agree the plan before any code",
    "note": "The AI reads the code and proposes a plan, but changes nothing until I approve it. It's define and direct in practice. Could be shown in the demo video. No slide yet.",
-   "slides": []
+   "slides": [
+    "plan-mode"
+   ]
   },
   {
    "id": "t-emdb",
@@ -455,7 +568,9 @@
    "order": 75,
    "title": "MCP: plugging the AI into your tools",
    "note": "One standard plug that lets the AI use your tools and data: GitHub, Linear, Slack, docs. Fits next to the workflow recipes. No slide yet.",
-   "slides": []
+   "slides": [
+    "mcp"
+   ]
   },
   {
    "id": "t-never-late",
@@ -510,7 +625,12 @@
    "order": 120,
    "title": "Appendix, not talked through: models under the hood",
    "note": "One slide each, a TLDR plus a link: what an LLM is, how a model is made (data, training, weights), why sizes differ, Haiku vs Sonnet vs Opus. Full reading list: erikpantzar.github.io/misc/work-in-progress/reading.html",
-   "slides": []
+   "slides": [
+    "apx-llm",
+    "apx-training",
+    "apx-size",
+    "apx-models"
+   ]
   }
  ]
 }
