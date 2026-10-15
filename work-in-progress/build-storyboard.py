@@ -7,7 +7,7 @@ from pathlib import Path
 MARKER = "<!-- build:slides -->"
 
 if len(sys.argv) != 4:
-    sys.exit("usage: python3 build-storyboard.py <index.html> <talk.json> <out.html>")
+    sys.exit("usage: python3 build-storyboard.py <pres.html> <talk.json> <out.html>")
 
 deck_path, talk_path, out_path = sys.argv[1:4]
 deck = Path(deck_path).read_text()
