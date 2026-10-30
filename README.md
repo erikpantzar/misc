@@ -9,6 +9,7 @@ Each page lives in its own folder as `index.html`, so it gets a clean URL:
 | Octane Racing 2.0 — #general-chat stage report | https://erikpantzar.github.io/misc/octane-chat-report |
 | Toxic Table Tennis — Stage Report | https://erikpantzar.github.io/misc/toxic-table-tennis |
 | From developer to AI builder — talk draft, script and rehearsal coach (work in progress) | https://erikpantzar.github.io/misc/work-in-progress |
+| Sim rig challenge — shifter and handbrake mounting (Excalidraw) | https://erikpantzar.github.io/misc/sim-rig-challenge |
 
 Pages here are set to `noindex, nofollow` and the repo root carries a
 blanket-disallow `robots.txt` — the URLs work when shared, but search

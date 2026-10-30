@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="description" content="Sim rig challenge: mounting the shifter and handbrake on 45x90 aluminium profile." />
+    <title>Sim Rig Challenge</title>
+    <style>
+      html, body, #app { margin: 0; height: 100%; }
+    </style>
+    <script>window.EXCALIDRAW_ASSET_PATH = "https://unpkg.com/@excalidraw/excalidraw@0.17.6/dist/";</script>
+    <script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@excalidraw/excalidraw@0.17.6/dist/excalidraw.production.min.js"></script>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script>
+      fetch("scene.json")
+        .then((res) => res.json())
+        .then((scene) => {
+          const { Excalidraw } = ExcalidrawLib;
+          const app = React.createElement(Excalidraw, {
+            initialData: { ...scene, scrollToContent: true },
+            viewModeEnabled: true,          });
+          ReactDOM.createRoot(document.getElementById("app")).render(app);
+        })
+        .catch((err) => {
+          document.getElementById("app").textContent = "Could not load the drawing: " + err.message;
+        });
+    </script>
+  </body>
+</html>
