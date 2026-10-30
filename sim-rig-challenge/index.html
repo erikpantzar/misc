@@ -8,6 +8,9 @@
     <title>Sim Rig Challenge</title>
     <style>
       html, body, #app { margin: 0; height: 100%; }
+      @media (prefers-color-scheme: dark) {
+        body { background: #121212; }
+      }
     </style>
     <script>window.EXCALIDRAW_ASSET_PATH = "https://unpkg.com/@excalidraw/excalidraw@0.17.6/dist/";</script>
     <script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js"></script>
@@ -21,6 +24,8 @@
         .then((res) => res.json())
         .then((scene) => {
           const { Excalidraw } = ExcalidrawLib;
+          const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+          scene.appState.theme = prefersDark ? "dark" : "light";
           const app = React.createElement(Excalidraw, {
             initialData: { ...scene, scrollToContent: true },
             viewModeEnabled: true,          });
